@@ -1,0 +1,22 @@
+<h2>قائمة المدن</h2>
+
+<table border="1" style="width: 100%; text-align: center">
+  <thead>
+    <tr>
+      <th>اسم المدينة</th>
+      <th>المحافظة</th>
+      <th>سعر الكيلو</th>
+      <th>تكلفة البيك أب</th>
+      <th>الحالة</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let city of cities">
+      <td>{{ city.name }}</td>
+      <td>{{ city.goverrateName }}</td>
+      <td>{{ city.pricePerKg }}</td>
+      <td>{{ city.pickupCost }}</td>
+      <td>{{ city.isActive ? "مفعّلة" : "غير مفعّلة" }}</td>
+    </tr>
+  </tbody>
+</table>
