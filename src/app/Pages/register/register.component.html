@@ -1,0 +1,153 @@
+<!-- <form #registerform="ngForm" (ngSubmit)="onSubmit(registerform)">
+  <input type="text" name="userName" ngModel placeholder="Username" required />
+  <input type="email" name="email" ngModel placeholder="Email" required />
+  <input
+    type="password"
+    name="password"
+    ngModel
+    placeholder="Password"
+    required
+    minlength="6"
+  />
+  <input
+    type="password"
+    name="confirmPassword"
+    ngModel
+    placeholder="Confirm Password"
+    required
+  />
+  <input type="text" name="fullName" ngModel placeholder="Full Name" />
+  <input type="text" name="address" ngModel placeholder="Address" />
+  <select name="role" ngModel>
+    <option value="">Select Role</option>
+    <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+  </select>
+  <button type="submit">Register</button>
+  <p *ngIf="errormessage" style="color: red">{{ errormessage }}</p>
+</form> -->
+<body>
+  <div class="overlay"></div>
+  <div class="container-wrapper">
+    <div class="row shadow rounded overflow-hidden">
+      <!-- Left Side: Form -->
+      <div class="col-md-6 p-4 bg-common">
+        <h2 class="mb-4 text-center">ADD EMPLOYEE</h2>
+
+        <form
+          #registerForm="ngForm"
+          (ngSubmit)="onSubmit(registerForm)"
+          class="bg-common"
+        >
+          <div class="mb-3">
+            <label class="form-label">
+              <i class="fa-solid fa-user" style="color: #083c3e"></i> Username
+            </label>
+            <input
+              type="text"
+              name="userName"
+              ngModel
+              required
+              class="form-control"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">
+              <i class="fa-solid fa-envelope" style="color: #083c3e"></i> Email
+            </label>
+            <input
+              type="email"
+              name="email"
+              ngModel
+              required
+              class="form-control"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">
+              <i class="fa-solid fa-lock" style="color: #083c3e"></i> Password
+            </label>
+            <input
+              type="password"
+              name="password"
+              ngModel
+              required
+              minlength="6"
+              class="form-control"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">
+              <i class="fa-solid fa-lock" style="color: #083c3e"></i> Confirm
+              Password
+            </label>
+            <input
+              type="password"
+              name="confirmPassword"
+              ngModel
+              required
+              class="form-control"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">
+              <i class="fa-solid fa-id-card" style="color: #083c3e"></i> Full
+              Name
+            </label>
+            <input type="text" name="fullName" ngModel class="form-control" />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">
+              <i class="fa-solid fa-location-dot" style="color: #083c3e"></i>
+              Address
+            </label>
+            <input type="text" name="address" ngModel class="form-control" />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">
+              <i class="fa-solid fa-user-tag" style="color: #083c3e"></i> Role
+            </label>
+            <select name="role" ngModel class="form-select">
+              <option value="">Select Role</option>
+              <option *ngFor="let role of roles" [value]="role">
+                {{ role }}
+              </option>
+            </select>
+          </div>
+
+          <button type="submit" class="custom-btn">Register</button>
+
+          <p *ngIf="errormessage" class="error-message">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            {{ errormessage }}
+          </p>
+          <p class="text-center mt-4">
+            Already Have An Account?
+            <a
+              [routerLink]="['/login']"
+              style="color: #083c3e; font-weight: bold"
+              >Login</a
+            >
+          </p>
+        </form>
+      </div>
+
+      <!-- Right Side: Image -->
+      <div
+        class="col-md-6 d-none d-md-flex justify-content-center align-items-center p-2 bg-common"
+      >
+        <img
+          src="	https://demo.templatesjungle.com/deliver/images/scooter.png"
+          alt="Register"
+          class="img-fluid"
+          style="width: 100%; height: 400px; object-fit: contain"
+        />
+      </div>
+    </div>
+  </div>
+</body>
