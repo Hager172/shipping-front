@@ -1,1 +1,65 @@
-<p>login works!</p>
+<body>
+  <div class="overlay"></div>
+  <div class="container-wrapper">
+    <div class="row shadow rounded overflow-hidden">
+      <!-- Left Side: Form -->
+      <div class="col-md-6 p-4 bg-common">
+        <h2 class="mb-4 text-center">Login</h2>
+
+        <form [formGroup]="loginform" (ngSubmit)="onsubmit()" class="bg-common">
+          <div class="form-group">
+            <label class="form-label">
+              <i class="fa-solid fa-user" style="color: #083c3e"></i> Username
+            </label>
+            <input
+              type="text"
+              id="username"
+              formControlName="userName"
+              class="form-control"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">
+              <i class="fa-solid fa-lock" style="color: #083c3e"></i> Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              formControlName="password"
+              class="form-control"
+              required
+            />
+          </div>
+
+          <button type="submit" class="custom-btn mt-2">Login</button>
+
+          <p *ngIf="errormessage" class="error-message">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            {{ errormessage }}
+          </p>
+
+          <p class="text-center mt-4">
+            Don’t have an account?
+            <a routerLink="/register" style="color: #083c3e; font-weight: bold"
+              >Create one</a
+            >
+          </p>
+        </form>
+      </div>
+
+      <!-- Right Side: Image -->
+      <div
+        class="col-md-6 d-none d-md-flex justify-content-center align-items-center p-2 bg-common"
+      >
+        <img
+          src="	https://demo.templatesjungle.com/deliver/images/scooter.png"
+          alt="Register"
+          class="img-fluid"
+          style="width: 100%; height: 400px; object-fit: contain"
+        />
+      </div>
+    </div>
+  </div>
+</body>
