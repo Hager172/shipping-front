@@ -13,10 +13,13 @@ export class CityService {
 
   constructor(private http: HttpClient) {}
 
-  getAllCities(): Observable<City[]> {
-    return this.http.get<City[]>(this.baseurl);
+  getAllCities(): Observable<CityDTO[]> {
+    return this.http.get<CityDTO[]>(this.baseurl);
   }
 
+  toggleCityStatusByName(name: string): Observable<City> {
+    return this.http.get<City>(`${this.baseurl}/togglecitystatus/${name}`);
+  }
   getCityById(id: number): Observable<City> {
     return this.http.get<City>(`${this.baseurl}/${id}`);
   }

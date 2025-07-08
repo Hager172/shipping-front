@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { City } from '../../../models/city/city.model';
+import { City, CityDTO } from '../../../models/city/city.model';
 import { CityService } from '../../../services/city.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-city-list',
@@ -10,21 +11,64 @@ import { CommonModule } from '@angular/common';
   styleUrl: './city-list.component.css'
 })
 export class CityListComponent implements OnInit {
-  constructor(private cityService: CityService) { }
-  cities : City[] = [];
+  constructor(private cityService: CityService, private router :Router) { }
+  cities: CityDTO[] = [];
+  filtered: CityDTO[] = [];
+
+  citySearchTerm = '';
+  governorateSearchTerm = '';
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-    this.cityService.getAllCities().subscribe({
-      next:(data)=> {
-        this.cities = data;
-      },
-      error:(err) => {
-        console.error('Error fetching cities:', err);
-      }
-    })
+     this.loadCities();
   }
-
-
-
+  loadCities(){
+    this.cityService.getAllCities().subscribe((data:CityDTO[])=>{
+      this.cities = data;
+      this.filtered = data;
+    }
+    )}
+     filterCities() {
+    this.filtered = this.cities.filter(city => {
+      const matchesCity =
+        this.citySearchTerm === '' || city.name.toLowerCase().includes(this.citySearchTerm.toLowerCase());
+      const matchesGov =
+        this.governorateSearchTerm === '' || city.goverrateName.toLowerCase().includes(this.governorateSearchTerm.toLowerCase());
+      return matchesCity && matchesGov;
+    });
+  }
+  onCitySearchInput(event: Event): void {
+  const input = event.target as HTMLInputElement;
+  this.onCitySearchChange(input.value);
 }
+toggleCityStatus(city: City): void {
+  this.cityService.toggleCityStatusByName(city.name).subscribe({
+    next: (response) => {
+      city.isActive = response.isActive;
+    },
+    error: err => console.error(err)
+  });
+}
+editcity(city: CityDTO): void {
+this.router.navigate(['/edit-city'],{state:{data:city}});
+}
+
+onGovernorateSearchInput(event: Event): void {
+  const input = event.target as HTMLInputElement;
+  this.onGovernorateSearchChange(input.value);
+}
+
+  onCitySearchChange(city:string){
+    this.citySearchTerm = city;
+    this.filterCities();
+
+
+  }
+  onGovernorateSearchChange(governorate:string){
+    this.governorateSearchTerm = governorate;
+    this.filterCities();
+  }}
+
+
+
+
+
+

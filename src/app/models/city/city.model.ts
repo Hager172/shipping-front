@@ -8,6 +8,7 @@ export interface City {
 export interface CityDTO {
   id: number;
   name: string;
+    goverrateName: string;
   goverrateId: number;
   pricePerKg: number;
   pickupCost: number;
