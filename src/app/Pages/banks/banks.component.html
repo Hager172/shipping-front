@@ -1,0 +1,21 @@
+<table border="1" cellpadding="10" cellspacing="0" style="width: 100%; text-align: left;">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Branch</th>
+      <th>Balance</th>
+      <th>Created Date</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let bank of banks">
+      <td>{{ bank.id }}</td>
+      <td>{{ bank.name }}</td>
+      <td>{{ bank.branchName || 'N/A' }}</td>
+      <td>{{ bank.balance | number:'1.2-2' }}</td>
+      <td>{{ bank.createdDate | date:'shortDate' }}</td>
+      <td>
+        <span [ngStyle]="{ color: bank.isActive ? 'green' : 'red' }">
+          {{ bank.isActive ? 'Active' : 'Inactive' }}
