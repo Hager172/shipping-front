@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { City } from '../../../models/order/city/city.model';
+import { City } from '../../../models/city/city.model';
 import { CityService } from '../../../services/city.service';
 import { CommonModule } from '@angular/common';
 
@@ -15,7 +15,7 @@ export class CityListComponent implements OnInit {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    this.cityService.getallcites().subscribe({
+    this.cityService.getAllCities().subscribe({
       next:(data)=> {
         this.cities = data;
       },
