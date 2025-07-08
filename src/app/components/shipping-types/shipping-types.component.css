@@ -1,0 +1,15 @@
+.btn.btn-primary {
+  border-radius: 60px;
+  --bs-btn-color: var(--accent-color);
+  --bs-btn-bg: var(--body-text-color);
+  --bs-btn-border-color: var(--body-text-color);
+  --bs-btn-hover-color: var(--accent-color);
+  --bs-btn-hover-bg: var(--secondary-color);
+  --bs-btn-hover-border-color: var(--secondary-color);
+}
+
+.btn.btn-primary.first-button {
+  font-size: 19px;
+  padding: 20px 60px;
+  transition: all 0.3s ease-in;
+}
