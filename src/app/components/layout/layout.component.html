@@ -1,16 +1,11 @@
-<!-- Navbar -->
-<app-navbar></app-navbar>
-
-<div class="container-scroller">
-  <!-- Sidebar -->
-  <app-sidebar></app-sidebar>
-
-  <!-- Main Page Content -->
-  <div class="container-fluid page-body-wrapper">
-    <div class="main-panel">
-      <div class="content-wrapper">
-        <router-outlet></router-outlet>
-      </div>
+<div class="container-fluid">
+  <div class="row">
+    <app-navbar></app-navbar>
+    <div class="col-md-3 col-lg-2 p-0">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="col-md-9 col-lg-10 p-4">
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

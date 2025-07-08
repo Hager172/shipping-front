@@ -1,0 +1,96 @@
+<div class="sidebar">
+  <div class="logo mb-4">
+    <i class="fas fa-user-circle me-2"></i> Shipping
+  </div>
+
+  <a class="nav-link" routerLink="/home">
+    <i class="fas fa-home"></i> Home
+  </a>
+
+  <!-- Settings -->
+  <a class="nav-link" (click)="toggleMenu('settings')">
+    <i class="fas fa-cog"></i> Settings
+  </a>
+  <div [class.collapse]="!isMenuOpen('settings')" class="submenu">
+    <a routerLink="/settings">Settings</a>
+    <a routerLink="/email-messages">Email Messages</a>
+    <a routerLink="/site-info">Site Info</a>
+    <a routerLink="/rejection-reasons">Rejection Reasons</a>
+    <a routerLink="/weight-settings">Weight Settings</a>
+    <a routerLink="/shipping-types">Shipping Types Settings</a>
+    <a routerLink="/permissions">Permissions</a>
+    <a routerLink="/branches">Branches</a>
+    <a routerLink="/banks">Banks</a>
+    <a routerLink="/safes">Safes</a>
+  </div>
+
+  <!-- Users -->
+  <a class="nav-link" (click)="toggleMenu('users')">
+    <i class="fas fa-users"></i> Users
+  </a>
+  <div [class.collapse]="!isMenuOpen('users')" class="submenu">
+    <a routerLink="/employees">Employees</a>
+    <a routerLink="/merchants">Merchants</a>
+    <a routerLink="/couriers">Couriers</a>
+  </div>
+
+  <!-- Regions -->
+  <a class="nav-link" (click)="toggleMenu('regions')">
+    <i class="fas fa-map-marker-alt"></i> Regions
+  </a>
+  <div [class.collapse]="!isMenuOpen('regions')" class="submenu">
+    <a routerLink="/governorates">Governorates</a>
+    <a routerLink="/cities">Cities</a>
+  </div>
+
+  <!-- Orders -->
+  <a class="nav-link" routerLink="/orders">
+    <i class="fas fa-shopping-bag"></i> Orders
+  </a>
+  <a class="nav-link" routerLink="/pickup-orders">
+    <i class="fas fa-truck"></i> Pickup Orders
+  </a>
+
+  <!-- Accounts -->
+  <a class="nav-link" (click)="toggleMenu('accounts')">
+    <i class="fas fa-wallet"></i> Accounts
+  </a>
+  <div [class.collapse]="!isMenuOpen('accounts')" class="submenu">
+    <a routerLink="/banks">Banks</a>
+    <a routerLink="/safes">Safes</a>
+    <a routerLink="/account-merchants">Merchants</a>
+    <a routerLink="/account-couriers">Couriers</a>
+  </div>
+
+  <!-- Order Reports -->
+  <a class="nav-link" (click)="toggleMenu('orderReports')">
+    <i class="fas fa-chart-bar"></i> Order Reports
+  </a>
+  <div [class.collapse]="!isMenuOpen('orderReports')" class="submenu">
+    <a routerLink="/courier-orders-report">Courier Orders Report</a>
+    <a routerLink="/merchant-orders-report">Merchant Orders Report</a>
+    <a routerLink="/branch-orders-report">Branch Orders Report</a>
+    <a routerLink="/status-orders-report">Status-Based Orders</a>
+    <a routerLink="/date-orders-report">Order Date Report</a>
+    <a routerLink="/late-orders-report">Late Orders Report</a>
+    <a routerLink="/pickup-orders-report">Pickup Orders Report</a>
+  </div>
+
+  <!-- Account Reports -->
+  <a class="nav-link" (click)="toggleMenu('accountReports')">
+    <i class="fas fa-file-invoice-dollar"></i> Account Reports
+  </a>
+  <div [class.collapse]="!isMenuOpen('accountReports')" class="submenu">
+    <a routerLink="/courier-account">Courier Account Statement</a>
+    <a routerLink="/merchant-account">Merchant Account Statement</a>
+    <a routerLink="/safe-account">Safe Account Statement</a>
+    <a routerLink="/bank-account">Bank Account Statements</a>
+    <a routerLink="/branch-profits">Branches Profit Report</a>
+    <a routerLink="/pickup-profits">Pickup Profit Reports</a>
+  </div>
+
+  <!-- Backup -->
+  <a class="nav-link" routerLink="/backup">
+    <i class="fas fa-database"></i> Backup
+  </a>
+</div>
