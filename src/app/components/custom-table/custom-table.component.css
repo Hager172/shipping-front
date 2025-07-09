@@ -1,0 +1,50 @@
+.table-container {
+  background-color: rgb(235, 253, 255);
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  /* font-family: Arial, sans-serif; */
+}
+
+.custom-table thead {
+  /* background-color: rgb(19, 152, 155); */
+  background-color: #083c3e;
+  color: white;
+}
+
+.custom-table th,
+.custom-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+.custom-table tbody tr:hover {
+  background-color: rgb(179, 232, 234);
+  transition: background-color 0.3s;
+}
+
+.pagination {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.pagination button {
+  margin: 0 4px;
+  padding: 6px 12px;
+  border: none;
+  background-color: #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pagination button.active {
+  background-color: rgb(19, 152, 155);
+  color: white;
+  font-weight: bold;
+}
