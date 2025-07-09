@@ -1,0 +1,26 @@
+<div class="modal-backdrop" *ngIf="show">
+  <div class="modal-container">
+    <div class="modal-header">
+      <h3>Edit Bank</h3>
+      <button (click)="closeModal()">X</button>
+    </div>
+    <div class="modal-body">
+      <label>
+        Name:
+        <input [(ngModel)]="bank!.name" />
+      </label>
+      <label>
+        Branch Name:
+        <input [(ngModel)]="bank!.branchName" />
+      </label>
+      <label>
+        Balance:
+        <input type="number" [(ngModel)]="bank!.balance" />
+      </label>
+    </div>
+    <div class="modal-footer">
+      <button (click)="saveChanges()">Save</button>
+      <button (click)="closeModal()">Cancel</button>
+    </div>
+  </div>
+</div>
