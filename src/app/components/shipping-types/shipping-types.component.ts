@@ -31,6 +31,7 @@ export class ShippingTypesComponent {
   isEditMode = false;
 
   columns = [
+    { header: '#', accessor: 'id'},
     { header: 'Name', accessor: 'typeName' },
     { header: 'Additional Cost', accessor: 'additionalCost' },
     { header: 'Estimated Days', accessor: 'estimatedDays' },
