@@ -1,0 +1,88 @@
+<!-- <p>rejection-reason works!</p> -->
+ <div class="page-container">
+  <div class="container mt-4">
+    <!-- Search & Add Button -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <input
+        type="text"
+        class="form-control w-25"
+        placeholder="Search rejection reason..."
+        [(ngModel)]="searchTerm"
+      />
+
+      <app-button-style
+        [label]="'Add New Rejection Reason'"
+        [className]="'btn custom-btn'"
+        [onClick]="openAddModal.bind(this)"
+      ></app-button-style>
+    </div>
+
+    <!--Table -->
+    <app-custom-table
+      [columns]="columns"
+      [data]="rejectionReasons | filterPipe:searchTerm"
+      (onEdit)="openEditModal($event)"
+      (onDelete)="confirmDelete($event)"
+    ></app-custom-table>
+  </div>
+</div>
+
+<!-- Add/Edit Modal -->
+<div class="modal" tabindex="-1" [ngClass]="{ 'show d-block': showModal }">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color:#083c3e; color:white">
+        <h5 class="modal-title">
+          {{ isEditMode ? 'Edit Rejection Reason' : 'Add Rejection Reason' }}
+        </h5>
+        <button type="button" class="btn-close" (click)="closeModal()"></button>
+      </div>
+
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label>Reason</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="modalRejectionReason.reason"
+              name="reason"
+            />
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="closeModal()">Cancel</button>
+
+        <app-button-style
+          [label]="isEditMode ? 'Save Changes' : 'Add'"
+          [className]="'btn custom-btn'"
+          [onClick]="saveRejectionReason.bind(this)"
+        ></app-button-style>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal" tabindex="-1" [ngClass]="{ 'show d-block': confirmDeleteModal }">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Delete</h5>
+      </div>
+      <div class="modal-body">
+        <p>
+          Are you sure you want to delete rejection reason:
+          <strong>{{ toBeDeleted?.reason }}</strong>?
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="confirmDeleteModal = false">Cancel</button>
+        <button class="btn btn-danger" (click)="deleteConfirmed()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+

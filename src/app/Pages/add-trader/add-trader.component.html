@@ -1,0 +1,75 @@
+<div class="container mt-4 p-4 rounded" style="background-color: rgb(235, 253, 255); box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+  <h4 class="mb-4 text-white p-3 rounded" style="background-color: #083c3e;">Add New Trader</h4>
+
+  <form (ngSubmit)="addTrader()" #form="ngForm">
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label>Full Name</label>
+        <input type="text" class="form-control" [(ngModel)]="trader.fullName" name="fullName" required />
+      </div>
+      <div class="col-md-6 mb-3">
+        <label>Email</label>
+        <input type="email" class="form-control" [(ngModel)]="trader.email" name="email" required />
+      </div>
+      <div class="col-md-6 mb-3">
+        <label>Password</label>
+        <input type="password" class="form-control" [(ngModel)]="trader.password" name="password" required />
+      </div>
+      <div class="col-md-6 mb-3">
+        <label>Phone</label>
+        <input type="text" class="form-control" [(ngModel)]="trader.phone" name="phone" />
+      </div>
+      <div class="col-md-6 mb-3">
+        <label>Store Name</label>
+        <input type="text" class="form-control" [(ngModel)]="trader.storeName" name="storeName" />
+      </div>
+      <div class="col-md-6 mb-3">
+        <label>Address</label>
+        <input type="text" class="form-control" [(ngModel)]="trader.address" name="address" />
+      </div>
+      <div class="col-md-4 mb-3">
+        <label>Governorate</label>
+        <select class="form-select" [(ngModel)]="trader.governorateId" name="governorateId">
+          <option [ngValue]="0" disabled selected>Select Governorate</option>
+          <option *ngFor="let g of governorates" [value]="g.id">{{ g.name }}</option>
+        </select>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label>City</label>
+        <select class="form-select" [(ngModel)]="trader.cityId" name="cityId">
+          <option [ngValue]="0" disabled selected>Select City</option>
+          <option *ngFor="let c of cities" [value]="c.id">{{ c.name }}</option>
+        </select>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label>Branch</label>
+        <select class="form-select" [(ngModel)]="trader.branchId" name="branchId">
+          <option [ngValue]="0" disabled selected>Select Branch</option>
+          <option *ngFor="let b of branches" [value]="b.id">{{ b.name }}</option>
+        </select>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label>Custom Pickup Cost</label>
+        <input type="number" class="form-control" [(ngModel)]="trader.customPickupCost" name="customPickupCost" />
+      </div>
+      <div class="col-md-6 mb-3">
+        <label>Rejected Order Shipping Share %</label>
+        <input type="number" class="form-control" [(ngModel)]="trader.rejectedOrderShippingShare" name="rejectedOrderShippingShare" />
+      </div>
+    </div>
+
+    
+    <!-- <div class="d-flex justify-content-end">
+      <button type="submit" class="btn custom-btn">Add Trader</button>
+    </div> -->
+
+  <div class="d-flex justify-content-end">
+    <app-button-style
+      [label]="'Add Trader'"
+      [className]="'btn custom-btn'"
+      [onClick]="addTrader.bind(this)"
+    ></app-button-style>
+  </div>
+
+  </form>
+</div>
