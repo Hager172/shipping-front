@@ -4,13 +4,16 @@ import { Bank } from '../../models/Banks/bank.model';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CustomTableComponent } from "../../components/custom-table/custom-table.component";
-import { EditBankModalComponent } from '../../components/edit-bank-modal/edit-bank-modal.component';
+import { SharedModalComponent } from "../../components/shared-modal/shared-modal.component";
+import { FormsModule } from '@angular/forms';
+import { BranchService } from '../../services/branch.service';
+import { ButtonStyleComponent } from "../../components/button-style/button-style.component";
 
 @Component({
   selector: 'app-banks',
   templateUrl: './banks.component.html',
   standalone: true,
-  imports: [CommonModule, RouterModule, CustomTableComponent, EditBankModalComponent],
+  imports: [CommonModule, RouterModule, CustomTableComponent, FormsModule, SharedModalComponent, ButtonStyleComponent],
 })
 export class BanksComponent implements OnInit {
   banks: Bank[] = [];
@@ -23,13 +26,40 @@ export class BanksComponent implements OnInit {
     { header: 'Active', accessor: 'isActive', type: 'toggle' }
   ];
 
-  selectedBank: Bank | null = null;
-  showModal: boolean = false;
+  showModal = false;
+  branches: any[] = [];
+  showDeleteModal = false;
+  bankToDelete: Bank | null = null;
+  searchTerm: string = '';
 
-  constructor(private bankService: BankService) { }
+
+  selectedBank: Bank = {
+    id: 0,
+    name: '',
+    branchName: '',
+    balance: 0,
+    isActive: true,
+    createdDate: new Date().toISOString(),
+    branchId: 0
+  };
+
+
+  constructor(private bankService: BankService, private branchService: BranchService) { }
 
   ngOnInit(): void {
     this.loadBanks();
+    this.loadBranches();
+  }
+  loadBranches() {
+    this.branchService.getAllBranches().subscribe({
+      next: (data) => {
+        this.branches = data;
+        console.log('Branches loaded:', data);
+      },
+      error: (err) => {
+        console.error('Error loading branches:', err);
+      }
+    });
   }
 
   loadBanks() {
@@ -42,7 +72,23 @@ export class BanksComponent implements OnInit {
       }
     });
   }
-
+  get filteredBanks(): Bank[] {
+    return this.banks.filter(bank =>
+      bank.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
+  openAddModal(): void {
+    this.selectedBank = {
+      id: 0,
+      name: '',
+      branchName: '',
+      balance: 0,
+      isActive: true,
+      createdDate: new Date().toISOString(),
+      branchId: 0
+    };
+    this.showModal = true;
+  }
   openEditModal(bank: Bank): void {
     this.selectedBank = { ...bank }; // Make a copy
     this.showModal = true;
@@ -50,35 +96,53 @@ export class BanksComponent implements OnInit {
 
   closeModal(): void {
     this.showModal = false;
-    this.selectedBank = null;
   }
 
-  saveEditedBank(updatedBank: Bank): void {
-    this.bankService.updateBank(updatedBank.id, updatedBank).subscribe({
-      next: () => {
-        const index = this.banks.findIndex(b => b.id === updatedBank.id);
-        if (index !== -1) {
-          this.banks[index] = updatedBank;
-        }
+  saveEditedBank(bank: Bank) {
+  if (!bank.id || bank.id === 0) {
+    // ⬅️ حالة الإضافة
+    this.bankService.addBank(bank).subscribe({
+      next: (newBank) => {
+        this.banks.push(newBank);
+        this.loadBanks();
         this.closeModal();
-        console.log('Bank updated successfully.');
       },
-      error: err => console.error('Error updating bank:', err)
+      error: err => console.error('Add error:', err)
+    });
+  } else {
+    // ⬅️ حالة التعديل
+    this.bankService.updateBank(bank.id, bank).subscribe({
+      next: () => {
+        const index = this.banks.findIndex(b => b.id === bank.id);
+        if (index !== -1) this.banks[index] = bank;
+        this.loadBanks();
+        this.closeModal();
+      },
+      error: err => console.error('Update error:', err)
     });
   }
-
-  deleteBank(bank: Bank): void {
-    const confirmDelete = confirm(`Are you sure you want to delete bank "${bank.name}"?`);
-    if (confirmDelete) {
-      this.bankService.deleteBank(bank.id).subscribe({
+}
+  openDeleteModal(bank: Bank): void {
+    this.bankToDelete = bank;
+    this.showDeleteModal = true;
+  }
+  confirmDelete(): void {
+    if (this.bankToDelete) {
+      this.bankService.deleteBank(this.bankToDelete.id).subscribe({
         next: () => {
-          this.banks = this.banks.filter(b => b.id !== bank.id);
-          console.log(`Bank ${bank.name} deleted.`);
+          this.banks = this.banks.filter(b => b.id !== this.bankToDelete!.id);
+          this.closeDeleteModal();
+          console.log('Bank deleted.');
         },
         error: err => console.error('Delete error:', err)
       });
     }
   }
+  closeDeleteModal(): void {
+    this.showDeleteModal = false;
+    this.bankToDelete = null;
+  }
+
 
   toggleStatus(bank: Bank): void {
     if (bank.isActive) {
