@@ -1,0 +1,21 @@
+<form #addgovernform="ngForm" (ngSubmit)="onSubmit(addgovernform)">
+  <div class="mb-3">
+    <label for="name" class="form-label">Governrate Name</label>
+    <input
+      type="text"
+      ngModel
+      name="name"
+      id="name"
+      class="form-control"
+      required
+    />
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+  <div *ngIf="successMessage" class="alert alert-success">
+    {{ successMessage }}
+  </div>
+  <button type="submit" class="btn btn-primary">Add Governorate</button>
+  <button [routerLink]="['/governrates']" class="btn btn-secondary ms-2">
+    Back
+  </button>
+</form>

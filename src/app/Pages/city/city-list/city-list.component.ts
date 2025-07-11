@@ -48,7 +48,11 @@ toggleCityStatus(city: City): void {
   });
 }
 editcity(city: CityDTO): void {
-this.router.navigate(['/edit-city'],{state:{data:city}});
+  this.cityService.selectedCity = city;
+  this.router.navigate(['/edit-city']);
+}
+addcity(): void {
+  this.router.navigate(['/add-city']);
 }
 
 onGovernorateSearchInput(event: Event): void {

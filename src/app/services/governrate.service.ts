@@ -13,7 +13,7 @@ export class GovernrateService {
   getAll(): Observable<GovernorateDTO[]> {
     return this.http.get<GovernorateDTO[]>(this.baseUrl);
   }
-
+selectedGovernorate: GovernorateDTO | null = null;
   getById(id: number): Observable<GovernorateDTO> {
     return this.http.get<GovernorateDTO>(`${this.baseUrl}/${id}`);
   }

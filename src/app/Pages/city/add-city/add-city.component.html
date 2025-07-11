@@ -1,9 +1,14 @@
-<form (ngSubmit)="updatecity()">
+<form (ngSubmit)="addcity()">
   <div class="mb-3">
     <label>City Name</label>
-    <input [(ngModel)]="city.name" name="name" class="form-control" />
+    <input
+      type="text"
+      [(ngModel)]="city.name"
+      name="name"
+      class="form-control"
+      required
+    />
   </div>
-
   <div class="mb-3">
     <label>Governorate</label>
     <select
@@ -49,14 +54,13 @@
     <label class="form-check-label">Is Active</label>
   </div>
 
-  <button type="submit" class="btn btn-success">Update</button>
-  <a routerLink="/cities" class="btn btn-primary">Back to Cities</a>
-  <p *ngIf="errormessage" class="error-message">
-    <i class="fa-solid fa-triangle-exclamation"></i>
-    {{ errormessage }}
-  </p>
-  <p *ngIf="successmessage" class="success-message">
-    <i class="fa-solid fa-circle-check"></i>
+  <button type="submit" class="btn btn-success">Add</button>
+
+  <div *ngIf="successmessage" class="alert alert-success mt-3">
     {{ successmessage }}
-  </p>
+  </div>
+
+  <div *ngIf="errormessage" class="alert alert-danger mt-3">
+    {{ errormessage }}
+  </div>
 </form>

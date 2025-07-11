@@ -9,9 +9,10 @@ import { Branch, BranchDTO } from '../models/branch/branch';
 export class BranchService {
 private baseUrl = 'https://localhost:7206/api/Branch';
   constructor(private http:HttpClient) { }
-   getAllBranches(): Observable<Branch[]> {
-    return this.http.get<Branch[]>(this.baseUrl);
+   getAllBranches(): Observable<BranchDTO[]> {
+    return this.http.get<BranchDTO[]>(this.baseUrl);
   }
+selectedBranch: BranchDTO | null = null;
 
   getBranchById(id: number): Observable<Branch> {
     return this.http.get<Branch>(`${this.baseUrl}/${id}`);

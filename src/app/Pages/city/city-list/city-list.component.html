@@ -1,18 +1,26 @@
+<div class="mt-2 mb-5">
+  <div class="row align-items-center">
+    <div class="col-md-6">
+      <button (click)="addcity()" class="custom-btn">Add City</button>
+    </div>
+    <div class="col-md-6 text-end">
+      <input
+        class="form-control d-inline-block w-75"
+        type="text"
+        placeholder="Search by governorate name..."
+        (input)="onGovernorateSearchInput($event)"
+      />
+    </div>
+  </div>
+</div>
+
 <div class="row mb-3">
   <div class="col-md-6">
     <input
-      class="form-control"
+      class="form-control w-75"
       type="text"
       placeholder="Search by city name..."
       (input)="onCitySearchInput($event)"
-    />
-  </div>
-  <div class="col-md-6">
-    <input
-      class="form-control"
-      type="text"
-      placeholder="Search by governorate name..."
-      (input)="onGovernorateSearchInput($event)"
     />
   </div>
 </div>

@@ -16,6 +16,7 @@ export class CityService {
   getAllCities(): Observable<CityDTO[]> {
     return this.http.get<CityDTO[]>(this.baseurl);
   }
+selectedCity: CityDTO | null = null;
 
   toggleCityStatusByName(name: string): Observable<City> {
     return this.http.get<City>(`${this.baseurl}/togglecitystatus/${name}`);

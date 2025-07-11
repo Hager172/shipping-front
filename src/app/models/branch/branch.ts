@@ -1,8 +1,9 @@
 export interface Branch {
   name: string;
   address: string;
-  cityId: number;
+  CityId: number;
 }
 export interface BranchDTO extends Branch {
   id: number;
+  cityName: string;
 }

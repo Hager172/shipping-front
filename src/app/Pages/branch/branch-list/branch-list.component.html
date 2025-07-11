@@ -1,0 +1,51 @@
+<div class="mt-2 mb-5">
+  <div class="row align-items-center">
+    <div class="col-md-6">
+      <button (click)="addBranch()" class="custom-btn">Add Branch</button>
+    </div>
+    <div class="col-md-6 text-end">
+      <input
+        class="form-control d-inline-block w-75"
+        type="text"
+        placeholder="Search by city name..."
+        (input)="onCitySearchInput($event)"
+      />
+    </div>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-6">
+    <input
+      class="form-control w-75"
+      type="text"
+      placeholder="Search by branch name..."
+      (input)="onNameSearchInput($event)"
+    />
+  </div>
+</div>
+
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Branch Name</th>
+      <th>City</th>
+
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let branch of filtered; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ branch.name }}</td>
+      <td>{{ branch.cityName }}</td>
+
+      <td>
+        <button class="btn-edit" title="Edit" (click)="editBranch(branch)">
+          <i class="fas fa-edit" style="color: #ffffff"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
