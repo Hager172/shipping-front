@@ -10,6 +10,8 @@ import { AddBranchComponent } from './Pages/branch/add-branch/add-branch.compone
 import { GovernListComponent } from './Pages/governrate/govern-list/govern-list.component';
 import { EditGovernorateComponent } from './Pages/governrate/edit-governorate/edit-governorate.component';
 import { AddGovernorateComponent } from './Pages/governrate/add-governorate/add-governorate.component';
+import { CourierListComponent } from './Pages/courier/courier-list/courier-list.component';
+import { CourierAddComponent } from './Pages/courier/courier-add/courier-add.component';
 
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -23,5 +25,7 @@ export const routes: Routes = [
 {path:'add-branch',component:AddBranchComponent},
 {path:'governrates', component: GovernListComponent},
 {path:'edit-governorate', component: EditGovernorateComponent},
-{path:'add-governorate', component: AddGovernorateComponent}
+{path:'add-governorate', component: AddGovernorateComponent},
+{path:'couriers',component:CourierListComponent},
+{path:'addcourier',component:CourierAddComponent}
 ];

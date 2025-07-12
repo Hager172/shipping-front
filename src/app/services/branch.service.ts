@@ -18,6 +18,9 @@ selectedBranch: BranchDTO | null = null;
     return this.http.get<Branch>(`${this.baseUrl}/${id}`);
   }
 
+  getnames(): Observable<any>{
+    return this.http.get<any>(`${this.baseUrl}/names`)
+  }
   getBranchByName(name: string): Observable<Branch> {
     return this.http.get<Branch>(`${this.baseUrl}/getbranchbyname/${name}`);
   }

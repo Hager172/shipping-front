@@ -18,9 +18,13 @@ export class CityService {
   }
 selectedCity: CityDTO | null = null;
 
-  toggleCityStatusByName(name: string): Observable<City> {
-    return this.http.get<City>(`${this.baseurl}/togglecitystatus/${name}`);
-  }
+toggleCityStatusByName(name: string): Observable<{ isActive: boolean }> {
+  return this.http.put<{ isActive: boolean }>(
+    `${this.baseurl}/togglestatusbyname/${name}`,
+    {}
+  );
+}
+
   getCityById(id: number): Observable<City> {
     return this.http.get<City>(`${this.baseurl}/${id}`);
   }

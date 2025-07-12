@@ -25,7 +25,9 @@ selectedGovernorate: GovernorateDTO | null = null;
   add(governorate: Governorate): Observable<any> {
     return this.http.post(this.baseUrl, governorate);
   }
-
+  getnames(): Observable<any>{
+    return this.http.get<any>(`${this.baseUrl}/names`)
+  }
   update(governorate: GovernorateDTO): Observable<any> {
     return this.http.put(this.baseUrl, governorate);
   }

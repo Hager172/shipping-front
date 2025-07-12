@@ -1,0 +1,73 @@
+<form [formGroup]="courierForm" (ngSubmit)="addCourier()">
+  <div class="mb-3">
+    <label>User Name</label>
+    <input class="form-control" formControlName="userName" />
+  </div>
+
+  <div class="mb-3">
+    <label>Email</label>
+    <input class="form-control" formControlName="email" type="email" />
+  </div>
+
+  <div class="mb-3">
+    <label>Password</label>
+    <input class="form-control" formControlName="password" type="password" />
+  </div>
+
+  <div class="mb-3">
+    <label>Full Name</label>
+    <input class="form-control" formControlName="fullName" />
+  </div>
+
+  <div class="mb-3">
+    <label>Address</label>
+    <input class="form-control" formControlName="address" />
+  </div>
+
+  <div class="mb-3">
+    <label>Phone Number</label>
+    <input class="form-control" formControlName="phoneNumber" />
+  </div>
+
+  <div class="mb-3">
+    <label>Discount Type</label>
+    <select class="form-select" formControlName="discountType">
+      <option [value]="0">Percentage</option>
+      <option [value]="1">Fixed Amount</option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label>Order Share</label>
+    <input class="form-control" formControlName="orderShare" type="number" />
+  </div>
+
+  <!-- Governorates Dropdown -->
+  <div class="form-group">
+    <label for="governorates">المحافظات</label>
+    <select
+      class="form-control"
+      multiple
+      (change)="onGovernoratesChange($event)"
+    >
+      <option *ngFor="let g of allGovernorates" [value]="g.id">
+        {{ g.name }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Branches Dropdown -->
+  <div class="form-group">
+    <label for="branches">الفروع</label>
+    <select class="form-control" multiple (change)="onBranchesChange($event)">
+      <option *ngFor="let b of allBranches" [value]="b.id">{{ b.name }}</option>
+    </select>
+  </div>
+
+  <button class="custom-btn" type="submit">Add Courier</button>
+
+  <div *ngIf="errormessage" class="alert alert-danger">{{ errormessage }}</div>
+  <div *ngIf="successmessage" class="alert alert-success">
+    {{ successmessage }}
+  </div>
+</form>
