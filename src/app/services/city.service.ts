@@ -13,9 +13,17 @@ export class CityService {
 
   constructor(private http: HttpClient) {}
 
-  getAllCities(): Observable<City[]> {
-    return this.http.get<City[]>(this.baseurl);
+  getAllCities(): Observable<CityDTO[]> {
+    return this.http.get<CityDTO[]>(this.baseurl);
   }
+selectedCity: CityDTO | null = null;
+
+toggleCityStatusByName(name: string): Observable<{ isActive: boolean }> {
+  return this.http.put<{ isActive: boolean }>(
+    `${this.baseurl}/togglestatusbyname/${name}`,
+    {}
+  );
+}
 
   getCityById(id: number): Observable<City> {
     return this.http.get<City>(`${this.baseurl}/${id}`);

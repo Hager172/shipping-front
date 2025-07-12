@@ -1,0 +1,57 @@
+<div class="mt-2 mb-5">
+  <div class="row align-items-center">
+    <div class="col-md-6">
+      <button (click)="addCourier()" class="custom-btn">Add Courier</button>
+    </div>
+    <div class="col-md-6 text-end">
+      <input
+        class="form-control d-inline-block w-75"
+        type="text"
+        placeholder="Search by name..."
+        (input)="onSearchInput($event)"
+      />
+    </div>
+  </div>
+</div>
+
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Governorates</th>
+      <th>Branches</th>
+      <th>Discount Type</th>
+      <th>Order Share</th>
+
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let courier of filtered; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ courier.fullName }}</td>
+      <td>{{ courier.email }}</td>
+      <td>{{ courier.phoneNumber }}</td>
+      <td>
+        <ul>
+          <li *ngFor="let gov of courier.selectedGovernorates">{{ gov }}</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li *ngFor="let branch of courier.selectedBranchs">{{ branch }}</li>
+        </ul>
+      </td>
+      <td>{{ discountTypeMap[courier.discountType] }}</td>
+      <td>{{ courier.orderShare }}</td>
+      <td>
+        <button class="btn-edit" (click)="editCourier(courier)" title="Edit">
+          <i class="fas fa-edit" style="color: #ffffff"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,66 @@
+<form (ngSubmit)="addcity()">
+  <div class="mb-3">
+    <label>City Name</label>
+    <input
+      type="text"
+      [(ngModel)]="city.name"
+      name="name"
+      class="form-control"
+      required
+    />
+  </div>
+  <div class="mb-3">
+    <label>Governorate</label>
+    <select
+      class="form-select"
+      [(ngModel)]="city.GovernorateId"
+      name="goverrateId"
+      required
+    >
+      <option value="" selected disabled>Select a governorate</option>
+      <option *ngFor="let g of governrates" [value]="g.id">
+        {{ g.name }}
+      </option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label>Shipping Cost</label>
+    <input
+      [(ngModel)]="city.pricePerKg"
+      name="pricePerKg"
+      type="number"
+      class="form-control"
+    />
+  </div>
+
+  <div class="mb-3">
+    <label>Pickup Cost</label>
+    <input
+      [(ngModel)]="city.pickupCost"
+      name="pickupCost"
+      type="number"
+      class="form-control"
+    />
+  </div>
+
+  <div class="form-check mb-3">
+    <input
+      [(ngModel)]="city.isActive"
+      name="isActive"
+      type="checkbox"
+      class="form-check-input"
+    />
+    <label class="form-check-label">Is Active</label>
+  </div>
+
+  <button type="submit" class="btn btn-success">Add</button>
+
+  <div *ngIf="successmessage" class="alert alert-success mt-3">
+    {{ successmessage }}
+  </div>
+
+  <div *ngIf="errormessage" class="alert alert-danger mt-3">
+    {{ errormessage }}
+  </div>
+</form>

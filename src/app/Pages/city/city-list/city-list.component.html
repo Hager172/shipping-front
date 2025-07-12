@@ -1,22 +1,64 @@
-<h2>قائمة المدن</h2>
+<div class="mt-2 mb-5">
+  <div class="row align-items-center">
+    <div class="col-md-6">
+      <button (click)="addcity()" class="custom-btn">Add City</button>
+    </div>
+    <div class="col-md-6 text-end">
+      <input
+        class="form-control d-inline-block w-75"
+        type="text"
+        placeholder="Search by governorate name..."
+        (input)="onGovernorateSearchInput($event)"
+      />
+    </div>
+  </div>
+</div>
 
-<table border="1" style="width: 100%; text-align: center">
+<div class="row mb-3">
+  <div class="col-md-6">
+    <input
+      class="form-control w-75"
+      type="text"
+      placeholder="Search by city name..."
+      (input)="onCitySearchInput($event)"
+    />
+  </div>
+</div>
+
+<table class="table table-bordered table-hover">
   <thead>
     <tr>
-      <th>اسم المدينة</th>
-      <th>المحافظة</th>
-      <th>سعر الكيلو</th>
-      <th>تكلفة البيك أب</th>
-      <th>الحالة</th>
+      <th>#</th>
+      <th>City Name</th>
+      <th>Governorate</th>
+      <th>Shipping</th>
+      <th>Pickup</th>
+      <th>Status</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let city of cities">
+    <tr *ngFor="let city of filtered; let i = index">
+      <td>{{ i + 1 }}</td>
       <td>{{ city.name }}</td>
       <td>{{ city.goverrateName }}</td>
       <td>{{ city.pricePerKg }}</td>
       <td>{{ city.pickupCost }}</td>
-      <td>{{ city.isActive ? "مفعّلة" : "غير مفعّلة" }}</td>
+      <td>
+        <button
+          class="btn"
+          [ngClass]="city.isActive ? 'custom-btn' : 'custom-btninactive'"
+          (click)="toggleCityStatus(city)"
+        >
+          {{ city.isActive ? "Active" : "Inactive" }}
+        </button>
+      </td>
+
+      <td>
+        <button class="btn-edit" title="Edit" (click)="editcity(city)">
+          <i class="fas fa-edit" style="color: #ffffff"></i>
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>

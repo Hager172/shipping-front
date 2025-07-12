@@ -1,0 +1,62 @@
+<form (ngSubmit)="updatecity()">
+  <div class="mb-3">
+    <label>City Name</label>
+    <input [(ngModel)]="city.name" name="name" class="form-control" />
+  </div>
+
+  <div class="mb-3">
+    <label>Governorate</label>
+    <select
+      class="form-select"
+      [(ngModel)]="city.GovernorateId"
+      name="goverrateId"
+      required
+    >
+      <option value="" selected disabled>Select a governorate</option>
+      <option *ngFor="let g of governrates" [value]="g.id">
+        {{ g.name }}
+      </option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label>Shipping Cost</label>
+    <input
+      [(ngModel)]="city.pricePerKg"
+      name="pricePerKg"
+      type="number"
+      class="form-control"
+    />
+  </div>
+
+  <div class="mb-3">
+    <label>Pickup Cost</label>
+    <input
+      [(ngModel)]="city.pickupCost"
+      name="pickupCost"
+      type="number"
+      class="form-control"
+    />
+  </div>
+
+  <div class="form-check mb-3">
+    <input
+      [(ngModel)]="city.isActive"
+      name="isActive"
+      type="checkbox"
+      class="form-check-input"
+    />
+    <label class="form-check-label">Is Active</label>
+  </div>
+
+  <button type="submit" class="btn btn-success">Update</button>
+  <a routerLink="/cities" class="btn btn-primary">Back to Cities</a>
+  <p *ngIf="errormessage" class="error-message">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    {{ errormessage }}
+  </p>
+  <p *ngIf="successmessage" class="success-message">
+    <i class="fa-solid fa-circle-check"></i>
+    {{ successmessage }}
+  </p>
+</form>

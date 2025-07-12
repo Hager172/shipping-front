@@ -1,0 +1,21 @@
+<form (ngSubmit)="updateGovernorate()">
+  <div class="mb-3">
+    <label>Governorate Name</label>
+    <input
+      [(ngModel)]="governorate.name"
+      name="name"
+      class="form-control"
+      required
+    />
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+  <div *ngIf="successMessage" class="alert alert-success">
+    {{ successMessage }}
+  </div>
+
+  <button type="submit" class="btn btn-primary">Update</button>
+  <button [routerLink]="['/governrates']" class="btn btn-secondary ms-2">
+    back
+  </button>
+</form>

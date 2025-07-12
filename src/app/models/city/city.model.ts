@@ -1,6 +1,6 @@
 export interface City {
   name: string;
-  goverrateName: string;
+GovernorateId: number;
   pricePerKg: number;
   pickupCost: number;
   isActive: boolean;
@@ -8,7 +8,8 @@ export interface City {
 export interface CityDTO {
   id: number;
   name: string;
-  goverrateId: number;
+    goverrateName: string;
+GovernorateId: number;
   pricePerKg: number;
   pickupCost: number;
   isActive: boolean;

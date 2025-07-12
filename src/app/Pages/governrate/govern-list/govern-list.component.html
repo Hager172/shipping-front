@@ -1,0 +1,39 @@
+<!-- governorate-list.component.html -->
+<div class="mt-2 mb-5">
+  <div class="row align-items-center">
+    <div class="col-md-6">
+      <button (click)="addGovernorate()" class="custom-btn">
+        Add Governorate
+      </button>
+    </div>
+    <div class="col-md-6 text-end">
+      <input
+        class="form-control d-inline-block w-75"
+        type="text"
+        placeholder="Search by governorate name..."
+        (input)="onSearchInput($event)"
+      />
+    </div>
+  </div>
+</div>
+
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Governorate Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let gov of filteredGovernorates; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ gov.name }}</td>
+      <td>
+        <button class="btn-edit" title="Edit" (click)="editGovernorate(gov)">
+          <i class="fas fa-edit" style="color: #ffffff"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

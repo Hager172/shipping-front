@@ -1,0 +1,44 @@
+<form (ngSubmit)="updateBranch()">
+  <div class="mb-3">
+    <label>Branch Name</label>
+    <input
+      [(ngModel)]="branch.name"
+      name="name"
+      class="form-control"
+      required
+    />
+  </div>
+
+  <div class="mb-3">
+    <label>City</label>
+    <select
+      [(ngModel)]="branch.CityId"
+      name="cityId"
+      class="form-control"
+      required
+    >
+      <option *ngFor="let city of cities" [value]="city.id">
+        {{ city.name }}
+      </option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label>Address</label>
+    <input
+      [(ngModel)]="branch.address"
+      name="address"
+      class="form-control"
+      required
+    />
+  </div>
+
+  <button type="submit" class="btn btn-primary">Update</button>
+
+  <div *ngIf="successMessage" class="alert alert-success mt-3">
+    {{ successMessage }}
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+    {{ errorMessage }}
+  </div>
+</form>
