@@ -11,7 +11,7 @@ import { ButtonStyleComponent } from '../../components/button-style/button-style
 @Component({
   selector: 'app-add-trader',
   standalone: true,
-  imports: [CommonModule , FormsModule , ReactiveFormsModule , ButtonStyleComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, ButtonStyleComponent],
   templateUrl: './add-trader.component.html',
   styleUrls: ['./add-trader.component.css']
 })
@@ -45,31 +45,25 @@ export class AddTraderComponent implements OnInit {
     isActive: true
   }
 
+  cpGovernorateId: number = 0;
+
   customPrices: any[] = [];
   governorates: any[] = [];
   cities: any[] = [];
+  filteredCitiesForTrader: any[] = [];
+  filteredCitiesForCP: any[] = [];
   branches: any[] = [];
-  filteredCities: any[] = [];
+  validationErrors: any = {};
 
   ngOnInit() {
     this.loadGovernorates();
-    this.loadCities();
     this.loadBranches();
   }
 
   loadGovernorates() {
     this.governrateService.getAll().subscribe(
-      data => {
-        this.governorates = data;
-      },
+      data => this.governorates = data,
       error => console.error('Error loading governorates', error)
-    );
-  }
-
-  loadCities() {
-    this.cityService.getAllCities().subscribe(
-      data => this.cities = data,
-      error => console.error('Error loading cities', error)
     );
   }
 
@@ -80,14 +74,38 @@ export class AddTraderComponent implements OnInit {
     );
   }
 
-  filterCities(governorateId: number) {
-    this.filteredCities = this.cities.filter(c => c.governorateId === governorateId);
+  filterCitiesForTrader(governorateId: number) {
+    this.cityService.getCitiesByGovernorate(governorateId).subscribe(
+      (data) => {
+        this.filteredCitiesForTrader = data;
+        this.trader.cityId = 0;
+      },
+      (error) => {
+        console.error('Error filtering cities for trader', error);
+        this.filteredCitiesForTrader = [];
+      }
+    );
+  }
+
+  filterCitiesForCP(governorateId: number) {
+    this.cityService.getCitiesByGovernorate(governorateId).subscribe(
+      (data) => {
+        this.filteredCitiesForCP = data;
+        this.cp.cityId = 0;
+      },
+      (error) => {
+        console.error('Error filtering cities for custom price', error);
+        this.filteredCitiesForCP = [];
+      }
+    );
   }
 
   addCustomPrice() {
     const newPrice = { ...this.cp };
     this.customPrices.push(newPrice);
     this.cp = { price: 0, traderId: '', cityId: 0, isActive: true };
+    this.cpGovernorateId = 0;
+    this.filteredCitiesForCP = [];
   }
 
   removeCustomPrice(index: number) {
@@ -97,7 +115,7 @@ export class AddTraderComponent implements OnInit {
   addTrader() {
     this.traderService.createTrader(this.trader).subscribe(
       (res: any) => {
-        const traderId = res.id || res.traderId;
+        const traderId = res.traderId || res.id;
         if (this.customPrices.length > 0) {
           this.customPrices.forEach(cp => cp.traderId = traderId);
           this.customPriceService.createBulkCustomPrices(this.customPrices).subscribe(
@@ -105,11 +123,16 @@ export class AddTraderComponent implements OnInit {
             err => console.error('Error saving custom prices', err)
           );
         }
+        alert("Trader added successfully!");
         this.resetForm();
       },
       error => {
         console.error('Error adding trader', error);
-        alert("Error occurred while adding trader. Check console for details.");
+        if (error.status === 400 && error.error?.errors) {
+          this.validationErrors = error.error.errors;
+        } else {
+          alert("Unexpected error occurred.");
+        }
       }
     );
   }
@@ -129,5 +152,10 @@ export class AddTraderComponent implements OnInit {
       rejectedOrderShippingShare: 0
     };
     this.customPrices = [];
+    this.cp = { price: 0, traderId: '', cityId: 0, isActive: true };
+    this.cpGovernorateId = 0;
+    this.filteredCitiesForTrader = [];
+    this.filteredCitiesForCP = [];
+    this.validationErrors = {};
   }
 }

@@ -1,0 +1,89 @@
+<div class="page-container">
+  <div class="container mt-4">
+    <!-- زرار الإضافة والبحث -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <app-button-style
+        label="Add Custom Price"
+        className="custom-btn"
+        [onClick]="openModal.bind(this)"
+      ></app-button-style>
+
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        placeholder="Search Custom Price..."
+        class="form-control w-25"
+      />
+    </div>
+
+    <!-- جدول عرض البيانات -->
+    <app-custom-table
+      [data]="customPrices | filterPipe: searchTerm"
+      [columns]="columns"
+      [itemsPerPage]="10"
+      (onEdit)="editCustomPrice($event)"
+      (onDelete)="deleteCustomPrice($event)"
+      (onToggleStatus)="toggleStatus($event)"
+    ></app-custom-table>
+  </div>
+
+  <!-- المودال -->
+  <app-shared-modal
+    [show]="showModal"
+    [title]="selectedCustomPrice ? 'Edit Custom Price' : 'Add Custom Price'"
+    (close)="closeModal(false)"
+    (save)="submitForm()"
+  >
+    <div modal-body>
+      <form #priceForm="ngForm">
+        <div class="mb-3">
+          <label>Trader</label>
+          <select class="form-control" [(ngModel)]="formData.traderId" name="traderId" required>
+            <option value="" disabled>Select Trader</option>
+            <option *ngFor="let trader of traders" [value]="trader.userId">
+              {{ trader.fullName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label>City</label>
+          <select class="form-control" [(ngModel)]="formData.cityId" name="cityId" required>
+            <option value="" disabled>Select City</option>
+            <option *ngFor="let city of cities" [value]="city.id">{{ city.name }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label>Price</label>
+          <input
+            type="number"
+            [(ngModel)]="formData.price"
+            name="price"
+            class="form-control"
+            required
+          />
+        </div>
+
+        <div class="form-check mb-3">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            [(ngModel)]="formData.isActive"
+            name="isActive"
+            id="statusToggle"
+          />
+          <label class="form-check-label" for="statusToggle"> Active </label>
+        </div>
+      </form>
+    </div>
+
+    <div modal-footer>
+      <app-button-style
+        label="Save"
+        className="custom-btn"
+        [onClick]="submitForm.bind(this)"
+      ></app-button-style>
+    </div>
+  </app-shared-modal>
+</div>

@@ -26,7 +26,6 @@ export class TradersComponent {
   searchTerm: string = '';
 
   columns = [
-    { header: '#', accessor: 'id' },
     { header: 'Name', accessor: 'fullName' },
     { header: 'Email', accessor: 'email' },
     { header: 'Phone', accessor: 'phone' },
@@ -42,7 +41,11 @@ export class TradersComponent {
   loadTraders() {
     this.traderService.getTraders().subscribe({
       next: (data: any[]) => {
-        this.traders = data;
+        this.traders = data.map(t => ({
+          ...t,
+          id: t.userId
+        }));
+        console.log('Traders loaded:', this.traders);
       },
       error: (err) => console.error('Error loading traders', err)
     });
@@ -60,7 +63,8 @@ export class TradersComponent {
     if (confirm(`Are you sure you want to delete ${trader.fullName}?`)) {
       this.traderService.deleteTrader(trader.id).subscribe({
         next: () => this.loadTraders(),
-        error: (err) => console.error('Error deleting trader', err)
+        error: (err) => alert("can't delete trader"),
+          // console.error('Error deleting trader', err)
       });
     }
   }

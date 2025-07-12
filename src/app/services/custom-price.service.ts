@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs';
 
 const baseUrl = environment.baseUrl;
 @Injectable({
@@ -12,8 +13,8 @@ export class CustomPriceService {
   getCustomPriceById(id: string) {
     return this.http.get(baseUrl + `CustomPrice/${id}`);
   }
-  getCustomPrices() {
-    return this.http.get(baseUrl + 'CustomPrice');
+  getCustomPrices(): Observable <any[]>  {
+    return this.http.get<any[]> (baseUrl + 'CustomPrice');
   }
   createCustomPrice(customPrice: any) {
     return this.http.post(baseUrl + 'CustomPrice', customPrice);

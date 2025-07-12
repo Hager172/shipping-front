@@ -11,8 +11,8 @@ export class TraderService {
 
   constructor(private http: HttpClient) { }
 
-  getTraderById(id: string) {
-    return this.http.get(baseUrl+ `Trader/${id}`);
+  getTraderById(id: string): Observable<any> {
+    return this.http.get(baseUrl+`Trader/getById/${id}`);
   }
 
   getTraders(): Observable<any[]>  {
@@ -22,10 +22,10 @@ export class TraderService {
   createTrader(trader: any) {
     return this.http.post<any>(baseUrl+ 'Trader/RegisterTrader', trader);
   }
-  updateTrader(id: string, trader: any) {
-    return this.http.put(baseUrl+`$Trader/${id}`, trader);
+  updateTrader(id: string, trader: any): Observable<any> {
+    return this.http.put(baseUrl+`Trader/${id}`, trader);
   }
   deleteTrader(id: string) {
-    return this.http.delete(baseUrl +`$Trader/${id}`);
+    return this.http.delete(baseUrl +`Trader/${id}`);
   }
 }

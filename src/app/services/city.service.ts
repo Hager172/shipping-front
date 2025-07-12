@@ -37,5 +37,9 @@ export class CityService {
     return this.http.delete(`${this.baseurl}/${id}`);
   }
 
+  getCitiesByGovernorate(governorateId: number): Observable<City[]> {
+    return this.http.get<City[]>(`${this.baseurl}/getbygovernorateid/${governorateId}`);
+  }   
+
 }
 
