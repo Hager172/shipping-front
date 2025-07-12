@@ -21,6 +21,9 @@ import { TradersComponent } from './Pages/traders/traders.component';
 import { SaveComponent } from './Pages/saves/save.component';
 import { BankFinancialtransferComponent } from './Pages/bank-financialtransfer/bank-financialtransfer.component';
 import { SafeFinancialtransferComponent } from './Pages/safe-financialtransfer/safe-financialtransfer.component';
+import { WeightComponent } from './Pages/weight/weight.component';
+import { ExtraVillagePriceComponent } from './Pages/extra-village-price/extra-village-price.component';
+import { AddCustomPriceComponent } from './Pages/add-custom-price/add-custom-price.component';
 
 export const routes: Routes = [
 
@@ -42,16 +45,25 @@ export const routes: Routes = [
       { path: 'bank-financialtransfer', component: BankFinancialtransferComponent },
       { path: 'safe-financialtransfer', component: SafeFinancialtransferComponent },
       {path:'edit-city',component:EditCityComponent},
-{path:'add-city',component:AddCityComponent},
-{path:'branches',component:BranchListComponent},
-{path:'edit-branch',component:EditBranchComponent},
-{path:'add-branch',component:AddBranchComponent},
-{path:'governrates', component: GovernListComponent},
-{path:'edit-governorate', component: EditGovernorateComponent},
-{path:'add-governorate', component: AddGovernorateComponent},
-{path:'couriers',component:CourierListComponent},
-{path:'addcourier',component:CourierAddComponent},
- {path:'cities',component:CityListComponent},
+      {path:'add-city',component:AddCityComponent},
+      {path:'branches',component:BranchListComponent},
+      {path:'edit-branch',component:EditBranchComponent},
+      {path:'add-branch',component:AddBranchComponent},
+      {path:'governrates', component: GovernListComponent},
+      {path:'edit-governorate', component: EditGovernorateComponent},
+      {path:'add-governorate', component: AddGovernorateComponent},
+      {path:'couriers',component:CourierListComponent},
+      {path:'addcourier',component:CourierAddComponent},
+      {path:'cities',component:CityListComponent},
+
+        {path:'extraVillagePrice' , component:ExtraVillagePriceComponent},
+        {path:'weight' , component:WeightComponent},
+        {path:'addCustomPrice' , component:AddCustomPriceComponent},
+        {
+        path: 'edit-trader/:id',
+        loadComponent: () =>
+          import('./Pages/edit-trader/edit-trader.component').then(m => m.EditTraderComponent)
+      }
     ]
   }
 
