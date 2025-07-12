@@ -1,0 +1,113 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    background-color: #083c3e; 
+    border-bottom: 1px solid #0a4c50;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    color: #ebfdff; 
+}
+
+.icon-left {
+  display: inline-block;
+  font-size: 40px;
+  color: #ebfdff;
+  margin-right: 8px;
+}
+
+.navbar-left {
+  display: flex;
+  flex-direction: column;
+}
+.navbar-left h2 {
+  margin: 10;
+  font-size: 30px;
+}
+
+.navbar-left .light-grey {
+  color: #ebfdff; 
+  font-weight: 500;
+}
+
+.navbar-left {
+  color: #ebfdff;
+  font-weight: 600;
+
+  margin-left: 5px;
+}
+
+.navbar-left .sub-text {
+  font-size: 20px;
+  color: #ebfdff99
+}
+
+/* Right Section */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Dropdown & Date Picker */
+.dropdown,
+.date-picker {
+  padding: 6px 10px;
+  font-size: 16px;
+  border: 1px solid #ebfdff66;
+  border-radius: 8px;
+  background-color: transparent;
+  color: #ebfdff;
+}
+
+.dropdown option {
+  background-color: #083c3e;
+  color: #ebfdff;
+}
+
+/* Icon Buttons */
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: #ebfdffcc;
+  transition: color 0.2s;
+}
+
+.icon-btn:hover {
+  color: #ffffff;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: brightness(0) saturate(100%) invert(84%) sepia(11%) saturate(747%) hue-rotate(135deg);
+}
+
+
+/* Profile Picture */
+.profile-pic {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ebfdffcc;
+}
+
+/* ✅ Responsive */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .navbar-right {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+
+

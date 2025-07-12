@@ -1,0 +1,119 @@
+<div class="page-container">
+  <div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <input
+        type="text"
+        class="form-control w-25"
+        placeholder="Search shipping type..."
+        [(ngModel)]="searchTerm"
+      />
+
+      <app-button-style
+        [label]="'Add New Shipping Type'"
+        [className]="'btn custom-btn'"
+        [onClick]="openAddModal.bind(this)"
+      ></app-button-style>
+    </div>
+
+    <app-custom-table
+      [columns]="columns"
+      [data]="shippingTypes | filterPipe:searchTerm"
+      (onEdit)="openEditModal($event)"
+      (onDelete)="confirmDelete($event)"
+      (onToggleStatus)="updateShippingTypeFromToggle($event)"
+    ></app-custom-table>
+  </div>
+</div>
+
+<!-- ✅ Add/Edit Modal -->
+<div class="modal" tabindex="-1" [ngClass]="{ 'show d-block': showModal }">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header"  style="background-color:#083c3e; color:white">
+        <h5 class="modal-title">
+          {{ isEditMode ? 'Edit Shipping Type' : 'Add Shipping Type' }}
+        </h5>
+        <button type="button" class="btn-close" (click)="closeModal()"></button>
+      </div>
+
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label>Type Name</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="modalShippingType.typeName"
+              name="typeName"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label>Additional Cost</label>
+            <input
+              type="number"
+              class="form-control"
+              [(ngModel)]="modalShippingType.additionalCost"
+              name="additionalCost"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label>Estimated Days</label>
+            <input
+              type="number"
+              class="form-control"
+              [(ngModel)]="modalShippingType.estimatedDays"
+              name="estimatedDays"
+            />
+          </div>
+
+          <!-- ✅ Toggle Switch -->
+          <div class="mb-3 form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="statusToggle"
+              [(ngModel)]="modalShippingType.isActive"
+              name="isActive"
+            />
+            <label class="form-check-label" for="statusToggle">Active?</label>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="closeModal()">Cancel</button>
+
+        <app-button-style
+          [label]="isEditMode ? 'Save Changes' : 'Add'"
+          [className]="'btn custom-btn'"
+          [onClick]="saveShippingType.bind(this)"
+        ></app-button-style>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ Delete Confirmation Modal -->
+<div class="modal" tabindex="-1" [ngClass]="{ 'show d-block': confirmDeleteModal }">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Delete</h5>
+      </div>
+      <div class="modal-body">
+        <p>
+          Are you sure you want to delete shipping type:
+          <strong>{{ toBeDeleted?.typeName }}</strong>?
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="confirmDeleteModal = false">
+          Cancel
+        </button>
+        <button class="btn btn-danger" (click)="deleteConfirmed()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

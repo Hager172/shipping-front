@@ -1,0 +1,72 @@
+:host {
+    display: block;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100%;
+    height: 100%;
+}
+
+.sidebar {
+  background-color: #083c3e;
+  color: #ebfdff;
+  height: 100vh;
+  transition: width 0.3s ease;
+  overflow-x: hidden;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.sidebar.collapsed {
+  width: 70px;
+}
+
+.toggle-btn {
+    text-align: left;
+    cursor: pointer;
+    padding: 10px;
+    color: #ebfdff;
+    margin-left: 10px;
+    border-bottom: 1px solid #1c5d5d;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #1c5d5d;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    gap: 10px;
+    padding: 10px 20px;
+    color: #ebfdff;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.nav-link:hover {
+    background-color: #ebfdff;
+    color: #083c3e !important;
+    font-weight: bold;
+}
+
+.submenu {
+    padding-left: 30px;
+    font-size: 1rem;
+}
+
+.submenu a {
+    padding: 6px 20px;
+    display: block;
+    color: #cdecee;
+    text-decoration: none;
+}
+
+.submenu a:hover {
+    background-color: #055052;
+    color: #ebfdff;
+}

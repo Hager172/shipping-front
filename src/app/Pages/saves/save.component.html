@@ -1,0 +1,61 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <input
+    type="text"
+    class="form-control w-25"
+    placeholder="Search banks..."
+    [(ngModel)]="searchTerm"
+  />
+
+  <app-button-style
+    [label]="'Add New Save'"
+    [className]="'btn custom-btn'"
+    [onClick]="openModal.bind(this)"
+  ></app-button-style>
+</div>
+
+<app-custom-table [columns]="columns" [data]="filteredSaves" (onEdit)="openModal($event)" (onDelete)="openDeleteModal($event)"
+  (onToggleStatus)="toggleStatus($event)">
+</app-custom-table>
+
+<app-shared-modal [title]="'Edit Save'" [show]="showModal" (close)="closeModal()">
+  <div modal-body>
+    <form *ngIf="selectedSave">
+      <div class="mb-3">
+        <label for="name">Name</label>
+        <input required id="name" name="name" class="form-control" [(ngModel)]="selectedSave.name">
+        <span *ngIf="!selectedSave.name" class="text-danger">
+          Save name is required.
+        </span>
+      </div>
+
+      <div class="mb-3">
+        <label for="branch">Branch</label>
+        <select id="branch" name="branch" class="form-control" [(ngModel)]="selectedSave.branchId">
+          <option *ngFor="let branch of branches" [value]="branch.id">
+            {{ branch.name }}
+          </option>
+        </select>
+        <span *ngIf="!selectedSave.branchId" class="text-danger">
+          Please select a branch.
+        </span>
+      </div>
+    </form>
+  </div>
+
+  <div modal-footer>
+    <button class="btn btn-primary" (click)="saveEditedSave(selectedSave)">Save</button>
+  </div>
+</app-shared-modal>
+<app-shared-modal
+  [title]="'Delete Save'"
+  [show]="showDeleteModal"
+  (close)="closeDeleteModal()"
+>
+  <div modal-body>
+    <p>Are you sure you want to delete <strong>{{ saveToDelete?.name }}</strong>?</p>
+  </div>
+
+  <div modal-footer>
+    <button class="btn btn-danger" (click)="confirmDelete()">Delete</button>
+  </div>
+</app-shared-modal>
