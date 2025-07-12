@@ -24,7 +24,7 @@
     <a routerLink="/permissions">Permissions</a>
     <a routerLink="/branches">Branches</a>
     <a routerLink="/banks">Banks</a>
-    <a routerLink="/safes">Safes</a>
+    <a routerLink="/saves">Saves</a>
   </div>
 
   <!-- Users -->
@@ -64,8 +64,8 @@
     <span *ngIf="!isCollapsed">Accounts</span>
   </a>
   <div *ngIf="!isCollapsed && isMenuOpen('accounts')" class="submenu">
-    <a routerLink="/banks">Banks</a>
-    <a routerLink="/safes">Safes</a>
+    <a routerLink="/bank-financialtransfer">Banks</a>
+    <a routerLink="/safe-financialtransfer">Safes</a>
     <a routerLink="/account-merchants">Merchants</a>
     <a routerLink="/account-couriers">Couriers</a>
   </div>

@@ -8,14 +8,15 @@ import { ShippingTypesComponent } from './components/shipping-types/shipping-typ
 import { BanksComponent } from './Pages/banks/banks.component';
 import { RejectionReasonComponent } from './Pages/rejection-reason/rejection-reason.component';
 import { TradersComponent } from './Pages/traders/traders.component';
+import { SaveComponent } from './Pages/saves/save.component';
+import { BankFinancialtransferComponent } from './Pages/bank-financialtransfer/bank-financialtransfer.component';
+import { SafeFinancialtransferComponent } from './Pages/safe-financialtransfer/safe-financialtransfer.component';
 
 export const routes: Routes = [
-  // صفحات خارج الـ layout (تسجيل دخول / تسجيل حساب)
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
 
-  // صفحات داخل layout بعد تسجيل الدخول
   {
     path: '',
     component: LayoutComponent,
@@ -26,6 +27,9 @@ export const routes: Routes = [
       { path: 'shippingTypes', component: ShippingTypesComponent },
       { path: 'rejectionReasons', component: RejectionReasonComponent },
       { path: 'traders', component: TradersComponent },
+      { path: 'saves', component: SaveComponent },
+      { path: 'bank-financialtransfer', component: BankFinancialtransferComponent },
+      { path: 'safe-financialtransfer', component: SafeFinancialtransferComponent }
     ]
   }
 ];

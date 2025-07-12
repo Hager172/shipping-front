@@ -7,35 +7,35 @@
   />
 
   <app-button-style
-    [label]="'Add New Bank'"
+    [label]="'Add New Save'"
     [className]="'btn custom-btn'"
-    [onClick]="openAddModal.bind(this)"
+    [onClick]="openModal.bind(this)"
   ></app-button-style>
 </div>
 
-<app-custom-table [columns]="columns" [data]="filteredBanks" (onEdit)="openEditModal($event)" (onDelete)="openDeleteModal($event)"
+<app-custom-table [columns]="columns" [data]="filteredSaves" (onEdit)="openModal($event)" (onDelete)="openDeleteModal($event)"
   (onToggleStatus)="toggleStatus($event)">
 </app-custom-table>
 
-<app-shared-modal [title]="'Edit Bank'" [show]="showModal" (close)="closeModal()">
+<app-shared-modal [title]="'Edit Save'" [show]="showModal" (close)="closeModal()">
   <div modal-body>
-    <form *ngIf="selectedBank">
+    <form *ngIf="selectedSave">
       <div class="mb-3">
         <label for="name">Name</label>
-        <input required id="name" name="name" class="form-control" [(ngModel)]="selectedBank.name">
-        <span *ngIf="!selectedBank.name" class="text-danger">
-          Bank name is required.
+        <input required id="name" name="name" class="form-control" [(ngModel)]="selectedSave.name">
+        <span *ngIf="!selectedSave.name" class="text-danger">
+          Save name is required.
         </span>
       </div>
 
       <div class="mb-3">
         <label for="branch">Branch</label>
-        <select id="branch" name="branch" class="form-control" [(ngModel)]="selectedBank.branchId">
+        <select id="branch" name="branch" class="form-control" [(ngModel)]="selectedSave.branchId">
           <option *ngFor="let branch of branches" [value]="branch.id">
             {{ branch.name }}
           </option>
         </select>
-        <span *ngIf="!selectedBank.branchId" class="text-danger">
+        <span *ngIf="!selectedSave.branchId" class="text-danger">
           Please select a branch.
         </span>
       </div>
@@ -43,16 +43,16 @@
   </div>
 
   <div modal-footer>
-    <button class="btn btn-primary" (click)="saveEditedBank(selectedBank)">Save</button>
+    <button class="btn btn-primary" (click)="saveEditedSave(selectedSave)">Save</button>
   </div>
 </app-shared-modal>
 <app-shared-modal
-  [title]="'Delete Bank'"
+  [title]="'Delete Save'"
   [show]="showDeleteModal"
   (close)="closeDeleteModal()"
 >
   <div modal-body>
-    <p>Are you sure you want to delete <strong>{{ bankToDelete?.name }}</strong>?</p>
+    <p>Are you sure you want to delete <strong>{{ saveToDelete?.name }}</strong>?</p>
   </div>
 
   <div modal-footer>

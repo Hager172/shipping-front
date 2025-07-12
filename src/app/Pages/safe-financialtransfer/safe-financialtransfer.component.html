@@ -1,0 +1,143 @@
+<div style="float: right;">
+  <app-button-style [label]="'Deposit / Withdraw'" [className]="'btn custom-btn me-2'"
+    [onClick]="openDepositWithdrawModal.bind(this)">
+  </app-button-style>
+
+  <app-button-style [label]="'Safe to Safe Transfer'" [className]="'btn custom-btn me-2'"
+    [onClick]="openSafeToSafeModal.bind(this)">
+  </app-button-style>
+
+  <app-button-style [label]="'Safe to Bank Transfer'" [className]="'btn custom-btn me-2'"
+    [onClick]="openSafeToBankModal.bind(this)">
+  </app-button-style>
+</div>
+
+<div style="margin-top: 50px;">
+  <div class="row align-items-end mb-3">
+    <div class="col-md-3">
+      <label class="form-label label">Safe</label>
+      <select class="form-control" [(ngModel)]="selectedSafeName" (change)="onSearch()">
+        <option value="">-- Select Safe --</option>
+        <option *ngFor="let safe of safes" [value]="safe.name">{{ safe.name }}</option>
+      </select>
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label label">Start Date</label>
+      <input type="date" class="form-control" [(ngModel)]="startDate">
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label label">End Date</label>
+      <input type="date" class="form-control" [(ngModel)]="endDate">
+    </div>
+
+    <div class="col-md-2">
+      <app-button-style [label]="'Search'" [className]="'btn custom-btn w-100 h-100'"
+        [onClick]="onSearch.bind(this)">
+      </app-button-style>
+    </div>
+  </div>
+
+  <app-custom-table-without-action [columns]="columns" [data]="reports"></app-custom-table-without-action>
+</div>
+
+<!-- Deposit / Withdraw Modal -->
+<app-shared-modal [title]="'Deposit / Withdraw'" [show]="showDepositWithdrawModal" (close)="closeModal()">
+  <div modal-body>
+    <form>
+      <select class="form-control" [(ngModel)]="selectedSafeId" (change)="onSafeChange()" name="selectedSafeId">
+        <option *ngFor="let safe of safes" [value]="safe.id">{{ safe.name }}</option>
+      </select>
+
+      <div class="mb-3">
+        <label>Withdraw (From)</label>
+        <input type="number" class="form-control" [(ngModel)]="withdrawAmount" name="withdrawAmount">
+      </div>
+
+      <div class="mb-3">
+        <label>Deposit (To)</label>
+        <input type="number" class="form-control" [(ngModel)]="depositAmount" name="depositAmount">
+      </div>
+
+      <div class="mb-3">
+        <label>Note</label>
+        <textarea class="form-control" [(ngModel)]="note" name="note"></textarea>
+      </div>
+    </form>
+  </div>
+
+  <div modal-footer>
+    <button class="btn btn-primary" (click)="submitDepositWithdraw()">Save</button>
+  </div>
+</app-shared-modal>
+
+<!-- Safe to Safe Transfer Modal -->
+<app-shared-modal [title]="'Safe to Safe Transfer'" [show]="showSafeToSafeModal" (close)="closeModal()">
+  <div modal-body>
+    <form>
+      <div class="mb-3">
+        <label>From Safe</label>
+         <select class="form-control" [(ngModel)]="safeToSafe.sourceSafeId" name="sourceSafeId">
+          <option *ngFor="let safe of safes" [value]="safe.id">{{ safe.name }}</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label>To Safe</label>
+        <select class="form-control" [(ngModel)]="safeToSafe.destinationSafeId" name="destinationSafeId">
+          <option *ngFor="let safe of safes" [value]="safe.id">{{ safe.name }}</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label>Amount</label>
+        <input type="number" class="form-control" [(ngModel)]="safeToSafe.amount" name="amount">
+      </div>
+
+      <div class="mb-3">
+        <label>Note</label>
+        <textarea class="form-control" [(ngModel)]="safeToSafe.note" name="note"></textarea>
+      </div>
+    </form>
+  </div>
+
+  <div modal-footer>
+    <button class="btn btn-primary" (click)="submitSafeToSafe()">Save</button>
+  </div>
+</app-shared-modal>
+
+<!-- Safe to Bank Transfer Modal -->
+<app-shared-modal [title]="'Safe to Bank Transfer'" [show]="showSafeToBankModal" (close)="closeModal()">
+  <div modal-body>
+    <form>
+      <div class="mb-3">
+        <label>From Safe</label>
+        <select class="form-control" [(ngModel)]="safeToBank.sourceSafeId" name="sourceSafeId">
+          <option *ngFor="let safe of safes" [value]="safe.id">{{ safe.name }}</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label>To Bank</label>
+        <select class="form-control" [(ngModel)]="safeToBank.destinationBankId" name="destinationBankId">
+          <option *ngFor="let bank of banks" [value]="bank.id">{{ bank.name }}</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label>Amount</label>
+        <input type="number" class="form-control" [(ngModel)]="safeToBank.amount" name="amount">
+      </div>
+
+      <div class="mb-3">
+        <label>Note</label>
+        <textarea class="form-control" [(ngModel)]="safeToBank.note" name="note"></textarea>
+      </div>
+    </form>
+  </div>
+
+  <div modal-footer>
+    <button class="btn btn-primary" (click)="submitSafeToBank()">Save</button>
+  </div>
+</app-shared-modal>
