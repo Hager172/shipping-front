@@ -1,4 +1,4 @@
-<form (ngSubmit)="updateBranch()">
+<!-- <form (ngSubmit)="updateBranch()">
   <div class="mb-3">
     <label>Branch Name</label>
     <input
@@ -41,4 +41,78 @@
   <div *ngIf="errorMessage" class="alert alert-danger mt-3">
     {{ errorMessage }}
   </div>
-</form>
+</form> -->
+
+<div class="container">
+  <div class="row shadow rounded overflow-hidden justify-content-center">
+    <div class="col-md-10 bg-common">
+      <h2 class="mb-4 text-center">Update Branch</h2>
+
+      <form (ngSubmit)="updateBranch()">
+        <!-- Branch Name -->
+        <div class="mb-3">
+          <label class="form-label">
+            <i class="fa-solid fa-code-branch" style="color: #083c3e"></i>
+            Branch Name
+          </label>
+          <input
+            [(ngModel)]="branch.name"
+            name="name"
+            class="form-control"
+            required
+            placeholder="Enter branch name"
+          />
+        </div>
+
+        <!-- City -->
+        <div class="mb-3">
+          <label class="form-label">
+            <i class="fa-solid fa-city" style="color: #083c3e"></i>
+            City
+          </label>
+          <select
+            [(ngModel)]="branch.CityId"
+            name="cityId"
+            class="form-select"
+            required
+          >
+            <option value="" disabled selected>Select City</option>
+            <option *ngFor="let city of cities" [value]="city.id">
+              {{ city.name }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Address -->
+        <div class="mb-3">
+          <label class="form-label">
+            <i class="fa-solid fa-location-dot" style="color: #083c3e"></i>
+            Address
+          </label>
+          <input
+            [(ngModel)]="branch.address"
+            name="address"
+            class="form-control"
+            required
+            placeholder="Enter address"
+          />
+        </div>
+
+        <!-- Messages -->
+        <p *ngIf="errorMessage" class="error-message">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          {{ errorMessage }}
+        </p>
+        <p *ngIf="successMessage" class="alert alert-success mt-2">
+          {{ successMessage }}
+        </p>
+
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="custom-btn m-4">
+            <i class="fa-solid fa-pen-to-square"></i> Update Branch
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,32 +1,104 @@
-<form
-  #addbranchform="ngForm"
-  (ngSubmit)="onSubmit(addbranchform)"
-  class="mt-4 w-50 mx-auto"
->
-  <div class="mb-3">
-    <label for="name" class="form-label">Branch Name</label>
-    <input ngModel name="name" id="name" class="form-control" required />
-  </div>
-  <div class="mb-3">
-    <label>Address</label>
-    <input ngModel name="address" class="form-control" required />
-  </div>
+<!-- <div class="container">
+  <form
+    #addbranchform="ngForm"
+    (ngSubmit)="onSubmit(addbranchform)"
+    class="mt-4 w-50 mx-auto"
+  >
+    <div class="mb-3">
+      <label for="name" class="form-label">Branch Name</label>
+      <input ngModel name="name" id="name" class="form-control" required />
+    </div>
+    <div class="mb-3">
+      <label>Address</label>
+      <input ngModel name="address" class="form-control" required />
+    </div>
 
-  <div class="mb-3">
-    <label for="cityId" class="form-label">City</label>
-    <select ngModel name="cityId" id="cityId" class="form-select" required>
-      <option value="" disabled selected>Select a city</option>
-      <option *ngFor="let city of cities" [value]="city.id">
-        {{ city.name }}
-      </option>
-    </select>
-  </div>
+    <div class="mb-3">
+      <label for="cityId" class="form-label">City</label>
+      <select ngModel name="cityId" id="cityId" class="form-select" required>
+        <option value="" disabled selected>Select a city</option>
+        <option *ngFor="let city of cities" [value]="city.id">
+          {{ city.name }}
+        </option>
+      </select>
+    </div>
 
-  <!-- رسائل النجاح / الخطأ -->
-  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
-  <div *ngIf="successMessage" class="alert alert-success">
-    {{ successMessage }}
-  </div>
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+    <div *ngIf="successMessage" class="alert alert-success">
+      {{ successMessage }}
+    </div>
 
-  <button type="submit" class="btn btn-primary">Add Branch</button>
-</form>
+    <button type="submit" class="custom-btn">Add Branch</button>
+  </form>
+</div> -->
+
+<div class="container">
+  <div class="row shadow rounded overflow-hidden justify-content-center">
+    <div class="col-md-10 bg-common">
+      <h2 class="mb-4 text-center">Add Branch</h2>
+
+      <form #addbranchform="ngForm" (ngSubmit)="onSubmit(addbranchform)">
+        <!-- Branch Name -->
+        <div class="mb-3">
+          <label class="form-label">
+            <i class="fa-solid fa-code-branch" style="color: #083c3e"></i>
+            Branch Name
+          </label>
+          <input
+            type="text"
+            name="name"
+            ngModel
+            required
+            class="form-control"
+            placeholder="Branch Name"
+          />
+        </div>
+
+        <!-- Address -->
+        <div class="mb-3">
+          <label class="form-label">
+            <i class="fa-solid fa-location-dot" style="color: #083c3e"></i>
+            Address
+          </label>
+          <input
+            type="text"
+            name="address"
+            ngModel
+            required
+            class="form-control"
+            placeholder="Address"
+          />
+        </div>
+
+        <!-- City -->
+        <div class="mb-3">
+          <label class="form-label">
+            <i class="fa-solid fa-city" style="color: #083c3e"></i>
+            City
+          </label>
+          <select name="cityId" ngModel required class="form-select">
+            <option value="">Select City</option>
+            <option *ngFor="let city of cities" [value]="city.id">
+              {{ city.name }}
+            </option>
+          </select>
+        </div>
+
+        <!-- رسائل -->
+        <p *ngIf="errorMessage" class="error-message">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          {{ errorMessage }}
+        </p>
+        <p *ngIf="successMessage" class="alert alert-success mt-2">
+          {{ successMessage }}
+        </p>
+
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="custom-btn m-4">Add Branch</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

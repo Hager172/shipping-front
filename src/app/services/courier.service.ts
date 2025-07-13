@@ -30,7 +30,8 @@ selectedCourier: DisplayCourier | null = null;
     return this.http.get<CourierDTO>(`${this.baseUrl}/getcourierbyid/${id}`);
   }
 
-  deleteCourier(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`);
-  }
+deleteCourier(userId: string): Observable<any> {
+  return this.http.delete(`https://localhost:7206/api/Courier/delete/${userId}`);
+}
+
 }
