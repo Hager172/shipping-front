@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Save } from '../../models/Saves/save.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SaveServiceService {
 
-  private baseUrl = 'https://localhost:7206/api/Saves';
+  private baseUrl = `${environment.baseUrl}Saves`;
   constructor( private http: HttpClient ) { }
   // Get all saves
     getAllSaves(): Observable<Save[]> {

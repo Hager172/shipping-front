@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CourierDTO, DisplayCourier } from '../models/courier/courier.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CourierService {
-  private baseUrl = 'https://localhost:7206/api/Courier';
+  private baseUrl = `${environment.baseUrl}Courier`;
 
   constructor(private http:HttpClient) { }
     getAllCouriers(): Observable<DisplayCourier[]> {
@@ -31,7 +32,7 @@ selectedCourier: DisplayCourier | null = null;
   }
 
 deleteCourier(userId: string): Observable<any> {
-  return this.http.delete(`https://localhost:7206/api/Courier/delete/${userId}`);
+  return this.http.delete(`${environment.baseUrl}/Courier/delete/${userId}`);
 }
 
 

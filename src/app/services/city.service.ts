@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { City, CityDTO } from '../models/city/city.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { City, CityDTO } from '../models/city/city.model';
 export class CityService {
 
 
- private baseurl = 'https://localhost:7206/api/Cities';
+ private baseurl = `${environment.baseUrl}Cities`;
 
   constructor(private http: HttpClient) {}
 
