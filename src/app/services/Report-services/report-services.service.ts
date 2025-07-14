@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { OrderStatusLog } from '../../models/Reports/order-report-dto';
 
 const baseUrl = environment.baseUrl;
 
@@ -61,4 +62,8 @@ export class ReportServicesService {
   getOrderStatuses(): Observable<any[]> {
     return this._httpClient.get<any[]>(`${baseUrl}OrderStatuses`);
   }
+  getOrderStatusHistory(orderId: number): Observable<OrderStatusLog[]> {
+  return this._httpClient.get<OrderStatusLog[]>(`${baseUrl}Reports/order-status-history/${orderId}`);
+}
+
 }

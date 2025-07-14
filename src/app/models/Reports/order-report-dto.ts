@@ -67,3 +67,12 @@ export interface GovernorateDropdownItem {
   name: string;
   isActive: boolean;
 }
+
+export interface OrderStatusLog {
+  orderId: number;
+  oldStatus: string;
+  newStatus: string;
+  changedBy: string;
+  notes: string;
+  changedAt: Date;
+}

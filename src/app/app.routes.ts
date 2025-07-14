@@ -31,6 +31,7 @@ import { RegisterEmployeeComponent } from './Pages/register-employee/register-em
 import { CourierOrdersComponent } from './Pages/courier/courier-orders/courier-orders.component';
 import { OrderReportPaymentComponent } from './components/order-report-payment/order-report-payment.component';
 import { UpdateEmployeeComponent } from './update-employee/update-employee.component';
+import { OrderStatusHistoryComponent } from './components/order-status-history/order-status-history.component';
 
 
 
@@ -84,10 +85,9 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./Pages/edit-trader/edit-trader.component').then(m => m.EditTraderComponent)
       },
-      {
-        path:'edit-employee/:id' , component:UpdateEmployeeComponent,
+      {path:'edit-employee/:id' , component:UpdateEmployeeComponent},
+      { path: 'orders/:id/history', component: OrderStatusHistoryComponent }
 
-}
 
 
     ]
