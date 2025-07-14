@@ -33,9 +33,9 @@ export class AuthService {
   isLoggedIn(): boolean {
     return !!this.gettoken();
   }
-  logout(): void {
-    localStorage.removeItem('token');
-  }
+  logout(): Observable<any> {
+  return this.http.post(`${this.apiURL}/logout`, {});
+}
   saveUserRole(role: string): void {
     localStorage.setItem('role', role);
   }
@@ -54,4 +54,5 @@ getUserIdFromToken(): string | null {
     return null;
   }
 }
+
 }
