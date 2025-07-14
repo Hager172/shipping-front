@@ -7,6 +7,7 @@ import { CustomPriceService } from '../../services/custom-price.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonStyleComponent } from '../../components/button-style/button-style.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-trader',
@@ -21,7 +22,8 @@ export class AddTraderComponent implements OnInit {
     private governrateService: GovernrateService,
     private cityService: CityService,
     private branchService: BranchService,
-    private customPriceService: CustomPriceService
+    private customPriceService: CustomPriceService,
+    private router :Router
   ) {}
 
   trader = {
@@ -125,6 +127,7 @@ export class AddTraderComponent implements OnInit {
         }
         alert("Trader added successfully!");
         this.resetForm();
+        this.router.navigate(['/traders']);
       },
       error => {
         console.error('Error adding trader', error);

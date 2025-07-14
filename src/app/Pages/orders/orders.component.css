@@ -1,0 +1,23 @@
+.new-table{
+  background-color: #ebfdff !important;
+}
+
+.new-table thead{
+  background-color: #083c3e !important;
+  color: white !important;
+}
+
+.new-table tbody tr:hover{
+  background-color: rgb(179, 232, 234) !important;
+}
+
+.disabled-row {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.pagination button.active {
+  background-color: #083c3e;
+  color: white;
+  border: 1px solid #083c3e;
+}

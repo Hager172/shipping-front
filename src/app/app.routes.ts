@@ -24,6 +24,10 @@ import { SafeFinancialtransferComponent } from './Pages/safe-financialtransfer/s
 import { WeightComponent } from './Pages/weight/weight.component';
 import { ExtraVillagePriceComponent } from './Pages/extra-village-price/extra-village-price.component';
 import { AddCustomPriceComponent } from './Pages/add-custom-price/add-custom-price.component';
+import { OrdersComponent } from './Pages/orders/orders.component';
+import { AdminAddOrderComponent } from './Pages/admin-add-order/admin-add-order.component';
+import { TraderAddOrderComponent } from './Pages/trader-add-order/trader-add-order.component';
+import { EditOrderComponent } from './Pages/edit-order/edit-order.component';
 
 export const routes: Routes = [
 
@@ -63,7 +67,16 @@ export const routes: Routes = [
         path: 'edit-trader/:id',
         loadComponent: () =>
           import('./Pages/edit-trader/edit-trader.component').then(m => m.EditTraderComponent)
-      }
+      },
+        {path:'orders' , component:OrdersComponent},
+        {path:'adminAddOrder' , component:AdminAddOrderComponent},
+        {path:'traderAddOrder' , component:TraderAddOrderComponent},
+        {path:'editOrder/:id' , component:EditOrderComponent},
+
+
+
+
+       
     ]
   }
 

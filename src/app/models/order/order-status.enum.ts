@@ -1,9 +1,14 @@
     export enum OrderStatus
     {
-        Pending = 1,
-        Confirmed = 2,
-        InTransit = 3,
+        New = 1,
+        Pending = 2,
+        DeliveredToCourier = 3,
         Delivered = 4,
-        Rejected = 5,
-        Cancelled = 6
+        NotReachable = 5,
+        Postponed = 6,
+        PartiallyDelivered = 7,
+        CancelledByRecipient = 8,
+        RejectedWithPayment = 9,
+        RejectedWithPartialPayment = 10,
+        RejectedWithoutPayment = 11
     }

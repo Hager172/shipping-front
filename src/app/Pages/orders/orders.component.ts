@@ -1,122 +1,364 @@
-// import { Component, OnInit } from '@angular/core';
-// import { OrderService } from '../../services/order.service';
-// import { BranchService } from '../../services/branch.service';
-// import { GovernrateService } from '../../services/governrate.service';
-// import { CityService } from '../../services/city.service';
-// // import { CourierService } from '../../services/cour.service';
-// import { TraderService } from '../../services/trader.service';
+import { Component, OnInit } from '@angular/core';
+import { OrderService } from '../../services/order.service';
+import { GovernrateService } from '../../services/governrate.service';
+import { CityService } from '../../services/city.service';
+import { TraderService } from '../../services/trader.service';
+import { CourierService } from '../../services/courier.service';
+import { BranchService } from '../../services/branch.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FilterPipe } from '../../shared/filter.pipe';
+import { ButtonStyleComponent } from '../../components/button-style/button-style.component';
+import { Router } from '@angular/router';
+import { SharedModalComponent } from '../../components/shared-modal/shared-modal.component';
 
-// @Component({
-//   selector: 'app-order',
-//   templateUrl: './orders.component.html',
-//   styleUrl: './orders.component.css'
-// })
-// export class OrderComponent implements OnInit {
-//   orders: any[] = [];
-//   filteredOrders: any[] = [];
+@Component({
+  selector: 'app-orders',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    FilterPipe,
+    ButtonStyleComponent,
+    SharedModalComponent
+  ],
+  templateUrl: './orders.component.html',
+  styleUrls: ['./orders.component.css'],
+})
+export class OrdersComponent implements OnInit {
+  orders: any[] = [];
+  filteredOrders: any[] = [];
 
-//   traders: any[] = [];
-//   branches: any[] = [];
-//   governorates: any[] = [];
-//   cities: any[] = [];
-//   couriers: any[] = [];
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
 
-//   filters = {
-//     traderId: '',
-//     branchId: '',
-//     governorateId: '',
-//     cityId: '',
-//     courierId: '',
-//     status: '',
-//     fromDate: '',
-//     toDate: ''
-//   };
+  statuses: { value: number; label: string }[] = [
+    { value: 1, label: 'New' },
+    { value: 2, label: 'Pending' },
+    { value: 3, label: 'Delivered To Courier' },
+    { value: 4, label: 'Delivered' },
+    { value: 5, label: 'Not Reachable' },
+    { value: 6, label: 'Postponed' },
+    { value: 7, label: 'Partially Delivered' },
+    { value: 8, label: 'Cancelled By Recipient' },
+    { value: 9, label: 'Rejected With Payment' },
+    { value: 10, label: 'Rejected With Partial Payment' },
+    { value: 11, label: 'Rejected Without Payment' }
+  ];
 
-//   columns = [
-//     { header: '#', accessor: 'index' },
-//     { header: 'Customer Name', accessor: 'customerName' },
-//     { header: 'Governorate', accessor: 'governorateName' },
-//     { header: 'City', accessor: 'cityName' },
-//     { header: 'Courier', accessor: 'courierName' },
-//     { header: 'Branch', accessor: 'branchName' },
-//     { header: 'Order Cost', accessor: 'orderCost' },
-//     { header: 'Total Cost', accessor: 'totalCost' },
-//     { header: 'Status', accessor: 'status' },
-//     { header: 'Date', accessor: 'createdAt' }
-//   ];
+  statusOptions = this.statuses.map(s => ({
+    value: s.value,
+    label: s.label,
+    disabled: ![1, 2, 8].includes(s.value)
+  }));
 
-//   constructor(
-//     private orderService: OrderService,
-//     private branchService: BranchService,
-//     private cityService: CityService,
-//     private governorateService: GovernrateService,
-//     // private courierService: CourierService,
-//     private traderService: TraderService
-//   ) {}
+  searchText = '';
+  governorates: any[] = [];
+  cities: any[] = [];
+  traders: any[] = [];
+  couriers: any[] = [];
+  branches: any[] = [];
 
-//   ngOnInit(): void {
-//     this.loadOrders();
-//     this.loadFilters();
-//   }
+  selectedGovernorateId: number | null = null;
+  selectedCityId: number | null = null;
+  selectedTraderId: string = '';
+  selectedCourierId: string = '';
+  selectedBranchId: number | null = null;
+  selectedStatus: number | null = null;
+  selectedOrderId: number | null = null;
+  startDate: string = '';
+  endDate: string = '';
 
-//   loadOrders() {
-//     this.orderService.getAllOrders().subscribe((res: any[]) => {
-//       this.orders = res.map((order, index) => ({
-//         ...order,
-//         index: index + 1
-//       }));
-//       this.filteredOrders = this.orders;
-//     });
-//   }
+  selectedCourierForOrder: { [orderId: number]: any } = {};
 
-//   loadFilters() {
-//     this.traderService.getTraders().subscribe((res: any) => this.traders = res);
-//     this.branchService.getAllBranches().subscribe((res: any) => this.branches = res);
-//     this.governorateService.getAll().subscribe((res: any) => this.governorates = res);
-//     // this.courierService.getAllCouriers().subscribe((res: any) => this.couriers = res);
-//   }
+  constructor(
+    private orderService: OrderService,
+    private govService: GovernrateService,
+    private cityService: CityService,
+    private traderService: TraderService,
+    private courierService: CourierService,
+    private branchService: BranchService,
+    private router: Router
+  ) {}
 
-//   onGovernorateChange() {
-//     if (this.filters.governorateId) {
-//       this.cityService.getCitiesByGovId(this.filters.governorateId).subscribe((res: any) => {
-//         this.cities = res;
-//       });
-//     }
-//   }
+  ngOnInit(): void {
+    this.loadOrders();
+    this.loadFilters();
+  }
 
-//   applyFilters() {
-//     let filtered = [...this.orders];
-//     if (this.filters.traderId) {
-//       filtered = filtered.filter(o => o.traderId === this.filters.traderId);
-//     }
-//     if (this.filters.branchId) {
-//       filtered = filtered.filter(o => o.branchId === this.filters.branchId);
-//     }
-//     if (this.filters.governorateId) {
-//       filtered = filtered.filter(o => o.governorateId === this.filters.governorateId);
-//     }
-//     if (this.filters.cityId) {
-//       filtered = filtered.filter(o => o.cityId === this.filters.cityId);
-//     }
-//     if (this.filters.courierId) {
-//       filtered = filtered.filter(o => o.courierId === this.filters.courierId);
-//     }
-//     if (this.filters.status) {
-//       filtered = filtered.filter(o => o.status === +this.filters.status);
-//     }
-//     if (this.filters.fromDate && this.filters.toDate) {
-//       const from = new Date(this.filters.fromDate);
-//       const to = new Date(this.filters.toDate);
-//       filtered = filtered.filter(o => {
-//         const created = new Date(o.createdAt);
-//         return created >= from && created <= to;
-//       });
-//     }
+  loadOrders(): void {
+    this.orderService.getAllOrders().subscribe({
+      next: (res) => {
+        if (Array.isArray(res)) {
+          this.orders = res.map((order: any, index: number) => ({
+            ...order,
+            index: index + 1,
+            statusLabel: this.getStatusLabel(order.status),
+            changeStatus: order.status
+          }));
+          this.filteredOrders = [...this.orders];
+        } else {
+          this.orders = [];
+          this.filteredOrders = [];
+        }
+      },
+      error: () => {
+        this.orders = [];
+        this.filteredOrders = [];
+      }
+    });
+  }
 
-//     this.filteredOrders = filtered;
-//   }
+  get paginatedOrders() {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    return this.filteredOrders.slice(start, start + this.itemsPerPage);
+  }
 
-//   openAddOrderPage() {
-//     // Navigate to new order page or open modal
-//   }
-// }
+  get totalPages(): number[] {
+    return Array(Math.ceil(this.filteredOrders.length / this.itemsPerPage))
+      .fill(0)
+      .map((_, i) => i + 1);
+  }
+
+  goToPage(page: number) {
+    this.currentPage = page;
+  }
+
+  loadFilters(): void {
+    this.govService.getAll().subscribe((res) => (this.governorates = res));
+    this.cityService.getAllCities().subscribe((res) => (this.cities = res));
+    this.traderService.getTraders().subscribe((res) => (this.traders = res));
+    this.courierService.getAllCouriers().subscribe((res) => (this.couriers = res));
+    this.branchService.getAllBranches().subscribe((res) => (this.branches = res));
+  }
+
+  getStatusLabel(statusValue: number): string {
+    const match = this.statuses.find((s) => s.value === statusValue);
+    return match ? match.label : statusValue.toString();
+  }
+
+   filterOrders(): void {
+  if (this.selectedOrderId !== null) {
+    this.orderService.getOrderById(this.selectedOrderId).subscribe({
+      next: (res: any) => {
+        if (res) {
+          res.statusLabel = this.getStatusLabel(res.status);
+          res.changeStatus = res.status;
+          res.index = 1;
+          this.orders = [res];
+          this.filteredOrders = [...this.orders];
+        }
+      }
+    });
+  } else if (this.selectedStatus !== null) {
+    this.orderService.getOrdersByStatus(this.selectedStatus).subscribe({
+      next: (res) => {
+        if (Array.isArray(res)) {
+          this.orders = res.map((o: any, i: number) => ({
+            ...o,
+            index: i + 1,
+            statusLabel: this.getStatusLabel(o.status),
+            changeStatus: o.status
+          }));
+          this.filteredOrders = [...this.orders];
+        }
+      }
+    });
+  } else if (this.startDate && this.endDate) {
+    this.orderService.getOrdersByDateRange(this.startDate, this.endDate).subscribe({
+      next: (res) => {
+        if (Array.isArray(res)) {
+          this.orders = res.map((o: any, i: number) => ({
+            ...o,
+            index: i + 1,
+            statusLabel: this.getStatusLabel(o.status),
+            changeStatus: o.status
+          }));
+          this.filteredOrders = [...this.orders];
+        }
+      }
+    });
+  } else if (this.selectedGovernorateId) {
+    this.orderService.getOrdersByGovId(this.selectedGovernorateId).subscribe({
+      next: (res) => {
+        if (Array.isArray(res)) {
+          this.orders = res.map((o: any, i: number) => ({
+            ...o,
+            index: i + 1,
+            statusLabel: this.getStatusLabel(o.status),
+            changeStatus: o.status
+          }));
+          this.filteredOrders = [...this.orders];
+        }
+      }
+    });
+  } else if (this.selectedCityId) {
+    this.orderService.getOrdersByCityId(this.selectedCityId).subscribe({
+      next: (res) => {
+        if (Array.isArray(res)) {
+          this.orders = res.map((o: any, i: number) => ({
+            ...o,
+            index: i + 1,
+            statusLabel: this.getStatusLabel(o.status),
+            changeStatus: o.status
+          }));
+          this.filteredOrders = [...this.orders];
+        }
+      }
+    });
+  } else if (this.selectedTraderId) {
+    this.orderService.getOrdersByTraderId(this.selectedTraderId).subscribe({
+      next: (res) => {
+        if (Array.isArray(res)) {
+          this.orders = res.map((o: any, i: number) => ({
+            ...o,
+            index: i + 1,
+            statusLabel: this.getStatusLabel(o.status),
+            changeStatus: o.status
+          }));
+          this.filteredOrders = [...this.orders];
+        }
+      }
+    });
+  } else if (this.selectedCourierId) {
+    this.orderService.getOrdersByCourierId(this.selectedCourierId).subscribe({
+      next: (res) => {
+        if (Array.isArray(res)) {
+          this.orders = res.map((o: any, i: number) => ({
+            ...o,
+            index: i + 1,
+            statusLabel: this.getStatusLabel(o.status),
+            changeStatus: o.status
+          }));
+          this.filteredOrders = [...this.orders];
+        }
+      }
+    });
+  } else if (this.selectedBranchId) {
+    this.orderService.getOrdersByBranchId(this.selectedBranchId).subscribe({
+      next: (res) => {
+        if (Array.isArray(res)) {
+          this.orders = res.map((o: any, i: number) => ({
+            ...o,
+            index: i + 1,
+            statusLabel: this.getStatusLabel(o.status),
+            changeStatus: o.status
+          }));
+          this.filteredOrders = [...this.orders];
+        }
+      }
+    });
+  } else {
+    this.loadOrders();
+  }
+}
+
+onStatusChange(event: any, order: any): void {
+  const newStatus = Number(event); 
+  order.changeStatus = newStatus;
+
+  const dto = {
+    customerName: order.customerName,
+    email: order.email,
+    phone1: order.phone1,
+    phone2: order.phone2,
+    streetAddress: order.streetAddress,
+    deliveryType: order.deliveryType,
+    paymentType: order.paymentType,
+    shippingTypeId: order.shippingTypeId,
+    totalWeight: order.totalWeight,
+    orderCost: order.orderCost,
+    notes: order.notes,
+    status: newStatus,
+    governorateId: order.governorateId,
+    cityId: order.cityId,
+    branchId: order.branchId,
+    traderId: order.traderId,
+    courierId: order.courierId,
+    createdAt: order.createdAt,
+    rejectionReasonId: order.rejectionReasonId || null
+  };
+
+  this.orderService.updateOrder(order.id, dto).subscribe({
+    next: () => {
+      order.statusLabel = this.getStatusLabel(newStatus);
+      alert('Status updated successfully');
+    },
+    error: err => {
+      console.error('Update status failed', err);
+      alert('Failed to update status');
+    }
+  });
+}
+
+
+assignCourier(order: any): void {
+  const courierId = this.selectedCourierForOrder[order.id];
+  if (!courierId) return;
+
+  const dto = {
+    ...order,        
+    courierId: courierId,
+    status: order.changeStatus
+  };
+  this.orderService.updateOrder(order.id, dto).subscribe({
+    next: updated => {
+      order.courierId = courierId;
+      alert('Courier assigned successfully');
+    },
+    error: err => console.error('Assign courier failed', err)
+  });
+}
+
+
+  openAssignDropdown(order: any): void {
+    this.selectedCourierForOrder[order.id] = order.courierId || '';
+  }
+
+  editOrder(order: any) {
+  this.router.navigate([`/editOrder/${order.id}`]);
+}
+
+
+  deleteOrder(orderId: number): void {
+    this.orderService.deleteOrder(orderId).subscribe(
+      (data)=>{
+        alert("Order Deleted Successfully !")
+      },
+      (error)=>{
+      alert("can't delete Order");
+    }
+      
+    )
+
+    console.log('Delete', orderId);
+  }
+
+  goToAddOrder(): void {
+    this.router.navigate(['/adminAddOrder']);
+  }
+
+  hasBranchMatch(courier: any, branchId: number): boolean {
+  return courier.selectedBranchsId?.includes(branchId);
+  }
+
+  showAssignModal = false;
+modalOrder: any = null;
+
+openAssignModal(order: any) {
+  this.modalOrder = order;
+  this.selectedCourierForOrder[order.id] = order.courierId || '';
+  this.showAssignModal = true;
+}
+
+closeAssignModal() {
+  this.showAssignModal = false;
+  this.modalOrder = null;
+}
+assignCourierHandler = () => {
+  if (this.modalOrder) {
+    this.assignCourier(this.modalOrder);
+  }
+};
+}

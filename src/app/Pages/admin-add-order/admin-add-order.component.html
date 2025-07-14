@@ -1,1 +1,130 @@
-<p>admin-add-order works!</p>
+<div class="container mt-4 p-4" style="background-color: #ebfdff; border-radius: 8px;">
+  <h4 class="text-white p-2 mb-4" style="background-color: #083c3e; border-radius: 4px;">Add New Order</h4>
+  <form #orderForm="ngForm" (ngSubmit)="submitOrder()">
+    <div class="row g-3 row-cols-1 row-cols-md-3">
+      <div class="col">
+        <label>Customer Name</label>
+        <input type="text" class="form-control" [(ngModel)]="order.customerName" name="customerName" required />
+      </div>
+      <div class="col">
+        <label>Email</label>
+        <input type="email" class="form-control" [(ngModel)]="order.email" name="email" required />
+      </div>
+      <div class="col">
+        <label>Phone 1</label>
+        <input type="text" class="form-control" [(ngModel)]="order.phone1" name="phone1" required />
+      </div>
+      <div class="col">
+        <label>Phone 2</label>
+        <input type="text" class="form-control" [(ngModel)]="order.phone2" name="phone2" />
+      </div>
+      <div class="col">
+        <label>Governorate</label>
+        <select class="form-select" (change)="onGovernorateChange($event)" [value]="order.governorateId">
+          <option value="">Select Governorate</option>
+          <option *ngFor="let gov of governorates" [value]="gov.id">{{ gov.name }}</option>
+        </select>
+      </div>
+      <div class="col">
+        <label>City</label>
+        <select class="form-select" (change)="onCityChange($event)" [value]="order.cityId">
+          <option value="">Select City</option>
+          <option *ngFor="let city of cities" [value]="city.id">{{ city.name }}</option>
+        </select>
+      </div>
+      <div class="col">
+        <label>Street Address</label>
+        <input type="text" class="form-control" [(ngModel)]="order.streetAddress" name="streetAddress" />
+      </div>
+      <div class="col">
+        <label>Delivery Type</label>
+        <select class="form-select" (change)="onDeliveryTypeChange($event)" [value]="order.deliveryType">
+          <option *ngFor="let type of deliveryTypes" [value]="type.value">{{ type.label }}</option>
+        </select>
+      </div>
+      <div class="col">
+        <label>Deliver To Village?</label><br />
+        <input type="checkbox" [(ngModel)]="order.deliverToVillage" name="deliverToVillage" />
+      </div>
+      <div class="col">
+        <label>Shipping Type</label>
+        <select class="form-select" (change)="onShippingTypeChange($event)" [value]="order.shippingTypeId">
+          <option value="">Select Shipping Type</option>
+          <option *ngFor="let type of shippingTypes" [value]="type.id">{{ type.typeName }}</option>
+        </select>
+      </div>
+      <div class="col">
+        <label>Payment Type</label>
+        <select class="form-select" (change)="onPaymentTypeChange($event)" [value]="order.paymentType">
+          <option *ngFor="let type of paymentTypes" [value]="type.value">{{ type.label }}</option>
+        </select>
+      </div>
+      <div class="col">
+        <label>Branch</label>
+        <select class="form-select" (change)="onBranchChange($event)" [value]="order.branchId">
+          <option *ngFor="let branch of branches" [value]="branch.id">{{ branch.name }}</option>
+        </select>
+      </div>
+      <div class="col">
+        <label>Trader</label>
+        <select class="form-select" [(ngModel)]="order.traderId" name="traderId">
+          <option *ngFor="let trader of traders" [value]="trader.userId">{{ trader.fullName }}</option>
+        </select>
+      </div>
+      <div class="col">
+        <label>Total Weight</label>
+        <input type="number" class="form-control" [(ngModel)]="order.totalWeight" name="totalWeight" />
+      </div>
+      <div class="col">
+        <label>Order Cost</label>
+        <input type="number" class="form-control" [(ngModel)]="order.orderCost" name="orderCost" />
+      </div>
+      <div class="col-12">
+        <label>Notes</label>
+        <textarea class="form-control" [(ngModel)]="order.notes" name="notes"></textarea>
+      </div>
+    </div>
+
+    <hr class="my-4" />
+    <h5 class="text-secondary">Order Items</h5>
+    <div class="row g-3">
+      <div class="col-md-4">
+        <label>Product Name</label>
+        <input type="text" class="form-control" [(ngModel)]="newItem.productName" name="productName" />
+      </div>
+      <div class="col-md-4">
+        <label>Quantity</label>
+        <input type="number" class="form-control" [(ngModel)]="newItem.quantity" name="quantity" />
+      </div>
+      <div class="col-md-4">
+        <label>Weight</label>
+        <input type="number" class="form-control" [(ngModel)]="newItem.weight" name="weight" />
+      </div>
+      <div class="col-12 text-end">
+        <!-- <button type="button" class="btn btn-sm btn-primary" (click)="addItem()">Add Item</button> -->
+        <app-button-style
+          [label]="'Add Item'"
+          [className]="'btn custom-btn px-3 py-1 btn-sm'"
+          [onClick]="addItem.bind(this)">
+        </app-button-style>
+      </div>
+    </div>
+
+    <div *ngIf="order.items?.length > 0" class="mt-3">
+      <ul class="list-group">
+        <li *ngFor="let item of order.items; let i = index" class="list-group-item d-flex justify-content-between align-items-center">
+          {{ item.productName }} - Qty: {{ item.quantity }}, Weight: {{ item.weight }} kg
+          <button type="button" class="btn btn-sm btn-outline-danger" (click)="removeItem(i)">Remove</button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="mt-4">
+      <app-button-style
+        [label]="'Add Order'"
+        [className]="'btn custom-btn px-4 py-2'"
+        [onClick]="submitOrder.bind(this)">
+      </app-button-style>
+    </div>
+  </form>
+</div>

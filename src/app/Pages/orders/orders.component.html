@@ -1,77 +1,173 @@
-<!-- <p>orders works!</p> -->
-
-<!-- <div class="container mt-4">
-  <button class="btn btn-primary mb-3" (click)="openAddOrderPage()">Add New Order</button>
-
-  <div class="row mb-3">
-    <div class="col-md-2">
-      <label>Trader</label>
-      <select class="form-control" [(ngModel)]="filters.traderId">
-        <option value="">Select Trader</option>
-        <option *ngFor="let trader of traders" [value]="trader.id">{{ trader.name }}</option>
-      </select>
-    </div>
-    <div class="col-md-2">
+<div class="container mt-4" style="background-color:#ebfdff ;">
+  <div class="filters mb-3 d-flex flex-wrap gap-2 align-items-end" >
+    <div style="flex: 1 1 18%;">
       <label>Governorate</label>
-      <select class="form-control" [(ngModel)]="filters.governorateId" (change)="onGovernorateChange()">
-        <option value="">Select Governorate</option>
+      <select class="form-select" [(ngModel)]="selectedGovernorateId" (change)="filterOrders()">
+        <option value="">All</option>
         <option *ngFor="let gov of governorates" [value]="gov.id">{{ gov.name }}</option>
       </select>
     </div>
-    <div class="col-md-2">
+
+    <div style="flex: 1 1 18%;">
       <label>City</label>
-      <select class="form-control" [(ngModel)]="filters.cityId">
-        <option value="">Select City</option>
+      <select class="form-select" [(ngModel)]="selectedCityId" (change)="filterOrders()">
+        <option value="">All</option>
         <option *ngFor="let city of cities" [value]="city.id">{{ city.name }}</option>
       </select>
     </div>
-    <div class="col-md-2">
-      <label>Courier</label>
-      <select class="form-control" [(ngModel)]="filters.courierId">
-        <option value="">Select Courier</option>
-        <option *ngFor="let courier of couriers" [value]="courier.id">{{ courier.name }}</option>
+
+    <div style="flex: 1 1 18%;">
+      <label>Trader</label>
+      <select class="form-select" [(ngModel)]="selectedTraderId" (change)="filterOrders()">
+        <option value="">All</option>
+        <option *ngFor="let trader of traders" [value]="trader.userId">{{ trader.fullName }}</option>
       </select>
     </div>
-    <div class="col-md-2">
+
+    <div style="flex: 1 1 18%;">
+      <label>Courier</label>
+      <select class="form-select" [(ngModel)]="selectedCourierId" (change)="filterOrders()">
+        <option value="">All</option>
+        <option *ngFor="let courier of couriers" [value]="courier.userId">{{ courier.fullName }}</option>
+      </select>
+    </div>
+
+    <div style="flex: 1 1 18%;">
       <label>Branch</label>
-      <select class="form-control" [(ngModel)]="filters.branchId">
-        <option value="">Select Branch</option>
+      <select class="form-select" [(ngModel)]="selectedBranchId" (change)="filterOrders()">
+        <option value="">All</option>
         <option *ngFor="let branch of branches" [value]="branch.id">{{ branch.name }}</option>
       </select>
     </div>
-    <div class="col-md-2">
+
+    <div style="flex: 1 1 18%;">
       <label>Status</label>
-      <select class="form-control" [(ngModel)]="filters.status">
-        <option value="">Select Status</option>
-        <option [value]="1">New</option>
-        <option [value]="2">Pending</option>
-        <option [value]="3">Delivered to Courier</option>
-        <option [value]="4">Delivered</option>
-        <option [value]="5">Not Reachable</option>
-        <option [value]="6">Postponed</option>
-        <option [value]="7">Partially Delivered</option>
-        <option [value]="8">Cancelled by Recipient</option>
-        <option [value]="9">Rejected With Payment</option>
-        <option [value]="10">Rejected With Partial Payment</option>
-        <option [value]="11">Rejected Without Payment</option>
+      <select class="form-select" [(ngModel)]="selectedStatus" (change)="filterOrders()">
+        <option value="">All</option>
+        <option *ngFor="let status of statuses" [value]="status.value">{{ status.label }}</option>
       </select>
     </div>
+
+    <div style="flex: 1 1 18%;">
+      <label>Order ID</label>
+      <input type="number" class="form-control" [(ngModel)]="selectedOrderId" (change)="filterOrders()" placeholder="Search by ID" />
+    </div>
+
+    <div style="flex: 1 1 18%;">
+      <label>Start Date</label>
+      <input type="date" class="form-control" [(ngModel)]="startDate" (change)="filterOrders()" />
+    </div>
+
+    <div style="flex: 1 1 18%;">
+      <label>End Date</label>
+      <input type="date" class="form-control" [(ngModel)]="endDate" (change)="filterOrders()" />
+    </div>
+
+    <div style="flex: 1 1 18%;">
+      <label>Search</label>
+      <input type="text" class="form-control" [(ngModel)]="searchText" placeholder="Search..." />
+    </div>
   </div>
 
-  <div class="row mb-3">
-    <div class="col-md-3">
-      <label>From Date</label>
-      <input type="date" class="form-control" [(ngModel)]="filters.fromDate">
-    </div>
-    <div class="col-md-3">
-      <label>To Date</label>
-      <input type="date" class="form-control" [(ngModel)]="filters.toDate">
-    </div>
-    <div class="col-md-3 d-flex align-items-end">
-      <button class="btn btn-success" (click)="applyFilters()">Filter</button>
-    </div>
+  <app-button-style
+    [label]="'Add Order'"
+    className="custom-btn mb-3"
+    [onClick]="goToAddOrder.bind(this)">
+  </app-button-style>
+
+ <table class="table table-bordered mt-3 new-table">
+    <thead style="background-color: #083c3f !important;">
+      <tr>
+        <th>#</th><th>Date</th><th>Customer Name</th><th>Governorate</th>
+        <th>City</th><th>Total Cost</th><th>Status</th><th>Assign</th><th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of paginatedOrders | filterPipe: searchText"
+          [ngClass]="{'disabled-row': order.changeStatus === 8}">
+        <td>{{ order.index }}</td>
+        <td>{{ order.createdAt | date:'shortDate' }}</td>
+        <td>{{ order.customerName }}</td>
+        <td>{{ order.governorateName }}</td>
+        <td>{{ order.cityName }}</td>
+        <td>{{ order.totalCost }}</td>
+        <td>
+          <select class="form-select"
+                  [ngModel]="order.changeStatus"
+                  (ngModelChange)="onStatusChange($event, order)">
+            <option *ngFor="let s of statusOptions"
+                    [value]="s.value" [disabled]="s.disabled">
+              {{ s.label }}
+            </option>
+          </select>
+        </td>
+        <td>
+          <!-- <button *ngIf="order.changeStatus === 2"
+                  class="btn btn-sm btn-outline-primary"
+                  (click)="openAssignModal(order)">
+            Assign Courier
+          </button> -->
+          <app-button-style
+            *ngIf="order.changeStatus === 2"
+            [label]="'Assign Courier'"
+            className="custom-btn"
+            [onClick]="openAssignModal.bind(this, order)">
+          </app-button-style>
+        </td>
+        <td>
+          <button class="btn btn-sm btn-success me-1" (click)="editOrder(order)">
+            <i class="fa fa-edit"></i>
+          </button>
+          <button class="btn btn-sm btn-danger" (click)="deleteOrder(order)">
+            <i class="fa fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Pagination -->
+  <div class="pagination d-flex justify-content-center mt-3">
+    <button *ngFor="let page of totalPages"
+            class="btn btn-sm btn-outline-secondary me-1"
+            [class.active]="page === currentPage"
+            (click)="goToPage(page)">
+      {{ page }}
+    </button>
   </div>
 
-  <app-custom-table [data]="filteredOrders" [columns]="columns"></app-custom-table>
-</div> -->
+<ng-container *ngIf="showAssignModal && modalOrder">
+  <app-shared-modal
+    [title]="'Assign Courier'"
+    [show]="true"
+    (close)="closeAssignModal()">
 
+    <!-- Body -->
+    <div modal-body>
+      <label for="courierSelect">Select Courier</label>
+      <select id="courierSelect"
+              class="form-select"
+              [(ngModel)]="selectedCourierForOrder[modalOrder.id]">
+        <option value="">-- Select Courier --</option>
+        <ng-container *ngFor="let c of couriers">
+          <option *ngIf="hasBranchMatch(c, modalOrder.branchId)"
+                  [value]="c.userId">
+            {{ c.fullName }}
+          </option>
+        </ng-container>
+      </select>
+    </div>
+
+    <!-- Footer -->
+    <div modal-footer>
+      <app-button-style
+        [label]="'Confirm'"
+        className="btn custom-btn"
+        [onClick]="assignCourierHandler">
+      </app-button-style>
+    </div>
+
+  </app-shared-modal>
+</ng-container>
+
+</div>
