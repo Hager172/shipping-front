@@ -10,7 +10,7 @@ import { RegisterDTO } from '../models/order/register.dto';
 })
 export class AuthService {
 
-  private apiURL= 'https://localhost:7206/api/Auth';
+  private apiURL= 'http://localhost:5226/api/Auth';
   constructor(private http:HttpClient) { }
   login(model:LoginDTO): Observable<UserProfileDTO>{
     return this.http.post<UserProfileDTO>(`${this.apiURL}/login`, model);

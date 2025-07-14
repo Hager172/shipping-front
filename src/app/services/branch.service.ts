@@ -7,7 +7,7 @@ import { Branch, BranchDTO } from '../models/branch/branch';
   providedIn: 'root'
 })
 export class BranchService {
-private baseUrl = 'https://localhost:7206/api/Branch';
+private baseUrl = 'http://localhost:5226/api/Branch';
   constructor(private http:HttpClient) { }
    getAllBranches(): Observable<BranchDTO[]> {
     return this.http.get<BranchDTO[]>(this.baseUrl);

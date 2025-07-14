@@ -1,0 +1,25 @@
+<div class="page-container">
+  <div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <input
+        type="text"
+        class="form-control w-25"
+        placeholder="Search employee..."
+        [(ngModel)]="searchTerm"
+      />
+
+      <app-button-style
+        [label]="'Add Employee'"
+        [className]="'btn custom-btn'"
+        [onClick]="navigateToAddEmployee.bind(this)"
+      ></app-button-style>
+    </div>
+    <app-custom-table
+      [columns]="columns"
+      [data]="employees | filterPipe:searchTerm"
+      (onEdit)="openEditEmployee($event)"
+      (onDelete)="deleteEmployee($event)"
+      (onToggleStatus)="onToggleStatus($event)"
+    ></app-custom-table>
+  </div>
+</div>

@@ -9,7 +9,7 @@ import { City, CityDTO } from '../models/city/city.model';
 export class CityService {
 
 
- private baseurl = 'https://localhost:7206/api/Cities';
+ private baseurl = 'http://localhost:5226/api/Cities';
 
   constructor(private http: HttpClient) {}
 

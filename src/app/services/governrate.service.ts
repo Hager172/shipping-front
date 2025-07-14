@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class GovernrateService {
-  private baseUrl = 'https://localhost:7206/api/Governrates';
+  private baseUrl = 'http://localhost:5226/api/Governrates';
 
   constructor(private http:HttpClient) { }
   getAll(): Observable<GovernorateDTO[]> {

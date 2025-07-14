@@ -48,6 +48,12 @@ export const routes: Routes = [
       { path: 'shippingTypes', component: ShippingTypesComponent },
       { path: 'rejectionReasons', component: RejectionReasonComponent },
       { path: 'traders', component: TradersComponent },
+    {
+  path: 'employees',
+  loadComponent: () =>
+    import('./components/all-employees/all-employees.component')
+      .then(m => m.AllEmployeesComponent)
+},
       { path: 'saves', component: SaveComponent },
       { path: 'bank-financialtransfer', component: BankFinancialtransferComponent },
       { path: 'safe-financialtransfer', component: SafeFinancialtransferComponent },

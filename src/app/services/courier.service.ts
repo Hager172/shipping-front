@@ -7,7 +7,7 @@ import { CourierDTO, DisplayCourier } from '../models/courier/courier.model';
   providedIn: 'root'
 })
 export class CourierService {
-  private baseUrl = 'https://localhost:7206/api/Courier';
+  private baseUrl = 'http://localhost:5226/api/Courier';
 
   constructor(private http:HttpClient) { }
     getAllCouriers(): Observable<DisplayCourier[]> {

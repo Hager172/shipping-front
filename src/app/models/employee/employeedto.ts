@@ -8,3 +8,12 @@ export interface RegisterEmployeeDTO {
   safeIds: number[];
   permissionActionIds?: number[];
 }
+export interface EmployeeWithPermissions {
+  userId: string;
+  userName: string;
+  fullName: string;
+  email: string;
+  address: string;
+  isActive: boolean;
+  permissions: string[];
+}
