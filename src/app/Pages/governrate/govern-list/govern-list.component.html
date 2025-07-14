@@ -1,4 +1,3 @@
-<!-- governorate-list.component.html -->
 <div class="mt-2 mb-5">
   <div class="row align-items-center">
     <div class="col-md-6">
@@ -26,8 +25,8 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let gov of filteredGovernorates; let i = index">
-      <td>{{ i + 1 }}</td>
+    <tr *ngFor="let gov of pagedGovernorates; let i = index">
+      <td>{{ (currentPage - 1) * pageSize + i + 1 }}</td>
       <td>{{ gov.name }}</td>
       <td class="d-flex justify-content-center gap-2">
         <button class="btn-edit" title="Edit" (click)="editGovernorate(gov)">
@@ -44,9 +43,24 @@
     </tr>
   </tbody>
 </table>
+
+<!-- Pagination Controls -->
+<div class="pagination text-center mt-3" *ngIf="totalPages.length > 0">
+  <button
+    style="background-color: #083c3e"
+    class="btn btn-sm m-1 text-white"
+    *ngFor="let page of totalPages"
+    [class.active]="page === currentPage"
+    (click)="goToPage(page)"
+  >
+    {{ page }}
+  </button>
+</div>
+
 <div *ngIf="errorMessage" class="alert alert-danger mt-3">
   {{ errorMessage }}
 </div>
+
 <!-- Delete Confirmation Modal -->
 <div
   class="modal fade"
