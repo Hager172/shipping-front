@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Governorate, GovernorateDTO } from '../models/governrate/governrate';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GovernrateService {
-  private baseUrl = 'https://localhost:7206/api/Governrates';
+  private baseUrl = `${environment.baseUrl}Governrates`;
 
   constructor(private http:HttpClient) { }
   getAll(): Observable<GovernorateDTO[]> {

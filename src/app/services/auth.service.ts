@@ -4,13 +4,14 @@ import { LoginDTO } from '../models/order/login.dto';
 import { UserProfileDTO } from '../models/order/user-profile.dto';
 import { Observable } from 'rxjs';
 import { RegisterDTO } from '../models/order/register.dto';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private apiURL = 'https://localhost:7206/api/Auth';
+  private apiURL= `${environment.baseUrl}Auth`;
   constructor(private http: HttpClient) { }
   login(model: LoginDTO): Observable<UserProfileDTO> {
     return this.http.post<UserProfileDTO>(`${this.apiURL}/login`, model);
