@@ -22,6 +22,8 @@ import { SaveComponent } from './Pages/saves/save.component';
 import { BankFinancialtransferComponent } from './Pages/bank-financialtransfer/bank-financialtransfer.component';
 import { SafeFinancialtransferComponent } from './Pages/safe-financialtransfer/safe-financialtransfer.component';
 import { CourierEditComponent } from './Pages/courier/courier-edit/courier-edit.component';
+import { RegisterEmployeeComponent } from './Pages/register-employee/register-employee.component';
+import { CourierOrdersComponent } from './Pages/courier/courier-orders/courier-orders.component';
 
 export const routes: Routes = [
 
@@ -53,7 +55,9 @@ export const routes: Routes = [
 {path:'couriers',component:CourierListComponent},
 {path:'addcourier',component:CourierAddComponent},
  {path:'cities',component:CityListComponent},
- {path:'editcourier',component:CourierEditComponent}
+ {path:'editcourier',component:CourierEditComponent},
+ {path:'employeereg',component:RegisterEmployeeComponent},
+ {path:'courierorders',component:CourierOrdersComponent}
     ]
   }
 

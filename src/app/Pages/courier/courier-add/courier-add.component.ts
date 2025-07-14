@@ -68,57 +68,51 @@ export class CourierAddComponent implements OnInit {
     this.courierForm.patchValue({ selectedBranchIds: selectedOptions });
   }
 
-  addCourier() {
-    this.errormessage='';
-    this.successmessage='';
-      console.log('Sending Courier Data:', this.courierForm.value);
-    if (this.courierForm.valid) {
-      console.log('Sending Courier Data:', this.courierForm.value);
-      this.courierService.addCourier(this.courierForm.value).subscribe({
-        next: (res) => console.log('Courier added successfully!', res),
-         error: (err) => {
-  // لو الخطأ رسالة string مباشرة (زي اللي انت شفتيه قبل كده)
-  if (typeof err.error === 'string') {
-    this.errormessage = 'Error: ' + err.error;
+addCourier() {
+  console.log(this.courierForm.value)
+  this.errormessage = '';
+  this.successmessage = '';
 
-  // لو ModelState errors (validation errors)
-  } else if (err.error?.errors) {
-    const errors = err.error.errors;
-    const messages: string[] = [];
+  if (this.courierForm.valid) {
+   this.courierForm.value.discountType = Number(this.courierForm.value.discountType);
+    this.courierService.addCourier(this.courierForm.value).subscribe({
+      next: (res) => {
+        this.errormessage='';
+        this.successmessage = res.message;
+        setTimeout(() => {
+          this.successmessage='';
 
-    // لفّي على المفاتيح وخدي كل رسالة
-    for (let key in errors) {
-      if (errors[key] && Array.isArray(errors[key])) {
-        messages.push(...errors[key]);
+        }, 2000);
+        this.courierForm.reset();
+      },
+      error: (err) => {
+          this.successmessage='';
+        if (typeof err.error === 'string') {
+          this.errormessage = 'Error: ' + err.error;
+
+        } else if (Array.isArray(err.error?.errors)) {
+          // لو السيرفر رجّع مصفوفة Errors
+          this.errormessage = err.error.errors.join(' | ');
+
+        } else if (err.error?.message) {
+          this.errormessage = err.error.message;
+
+        } else {
+          this.errormessage = 'Unknown error occurred';
+        }
+ setTimeout(() => {
+          this.errormessage='';
+
+        }, 2000);
+        console.error('Error adding courier:', err);
       }
-    }
-
-    this.errormessage = messages.join(' | ');
-
-  // لو رسالة عادية (زي error.message)
-  } else if (err.error?.message) {
-    this.errormessage = 'Error: ' + err.error.message;
-
+    });
   } else {
-    this.errormessage = 'Unknown error occurred';
+    this.errormessage = 'Please fill the form correctly.';
+    console.warn('Form is invalid:', this.courierForm.errors);
   }
-
-  console.error('Error adding curier:', err);
 }
 
-      });
-    } else {
-      console.warn('Form is invalid:', this.courierForm.errors);
-      Object.keys(this.courierForm.controls).forEach(key => {
-  const controlErrors = this.courierForm.get(key)?.errors;
-  if (controlErrors) {
-    console.log(`${key} has errors:`, controlErrors);
-    this.errormessage=`fill the form`;
-  }
-});
-
-    }
-  }
 
 
 }
