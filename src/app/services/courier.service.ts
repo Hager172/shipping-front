@@ -51,8 +51,18 @@ getOrdersByCourierId(courierId: string): Observable<any[]> {
   }
 
   // تغيير حالة الأوردر
-  updateOrderStatus(orderId: number, status: number): Observable<any> {
-    return this.http.put(`${this.baseUrl}/update-order-status/${orderId}`, { status });
-  }
+updateOrderStatus(orderId: number, newStatus: number, rejectionReasonId?: number) {
+  const body = {
+    orderId: orderId,
+    newStatus: newStatus,
+    rejectionReasonId: rejectionReasonId ?? null
+  };
+
+  return this.http.put(`${this.baseUrl}/update-order-status`, body);
+}
+
+
+
+
 
 }

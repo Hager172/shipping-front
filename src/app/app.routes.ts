@@ -24,6 +24,7 @@ import { SafeFinancialtransferComponent } from './Pages/safe-financialtransfer/s
 import { CourierEditComponent } from './Pages/courier/courier-edit/courier-edit.component';
 import { RegisterEmployeeComponent } from './Pages/register-employee/register-employee.component';
 import { CourierOrdersComponent } from './Pages/courier/courier-orders/courier-orders.component';
+import { RejectedorderComponent } from './Pages/courier/rejectedorder/rejectedorder.component';
 
 export const routes: Routes = [
 
@@ -57,7 +58,8 @@ export const routes: Routes = [
  {path:'cities',component:CityListComponent},
  {path:'editcourier',component:CourierEditComponent},
  {path:'employeereg',component:RegisterEmployeeComponent},
- {path:'courierorders',component:CourierOrdersComponent}
+ {path:'courierorders',component:CourierOrdersComponent},
+ {path:'rejectedorder',component:RejectedorderComponent}
     ]
   }
 
