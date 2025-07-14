@@ -14,23 +14,27 @@ export class CourierListComponent  {
 
   constructor(private courierService: CourierService, private router: Router) {}
 
-  couriers: DisplayCourier[] = [];
+   couriers: DisplayCourier[] = [];
   filtered: DisplayCourier[] = [];
-   selectedCourier: DisplayCourier | null = null;
+  selectedCourier: DisplayCourier | null = null;
   deleteModal: any;
-    errormessage: string = '';
+  errormessage: string = '';
+
+  pageSize = 5;
+  currentPage = 1;
+  totalPages: number[] = [];
 
   discountTypeMap: { [key: number]: string } = {
-  0: 'Percentage',
-  1: 'Fixed Amount'
-};
-
+    0: 'Percentage',
+    1: 'Fixed Amount'
+  };
 
   searchTerm = '';
 
   ngOnInit(): void {
     this.loadCouriers();
-       const modalEl = document.getElementById('deleteConfirmModal');
+
+    const modalEl = document.getElementById('deleteConfirmModal');
     if (modalEl) {
       this.deleteModal = new bootstrap.Modal(modalEl);
     }
@@ -40,6 +44,7 @@ export class CourierListComponent  {
     this.courierService.getAllCouriers().subscribe(data => {
       this.couriers = data;
       this.filtered = data;
+      this.generatePageNumbers();
     });
   }
 
@@ -47,6 +52,13 @@ export class CourierListComponent  {
     this.filtered = this.couriers.filter(courier =>
       courier.fullName.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
+    this.currentPage = 1;
+    this.generatePageNumbers();
+  }
+
+  generatePageNumbers(): void {
+    const total = Math.ceil(this.filtered.length / this.pageSize);
+    this.totalPages = Array.from({ length: total }, (_, i) => i + 1);
   }
 
   onSearchInput(event: Event): void {
@@ -63,15 +75,14 @@ export class CourierListComponent  {
   addCourier(): void {
     this.router.navigate(['/addcourier']);
   }
+
   deleteCourier(courier: DisplayCourier): void {
     this.selectedCourier = courier;
-    console.log(this.selectedCourier);
     this.deleteModal.show();
   }
 
   confirmDelete(): void {
     this.errormessage = '';
-    console.log(this.selectedCourier)
     if (!this.selectedCourier) return;
 
     this.courierService.deleteCourier(this.selectedCourier.userId).subscribe({
@@ -79,19 +90,26 @@ export class CourierListComponent  {
         this.filtered = this.filtered.filter(
           c => c.userId !== this.selectedCourier?.userId
         );
+        this.generatePageNumbers();
         this.deleteModal.hide();
         this.errormessage = 'Courier deleted successfully';
-        setTimeout(() => {
-          this.errormessage = '';
-        }, 2000);
+        setTimeout(() => (this.errormessage = ''), 2000);
       },
       error: (err) => {
         this.errormessage = err.error || 'Error deleting courier';
         this.deleteModal.hide();
-        setTimeout(() => {
-          this.errormessage = '';
-        }, 2000);
+        setTimeout(() => (this.errormessage = ''), 2000);
       }
     });
+  }
+
+  get pagedCouriers(): DisplayCourier[] {
+    const start = (this.currentPage - 1) * this.pageSize;
+    const end = start + this.pageSize;
+    return this.filtered.slice(start, end);
+  }
+
+  goToPage(page: number): void {
+    this.currentPage = page;
   }
 }
