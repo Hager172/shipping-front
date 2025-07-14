@@ -1,0 +1,64 @@
+<!-- شريط علوي للزر والبحث -->
+<div class="mt-2 mb-5">
+  <div class="row align-items-center">
+    <div class="col-md-6">
+      <button
+        [routerLink]="['/courierorders']"
+        routerLinkActive="router-link-active"
+        class="custom-btn"
+      >
+        Back to Orders
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- جدول الأوردرات المرفوضة -->
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Customer Name</th>
+      <th>Phone</th>
+      <th>Merchant</th>
+      <th>Governorate</th>
+      <th>City</th>
+      <th>Branch</th>
+      <th>Status</th>
+      <th>Cost</th>
+      <th>Rejection Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of paginatedData; let i = index">
+      <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+      <td>{{ order.customerName }}</td>
+      <td>{{ order.phoneNumber }}</td>
+      <td>{{ order.merchantName }}</td>
+      <td>{{ order.governorate }}</td>
+      <td>{{ order.city }}</td>
+      <td>{{ order.branch }}</td>
+      <td>{{ statusMap[order.status] }}</td>
+
+      <td>{{ order.orderCost }} EGP</td>
+      <td>{{ order.rejectionReason }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- رسالة في حال عدم وجود بيانات -->
+<div *ngIf="paginatedData.length === 0" class="alert alert-info mt-3">
+  No rejected orders found.
+</div>
+
+<!-- الباجيناشن -->
+<div class="pagination text-center" *ngIf="totalPages.length > 0">
+  <button
+    class="btn btn-outline-primary btn-sm m-1"
+    *ngFor="let page of totalPages"
+    [class.active]="page === currentPage"
+    (click)="goToPage(page)"
+  >
+    {{ page }}
+  </button>
+</div>

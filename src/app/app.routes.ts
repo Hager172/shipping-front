@@ -33,6 +33,7 @@ import { EditOrderComponent } from './Pages/edit-order/edit-order.component';
 import { CourierEditComponent } from './Pages/courier/courier-edit/courier-edit.component';
 import { RegisterEmployeeComponent } from './Pages/register-employee/register-employee.component';
 import { CourierOrdersComponent } from './Pages/courier/courier-orders/courier-orders.component';
+import { RejectedorderComponent } from './Pages/courier/rejectedorder/rejectedorder.component';
 
 
 import { AdminDashboardComponent} from './Pages/dashboard/admindashboard.component'
@@ -62,6 +63,7 @@ export const routes: Routes = [
       { path: 'safe-financialtransfer', component: SafeFinancialtransferComponent },
       {path:'edit-city',component:EditCityComponent},
 
+
      {path:'add-city',component:AddCityComponent},
     {path:'branches',component:BranchListComponent},
     {path:'edit-branch',component:EditBranchComponent},
@@ -85,6 +87,10 @@ export const routes: Routes = [
       {path:'couriers',component:CourierListComponent},
       {path:'addcourier',component:CourierAddComponent},
       {path:'cities',component:CityListComponent},
+       {path:'editcourier',component:CourierEditComponent},
+ {path:'employeereg',component:RegisterEmployeeComponent},
+ {path:'courierorders',component:CourierOrdersComponent},
+ {path:'rejectedorder',component:RejectedorderComponent},
       {path: 'AdminDashboard' , component : AdminDashboardComponent},
       {path: 'TraderDashboard' , component : TraderdashboardComponent},
       {path: 'CourierDashboard' , component : CourierdashboardComponent},
@@ -104,6 +110,7 @@ export const routes: Routes = [
         {path:'adminAddOrder' , component:AdminAddOrderComponent},
         {path:'traderAddOrder' , component:TraderAddOrderComponent},
         {path:'editOrder/:id' , component:EditOrderComponent},
+
 
 
     ]

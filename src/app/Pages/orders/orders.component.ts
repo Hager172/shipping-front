@@ -300,6 +300,7 @@ assignCourier(order: any): void {
   const dto = {
     ...order,        
     courierId: courierId,
+    RejectionReasonId :null,
     status: order.changeStatus
   };
   this.orderService.updateOrder(order.id, dto).subscribe({
