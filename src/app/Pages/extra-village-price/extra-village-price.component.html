@@ -1,0 +1,86 @@
+<!-- <p>extra-village-price works!</p> -->
+<div class="page-container">
+  <div class="container mt-4">
+    <!-- Search + Add -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <input
+        type="text"
+        class="form-control w-25"
+        placeholder="Search..."
+        [(ngModel)]="searchTerm"
+      />
+      <app-button-style
+        [label]="'Add Price'"
+        [className]="'btn custom-btn'"
+        [onClick]="openAddModal.bind(this)"
+      ></app-button-style>
+    </div>
+
+    <!-- Table -->
+    <app-custom-table
+      [columns]="columns"
+      [data]="prices | filterPipe:searchTerm"
+      (onEdit)="openEditModal($event)"
+      (onDelete)="confirmDelete($event)"
+      (onToggleStatus)="onToggleStatus($event)"
+    ></app-custom-table>
+  </div>
+</div>
+
+<!-- Modal -->
+<app-shared-modal
+  [title]="isEditMode ? 'Edit Extra Village Price' : 'Add Extra Village Price'"
+  [show]="showModal"
+  (close)="closeModal()"
+  (save)="savePrice()"
+>
+  <div modal-body>
+    <div class="mb-3">
+      <label>Value</label>
+      <input
+        type="number"
+        class="form-control"
+        [(ngModel)]="modalPrice.value"
+        name="value"
+      />
+    </div>
+    <div class="form-check">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        [(ngModel)]="modalPrice.isActive"
+        id="isActive"
+      />
+      <label class="form-check-label" for="isActive">Is Active</label>
+    </div>
+  </div>
+
+  <div modal-footer>
+    <app-button-style
+      [label]="isEditMode ? 'Save Changes' : 'Add'"
+      [className]="'btn custom-btn'"
+      [onClick]="savePrice.bind(this)"
+    ></app-button-style>
+  </div>
+</app-shared-modal>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal" tabindex="-1" [ngClass]="{ 'show d-block': confirmDeleteModal }">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="background-color: #083c3e;">
+        <h5 class="modal-title">Confirm Delete</h5>
+      </div>
+      <div class="modal-body">
+        <p>
+          Are you sure you want to delete extra village price with value:
+          <strong>{{ toBeDeleted?.value }}</strong>?
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="confirmDeleteModal = false">Cancel</button>
+        <button class="btn btn-danger" (click)="deleteConfirmed()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,89 @@
+.dashboard-header ,.dashboard-title {
+  display: inline-block;
+  text-align: center;
+  font-size: 40px;
+  color: #083c3e;
+  margin-bottom: 30px;
+  margin-left: 20px;
+  letter-spacing: 1px;
+  transition: transform 0.3s ease;
+}
+
+
+.dashboard-title:hover {
+  transform: scale(1.03);
+}
+
+.dashboard-pricing-card {
+  width: 280px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  display: inline-block;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-left: 10px;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-pricing-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  background-color:#ebfdff;
+
+}
+
+.card-top {
+  background-color: #083c3e;
+  color: white;
+  width: 100%;
+  padding: 16px;
+  font-size: 18px;
+  text-align: center;
+  font-weight: bold;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.card-center {
+  font-size: 40px;
+  font-weight: bold;
+  color: #083c3e;
+  padding: 24px 0 16px 0;
+}
+
+.card-details {
+  list-style: none;
+  padding: 0 16px 16px;
+  text-align: center;
+  color: #555;
+}
+
+.card-details li {
+  margin: 6px 0;
+  font-size: 14px;
+}
+
+.card-details i {
+  margin-right: 6px;
+  color: #083c3e;
+}
+
+.card-btn {
+  margin: 16px;
+  padding: 10px 20px;
+  background-color: #083c3e;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.card-btn:hover {
+  background-color: #065555;
+}

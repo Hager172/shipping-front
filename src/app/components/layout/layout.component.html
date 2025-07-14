@@ -1,4 +1,4 @@
-<div class="container-fluid p-0">
+<div class="container-fluid p-0"  style="background-color: #f8f9fa;">
   <app-navbar></app-navbar>
 
   <div class="row g-0 m-0">
@@ -9,11 +9,11 @@
       [class.col-lg-1]="isSidebarCollapsed">
       <app-sidebar (collapsedChange)="onSidebarToggle($event)"></app-sidebar>
     </div>
-
+    
     <!-- Main Content -->
     <div 
       class="p-4"
-      style="background-color: #f8f9fa; min-height: 100vh;"
+      style="background-color: #f8f9fa; min-height: 100vh ;"
       [class.col-lg-10]="!isSidebarCollapsed"
       [class.col-lg-11]="isSidebarCollapsed">
       <router-outlet></router-outlet>

@@ -1,0 +1,45 @@
+<div>
+    <!-- Input for new permission name -->
+    <input type="text" [(ngModel)]="newPermissionName" placeholder="Permission Name" class="form-control w-25 d-inline-block me-2" />
+    <button (click)="addPermission()" class="btn customstyle">➕ Add New Permission</button>
+    <!-- Save button -->
+    <button (click)="save()" class="btn customstyle">💾 Save Permissions</button>
+</div>
+
+<hr />
+
+<div class="table-container">
+  <table class="custom-table">
+    <thead>
+      <tr>
+        <th>Permission Name</th>
+        <th *ngFor="let action of actionTypes">{{ action.name }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let perm of paginatedData">
+        <td>{{ perm.name }}</td>
+        <td *ngFor="let action of actionTypes">
+          <input
+            type="checkbox"
+            [checked]="perm.selectedActions[action.id]"
+            (change)="toggleAction(perm, action.id, $event)"
+          />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pagination">
+    <button
+      *ngFor="let page of totalPages"
+      [class.active]="page === currentPage"
+      (click)="goToPage(page)"
+    >
+      {{ page }}
+    </button>
+  </div>
+</div>
+
+<hr />
+

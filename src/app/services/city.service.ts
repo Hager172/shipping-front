@@ -45,5 +45,9 @@ toggleCityStatusByName(name: string): Observable<{ isActive: boolean }> {
     return this.http.delete(`${this.baseurl}/${id}`);
   }
 
+  getCitiesByGovernorate(governorateId: number): Observable<City[]> {
+    return this.http.get<City[]>(`${this.baseurl}/getbygovernorateid/${governorateId}`);
+  }   
+
 }
 

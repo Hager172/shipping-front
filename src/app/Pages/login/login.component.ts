@@ -26,10 +26,16 @@ onsubmit(){
     return;}
   this.authservice.login(this.loginform.value).subscribe({
     next:(data)=>{
- this.authservice.savetoken(data.token);
+      this.authservice.savetoken(data.token);
+
+      // فك التوكن واستخراج بيانات التاجر
+      const payload = JSON.parse(atob(data.token.split('.')[1]));
+      const traderId = payload.nameid || payload.sub || payload.id|| payload.UserId;
+      localStorage.setItem('traderId', traderId);
+      console.log('Trader ID:', traderId);
+      
       this.router.navigate(['/cities']);
-
-
+      this.authservice.saveUserRole(data.role);
     },
     error:(err)=>{
       this.errormessage=err.error.message || 'An error occurred during login. Please try again.';
