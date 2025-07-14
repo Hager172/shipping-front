@@ -1,3 +1,23 @@
+.container {
+  width: 1000px;
+}
+.custom-btn {
+  background-color: #083c3e;
+  color: white;
+  border: none;
+  width: 180px;
+  height: 45px;
+  padding: 10px;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.custom-btn:hover {
+  background-color: #3ac5ce;
+}
+
+
 .error-message {
   background-color: #f8d7da;       /* لون الخلفية الأحمر الفاتح */
   color: #721c24;                  /* لون النص الأحمر الداكن */

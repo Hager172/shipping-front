@@ -1,4 +1,4 @@
-<form (ngSubmit)="addcity()">
+<!-- <form (ngSubmit)="addcity()">
   <div class="mb-3">
     <label>City Name</label>
     <input
@@ -63,4 +63,106 @@
   <div *ngIf="errormessage" class="alert alert-danger mt-3">
     {{ errormessage }}
   </div>
-</form>
+</form> -->
+
+<div class="container">
+  <div class="row shadow rounded overflow-hidden justify-content-center">
+    <div class="col-md-10 bg-common">
+      <h2 class="mb-4 text-center">Add City</h2>
+
+      <form (ngSubmit)="addcity()">
+        <!-- City Name -->
+        <div class="mb-3">
+          <label class="form-label">
+            <i class="fa-solid fa-city" style="color: #083c3e"></i>
+            City Name
+          </label>
+          <input
+            type="text"
+            [(ngModel)]="city.name"
+            name="name"
+            class="form-control"
+            required
+            placeholder="Enter city name"
+          />
+        </div>
+
+        <!-- Governorate -->
+        <div class="mb-3">
+          <label class="form-label">
+            <i class="fa-solid fa-flag" style="color: #083c3e"></i>
+            Governorate
+          </label>
+          <select
+            class="form-select"
+            [(ngModel)]="city.GovernorateId"
+            name="goverrateId"
+            required
+          >
+            <option value="" selected disabled>Select a governorate</option>
+            <option *ngFor="let g of governrates" [value]="g.id">
+              {{ g.name }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Shipping Cost -->
+        <div class="mb-3">
+          <label class="form-label">
+            <i class="fa-solid fa-box" style="color: #083c3e"></i>
+            Shipping Cost
+          </label>
+          <input
+            [(ngModel)]="city.pricePerKg"
+            name="pricePerKg"
+            type="number"
+            class="form-control"
+            placeholder="Enter shipping cost"
+          />
+        </div>
+
+        <!-- Pickup Cost -->
+        <div class="mb-3">
+          <label class="form-label">
+            <i class="fa-solid fa-truck" style="color: #083c3e"></i>
+            Pickup Cost
+          </label>
+          <input
+            [(ngModel)]="city.pickupCost"
+            name="pickupCost"
+            type="number"
+            class="form-control"
+            placeholder="Enter pickup cost"
+          />
+        </div>
+
+        <!-- Is Active -->
+        <div class="form-check mb-3">
+          <input
+            [(ngModel)]="city.isActive"
+            name="isActive"
+            type="checkbox"
+            class="form-check-input"
+            id="activeCheck"
+          />
+          <label class="form-check-label" for="activeCheck"> Is Active </label>
+        </div>
+
+        <!-- Messages -->
+        <p *ngIf="errormessage" class="error-message">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          {{ errormessage }}
+        </p>
+        <p *ngIf="successmessage" class="alert alert-success mt-2">
+          {{ successmessage }}
+        </p>
+
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="custom-btn m-4">
+            <i class="fa-solid fa-plus"></i> Add City
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

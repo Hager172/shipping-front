@@ -11,7 +11,7 @@ export interface CourierDTO {
   selectedBranchIds: number[];
 }
 export interface DisplayCourier {
-  UserId: string;
+  userId: string;
   userName: string;
   email: string;
   password: string;

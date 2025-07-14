@@ -3,6 +3,7 @@ import { City, CityDTO } from '../../../models/city/city.model';
 import { CityService } from '../../../services/city.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-city-list',
@@ -14,11 +15,17 @@ export class CityListComponent implements OnInit {
   constructor(private cityService: CityService, private router :Router) { }
   cities: CityDTO[] = [];
   filtered: CityDTO[] = [];
-
+  deleteModal: any;
+  errormessage:string='';
+  selectedCity:CityDTO|null=null;
   citySearchTerm = '';
   governorateSearchTerm = '';
   ngOnInit(): void {
      this.loadCities();
+      const modalEl = document.getElementById('deleteConfirmModal');
+    if (modalEl) {
+      this.deleteModal = new bootstrap.Modal(modalEl);
+    }
   }
   loadCities(){
     this.cityService.getAllCities().subscribe((data:CityDTO[])=>{
@@ -69,7 +76,42 @@ onGovernorateSearchInput(event: Event): void {
   onGovernorateSearchChange(governorate:string){
     this.governorateSearchTerm = governorate;
     this.filterCities();
-  }}
+  }
+  deleteCity(city: CityDTO): void {
+    this.selectedCity = city;
+    this.deleteModal.show(); // عرض المودال
+    console.log(this.selectedCity);
+  }
+
+  confirmDeleteCity(): void {
+    this.errormessage = '';
+    if (!this.selectedCity) return;
+
+    this.cityService.deleteCity(this.selectedCity.id).subscribe({
+      next: () => {
+        this.filtered = this.filtered.filter(
+          (c) => c.id !== this.selectedCity?.id
+        );
+        this.deleteModal.hide();
+        this.errormessage = 'city deleted successfully';
+
+        setTimeout(() => {
+          this.errormessage = '';
+        }, 2000);
+      },
+      error: (err) => {
+        this.errormessage = err.error;
+        setTimeout(() => {
+          this.errormessage = '';
+        }, 2000);
+
+        console.error('Error deleting city', err.error);
+        this.deleteModal.hide();
+      },
+    });
+  }
+
+}
 
 
 

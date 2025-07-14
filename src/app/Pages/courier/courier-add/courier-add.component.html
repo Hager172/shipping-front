@@ -1,73 +1,142 @@
-<form [formGroup]="courierForm" (ngSubmit)="addCourier()">
-  <div class="mb-3">
-    <label>User Name</label>
-    <input class="form-control" formControlName="userName" />
-  </div>
+<div class="container">
+  <div class="row shadow rounded overflow-hidden justify-content-center">
+    <div class="col-md-10 bg-common">
+      <h2 class="mb-4 text-center">Add Courier</h2>
 
-  <div class="mb-3">
-    <label>Email</label>
-    <input class="form-control" formControlName="email" type="email" />
-  </div>
+      <form [formGroup]="courierForm" (ngSubmit)="addCourier()">
+        <div class="row">
+          <!-- Username -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">
+              <i class="fa-solid fa-user" style="color: #083c3e"></i>
+              Username
+            </label>
+            <input class="form-control" formControlName="userName" />
+          </div>
 
-  <div class="mb-3">
-    <label>Password</label>
-    <input class="form-control" formControlName="password" type="password" />
-  </div>
+          <!-- Email -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">
+              <i class="fa-solid fa-envelope" style="color: #083c3e"></i>
+              Email
+            </label>
+            <input class="form-control" formControlName="email" type="email" />
+          </div>
 
-  <div class="mb-3">
-    <label>Full Name</label>
-    <input class="form-control" formControlName="fullName" />
-  </div>
+          <!-- Password -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">
+              <i class="fa-solid fa-lock" style="color: #083c3e"></i>
+              Password
+            </label>
+            <input
+              class="form-control"
+              formControlName="password"
+              type="password"
+            />
+          </div>
 
-  <div class="mb-3">
-    <label>Address</label>
-    <input class="form-control" formControlName="address" />
-  </div>
+          <!-- Full Name -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">
+              <i class="fa-solid fa-id-card" style="color: #083c3e"></i>
+              Full Name
+            </label>
+            <input class="form-control" formControlName="fullName" />
+          </div>
 
-  <div class="mb-3">
-    <label>Phone Number</label>
-    <input class="form-control" formControlName="phoneNumber" />
-  </div>
+          <!-- Address -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">
+              <i class="fa-solid fa-location-dot" style="color: #083c3e"></i>
+              Address
+            </label>
+            <input class="form-control" formControlName="address" />
+          </div>
 
-  <div class="mb-3">
-    <label>Discount Type</label>
-    <select class="form-select" formControlName="discountType">
-      <option [value]="0">Percentage</option>
-      <option [value]="1">Fixed Amount</option>
-    </select>
-  </div>
+          <!-- Phone -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">
+              <i class="fa-solid fa-phone" style="color: #083c3e"></i>
+              Phone Number
+            </label>
+            <input class="form-control" formControlName="phoneNumber" />
+          </div>
 
-  <div class="mb-3">
-    <label>Order Share</label>
-    <input class="form-control" formControlName="orderShare" type="number" />
-  </div>
+          <!-- Discount Type -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">
+              <i class="fa-solid fa-percent" style="color: #083c3e"></i>
+              Discount Type
+            </label>
+            <select class="form-select" formControlName="discountType">
+              <option [value]="0">Percentage</option>
+              <option [value]="1">Fixed Amount</option>
+            </select>
+          </div>
 
-  <!-- Governorates Dropdown -->
-  <div class="form-group">
-    <label for="governorates">المحافظات</label>
-    <select
-      class="form-control"
-      multiple
-      (change)="onGovernoratesChange($event)"
-    >
-      <option *ngFor="let g of allGovernorates" [value]="g.id">
-        {{ g.name }}
-      </option>
-    </select>
-  </div>
+          <!-- Order Share -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">
+              <i class="fa-solid fa-chart-line" style="color: #083c3e"></i>
+              Order Share
+            </label>
+            <input
+              class="form-control"
+              formControlName="orderShare"
+              type="number"
+            />
+          </div>
 
-  <!-- Branches Dropdown -->
-  <div class="form-group">
-    <label for="branches">الفروع</label>
-    <select class="form-control" multiple (change)="onBranchesChange($event)">
-      <option *ngFor="let b of allBranches" [value]="b.id">{{ b.name }}</option>
-    </select>
-  </div>
+          <!-- Governorates -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">
+              <i class="fa-solid fa-flag" style="color: #083c3e"></i>
+              Governorates
+            </label>
+            <select
+              class="form-select"
+              multiple
+              (change)="onGovernoratesChange($event)"
+            >
+              <option *ngFor="let g of allGovernorates" [value]="g.id">
+                {{ g.name }}
+              </option>
+            </select>
+          </div>
 
-  <button class="custom-btn" type="submit">Add Courier</button>
+          <!-- Branches -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">
+              <i class="fa-solid fa-code-branch" style="color: #083c3e"></i>
+              Branches
+            </label>
+            <select
+              class="form-select"
+              multiple
+              (change)="onBranchesChange($event)"
+            >
+              <option *ngFor="let b of allBranches" [value]="b.id">
+                {{ b.name }}
+              </option>
+            </select>
+          </div>
+        </div>
 
-  <div *ngIf="errormessage" class="alert alert-danger">{{ errormessage }}</div>
-  <div *ngIf="successmessage" class="alert alert-success">
-    {{ successmessage }}
+        <!-- رسائل -->
+        <p *ngIf="errormessage" class="error-message">
+          <i class="fa-solid fa-triangle-exclamation"></i> {{ errormessage }}
+        </p>
+        <p *ngIf="successmessage" class="alert alert-success mt-2">
+          <i class="fa-solid fa-circle-check"></i> {{ successmessage }}
+        </p>
+
+        <div class="d-flex justify-content-center">
+          <button class="custom-btn m-4" type="submit">
+            <i class="fa-solid fa-plus"></i> Add Courier
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
-</form>
+</div>

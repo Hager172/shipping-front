@@ -30,7 +30,29 @@ selectedCourier: DisplayCourier | null = null;
     return this.http.get<CourierDTO>(`${this.baseUrl}/getcourierbyid/${id}`);
   }
 
-  deleteCourier(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`);
+deleteCourier(userId: string): Observable<any> {
+  return this.http.delete(`https://localhost:7206/api/Courier/delete/${userId}`);
+}
+
+
+getOrdersByCourierId(courierId: string): Observable<any[]> {
+  return this.http.get<any[]>(`${this.baseUrl}/courier-orders-display/${courierId}`);
+}
+
+
+  // الطلبات المرفوضة فقط
+  getRejectedOrders(courierId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/rejected-orders/${courierId}`);
   }
+
+  // أسباب الرفض
+  getRejectionReasons(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/rejection-reasons`);
+  }
+
+  // تغيير حالة الأوردر
+  updateOrderStatus(orderId: number, status: number): Observable<any> {
+    return this.http.put(`${this.baseUrl}/update-order-status/${orderId}`, { status });
+  }
+
 }

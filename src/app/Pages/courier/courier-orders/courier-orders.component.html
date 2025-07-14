@@ -1,0 +1,71 @@
+<div class="mt-2 mb-5">
+  <div class="row align-items-center">
+    <div class="col-md-6">
+      <h4>Courier Orders</h4>
+    </div>
+    <div class="col-md-6 text-end">
+      <input
+        class="form-control d-inline-block w-75"
+        type="text"
+        placeholder="Search by customer name..."
+        (input)="onSearchInput($event)"
+      />
+    </div>
+  </div>
+</div>
+
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Customer Name</th>
+      <th>Phone</th>
+      <th>Merchant</th>
+      <th>Governorate</th>
+      <th>City</th>
+      <th>Branch</th>
+      <th>Status</th>
+      <th>Cost</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of paginatedData; let i = index">
+      <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+      <td>{{ order.customerName }}</td>
+      <td>{{ order.phoneNumber }}</td>
+      <td>{{ order.merchantName }}</td>
+      <td>{{ order.governorate }}</td>
+      <td>{{ order.city }}</td>
+      <td>{{ order.branch }}</td>
+      <td>{{ orderStatusMap[order.status] }}</td>
+      <td>{{ order.orderCost }} EGP</td>
+      <td>
+        <button
+          class="btn btn-sm btn-success me-1"
+          (click)="viewDetails(order)"
+        >
+          <i class="fa fa-eye" style="color: white"></i>
+        </button>
+        <button class="btn btn-sm btn-danger" (click)="rejectOrder(order)">
+          <i class="fa fa-times" style="color: white"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="paginatedData.length === 0" class="alert alert-info mt-3">
+  No orders found.
+</div>
+
+<div class="pagination text-center" *ngIf="totalPages.length > 0">
+  <button
+    class="btn btn-outline-primary btn-sm m-1"
+    *ngFor="let page of totalPages"
+    [class.active]="page === currentPage"
+    (click)="goToPage(page)"
+  >
+    {{ page }}
+  </button>
+</div>

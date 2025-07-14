@@ -1,21 +1,43 @@
-<form (ngSubmit)="updateGovernorate()">
-  <div class="mb-3">
-    <label>Governorate Name</label>
-    <input
-      [(ngModel)]="governorate.name"
-      name="name"
-      class="form-control"
-      required
-    />
-  </div>
+<div class="container">
+  <div class="row shadow rounded overflow-hidden justify-content-center">
+    <div class="col-md-8 bg-common">
+      <h2 class="text-center my-4">Edit Governorate</h2>
 
-  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
-  <div *ngIf="successMessage" class="alert alert-success">
-    {{ successMessage }}
-  </div>
+      <form (ngSubmit)="updateGovernorate()">
+        <div class="mb-3">
+          <label class="form-label">
+            <i class="fa-solid fa-flag" style="color: #083c3e"></i>
+            Governorate Name
+          </label>
+          <input
+            [(ngModel)]="governorate.name"
+            name="name"
+            class="form-control"
+            placeholder="Enter governorate name"
+            required
+          />
+        </div>
 
-  <button type="submit" class="btn btn-primary">Update</button>
-  <button [routerLink]="['/governrates']" class="btn btn-secondary ms-2">
-    back
-  </button>
-</form>
+        <!-- Messages -->
+        <div *ngIf="errorMessage" class="alert alert-danger">
+          <i class="fa-solid fa-triangle-exclamation"></i> {{ errorMessage }}
+        </div>
+        <div *ngIf="successMessage" class="alert alert-success">
+          <i class="fa-solid fa-circle-check"></i> {{ successMessage }}
+        </div>
+
+        <!-- Buttons -->
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="custom-btn m-2">Update</button>
+        </div>
+        <button
+          [routerLink]="['/governrates']"
+          class="btn btn-secondary m-2"
+          type="button"
+        >
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
