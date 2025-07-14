@@ -27,9 +27,9 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  getroles(): Observable<string[]> {
-    return this.http.get<string[]>(`${this.apiURL}/rols`);
-  }
+  // getroles(): Observable<string[]> {
+  //   return this.http.get<string[]>(`${this.apiURL}/rols`);
+  // }
   isLoggedIn(): boolean {
     return !!this.gettoken();
   }
@@ -43,5 +43,15 @@ export class AuthService {
   getUserRole(): string {
     return localStorage.getItem('role') || '';
   }
+getUserIdFromToken(): string | null {
+  const token = this.gettoken();
+  if (!token) return null;
 
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.nameid || payload.sub || payload.id || payload.UserId || null;
+  } catch (error) {
+    return null;
+  }
+}
 }

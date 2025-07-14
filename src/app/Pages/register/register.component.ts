@@ -15,41 +15,46 @@ export class RegisterComponent implements OnInit {
  errormessage: string = '';
   roles: string[] = [];
   ngOnInit(): void {
-   this.authservice.getroles().subscribe({
-      next: (data) => {
-        this.roles = data;
-        this.errormessage = '';
-      },
-      error: (err) => {
-        console.error('Error fetching roles:', err);
-         this.errormessage = err.error.message || 'An error occurred during registration. Please try again.';
-      }
-    });
+  //  this.authservice.getroles().subscribe({
+  //     next: (data) => {
+  //       this.roles = data;
+  //       this.errormessage = '';
+  //     },
+  //     error: (err) => {
+  //       console.error('Error fetching roles:', err);
+  //        this.errormessage = err.error.message || 'An error occurred during registration. Please try again.';
+  //     }
+  //   });
   }
 
   constructor(private http:HttpClient, private authservice :AuthService , private router:Router) { }
 onSubmit(form: NgForm) {
-    if (form.invalid) {
-      this.errormessage = 'Please fill out all required fields correctly.';
-      return;}
-          const formData = {
-      ...form.value,
-      role: 'Admin'
-    };
-    this.authservice.regester(form.value).subscribe({
-      next:(data)=>{
+  if (form.invalid) {
+    this.errormessage = 'Please fill out all required fields correctly.';
+    return;
+  }
 
-                 this.errormessage = '';
-                this.router.navigate(['/login']); // Redirect to login page after successful registration
+  const formData = {
+    ...form.value,
+    role: 'Admin' // أو أي role تاني زي "Trader"
+  };
 
-        // Optionally, redirect to login or another page
-      },
-      error:(err)=>{
-        this.errormessage = err.error.message || 'An error occurred during registration. Please try again.';
-        alert('Registration failed');
+  this.authservice.regester(formData).subscribe({
+    next: (data) => {
+      this.errormessage = '';
+      this.router.navigate(['/login']);
+    },
+    error: (err) => {
+      console.error('Registration error:', err);
 
+      // تأمين قراءة الرسالة بدون crash
+      if (err?.error?.message) {
+        this.errormessage = err.error.message;
+      } else {
+        this.errormessage = 'An error occurred during registration.';
       }
-    })
 
-
+      alert(this.errormessage);
+    }
+  });
 }}
