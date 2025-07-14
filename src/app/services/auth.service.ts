@@ -10,29 +10,37 @@ import { RegisterDTO } from '../models/order/register.dto';
 })
 export class AuthService {
 
-  private apiURL= 'https://localhost:7206/api/Auth';
-  constructor(private http:HttpClient) { }
-  login(model:LoginDTO): Observable<UserProfileDTO>{
+  private apiURL = 'https://localhost:7206/api/Auth';
+  constructor(private http: HttpClient) { }
+  login(model: LoginDTO): Observable<UserProfileDTO> {
     return this.http.post<UserProfileDTO>(`${this.apiURL}/login`, model);
   }
-  regester(model:RegisterDTO): Observable<UserProfileDTO>{
+  regester(model: RegisterDTO): Observable<UserProfileDTO> {
     return this.http.post<UserProfileDTO>(`${this.apiURL}/register`, model);
   }
-  savetoken(token:string):void{
+  savetoken(token: string): void {
     localStorage.setItem('token', token);
   }
 
-  gettoken():string | null{
+  gettoken(): string | null {
     return localStorage.getItem('token');
   }
 
-  getroles(): Observable<string[]>{
+  getroles(): Observable<string[]> {
     return this.http.get<string[]>(`${this.apiURL}/rols`);
   }
-  isLoggedIn():boolean{
-       return !!this.gettoken();
+  isLoggedIn(): boolean {
+    return !!this.gettoken();
   }
   logout(): void {
     localStorage.removeItem('token');
   }
+  saveUserRole(role: string): void {
+    localStorage.setItem('role', role);
+  }
+
+  getUserRole(): string {
+    return localStorage.getItem('role') || '';
+  }
+
 }

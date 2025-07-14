@@ -1,0 +1,39 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <input type="text" class="form-control w-25" placeholder="Search Permissions..." [(ngModel)]="searchTerm" />
+
+  <button (click)="addnewpermission()" class="customstyle btn">Add New Permission</button>
+</div>
+<app-custom-table [columns]="columns" [data]="filteredPermissions" (onEdit)="openEditModal($event)" (onDelete)="openDeleteModal($event)">
+</app-custom-table>
+
+<app-shared-modal [title]="'Edit Permission'" [show]="showEditModal" (close)="showEditModal = false">
+  <div modal-body>
+    <form *ngIf="editingPermission">
+      <div class="mb-3">
+        <label for="name">Name</label>
+        <input required id="name" name="name" class="form-control" [(ngModel)]="editedName" />
+        <span *ngIf="!editedName" class="text-danger">
+          Permission name is required.
+        </span>
+      </div>
+
+      <div class="mb-3">
+        <label for="description">Description</label>
+        <input id="description" name="description" class="form-control" [(ngModel)]="editedDescription" />
+      </div>
+    </form>
+  </div>
+
+  <div modal-footer>
+    <button class="btn btn-primary" (click)="saveEdit()">Save</button>
+  </div>
+</app-shared-modal>
+<app-shared-modal [title]="'Delete Permission'" [show]="showDeleteModal" (close)="showDeleteModal = false">
+  <div modal-body>
+    <p>Are you sure you want to delete <strong>{{ deletingPermission?.name }}</strong>?</p>
+  </div>
+
+  <div modal-footer>
+    <button class="btn btn-danger" (click)="confirmDelete()">Delete</button>
+  </div>
+</app-shared-modal>

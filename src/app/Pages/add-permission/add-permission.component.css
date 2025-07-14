@@ -1,0 +1,78 @@
+.customstyle {
+  background-color: #083c3e;
+  color: white;
+  border: none;
+  height: 50px;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  -ms-border-radius: 25px;
+  -o-border-radius: 25px;
+  margin-left: 20px;
+}
+
+.customstyle:hover {
+
+  background-color: #3ac5ce;  /* لون وقت الـ hover */
+ }
+.table-container {
+  background-color: #ebfdff;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  overflow-x: auto; /* مهم للتجاوب */
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+}
+
+.custom-table thead {
+  background-color: #083c3e;
+  color: #ebfdff;
+}
+
+.custom-table th,
+.custom-table td {
+  padding: 12px;
+  text-align: center; /* توسيط المحتوى */
+  vertical-align: middle;
+  border-bottom: 1px solid #ccc;
+  white-space: nowrap; /* تمنع التكسر */
+}
+
+.custom-table tbody tr:hover {
+  background-color: rgb(179, 232, 234);
+  transition: background-color 0.3s;
+}
+
+.pagination {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.pagination button {
+  margin: 0 4px;
+  padding: 6px 12px;
+  border: none;
+  background-color: #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.pagination button:hover {
+  background-color: #b3e8ea;
+}
+
+.pagination button.active {
+  background-color: #13989b;
+  color: white;
+  font-weight: bold;
+}

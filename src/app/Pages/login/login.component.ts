@@ -28,8 +28,7 @@ onsubmit(){
     next:(data)=>{
  this.authservice.savetoken(data.token);
       this.router.navigate(['/cities']);
-
-
+      this.authservice.saveUserRole(data.role);
     },
     error:(err)=>{
       this.errormessage=err.error.message || 'An error occurred during login. Please try again.';

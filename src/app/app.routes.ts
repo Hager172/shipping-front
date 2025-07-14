@@ -24,6 +24,11 @@ import { SafeFinancialtransferComponent } from './Pages/safe-financialtransfer/s
 import { WeightComponent } from './Pages/weight/weight.component';
 import { ExtraVillagePriceComponent } from './Pages/extra-village-price/extra-village-price.component';
 import { AddCustomPriceComponent } from './Pages/add-custom-price/add-custom-price.component';
+import { AdminDashboardComponent} from './Pages/dashboard/admindashboard.component'
+import { TraderdashboardComponent } from './Pages/traderdashboard/traderdashboard.component';
+import { CourierdashboardComponent } from './Pages/courierdashboard/courierdashboard.component';
+import { PermissionsComponent } from './Pages/permissions/permissions.component';
+import { AddPermissionComponent } from './Pages/add-permission/add-permission.component';
 
 export const routes: Routes = [
 
@@ -55,6 +60,12 @@ export const routes: Routes = [
       {path:'couriers',component:CourierListComponent},
       {path:'addcourier',component:CourierAddComponent},
       {path:'cities',component:CityListComponent},
+      {path: 'AdminDashboard' , component : AdminDashboardComponent},
+      {path: 'TraderDashboard' , component : TraderdashboardComponent},
+      {path: 'CourierDashboard' , component : CourierdashboardComponent},
+      {path: 'Permissions' , component : PermissionsComponent},
+      { path: 'addpermission', component: AddPermissionComponent },
+
 
         {path:'extraVillagePrice' , component:ExtraVillagePriceComponent},
         {path:'weight' , component:WeightComponent},

@@ -4,10 +4,24 @@
     <i class="fas" [ngClass]="isCollapsed ? 'fa-chevron-right' : 'fa-chevron-left'"></i>
   </div>
   <!-- Home -->
-  <a class="nav-link" routerLink="/home">
-    <i class="fas fa-home"></i>
-    <span *ngIf="!isCollapsed">Home</span>
-  </a>
+  <!-- لو الدور admin -->
+<a *ngIf="userRole === 'Admin'" class="nav-link" routerLink="/AdminDashboard">
+  <i class="fas fa-home"></i>
+  <span *ngIf="!isCollapsed">Admin Dashboard</span>
+</a>
+
+<!-- لو الدور courier -->
+<a *ngIf="userRole === 'Courier'" class="nav-link" routerLink="/CourierDashboard">
+  <i class="fas fa-home"></i>
+  <span *ngIf="!isCollapsed">Courier Dashboard</span>
+</a>
+
+<!-- لو الدور trader -->
+<a *ngIf="userRole === 'Trader'" class="nav-link" routerLink="/TraderDashboard">
+  <i class="fas fa-home"></i>
+  <span *ngIf="!isCollapsed">Trader Dashboard</span>
+</a>
+
 
   <!-- Settings -->
   <a class="nav-link" (click)="toggleMenu('settings')">
@@ -21,7 +35,7 @@
     <a routerLink="/rejectionReasons">Rejection Reasons</a>
     <a routerLink="/weight-settings">Weight Settings</a>
     <a routerLink="/shippingTypes">Shipping Types</a>
-    <a routerLink="/permissions">Permissions</a>
+    <a routerLink="/Permissions">Permissions</a>
     <a routerLink="/branches">Branches</a>
     <a routerLink="/banks">Banks</a>
     <a routerLink="/saves">Saves</a>
