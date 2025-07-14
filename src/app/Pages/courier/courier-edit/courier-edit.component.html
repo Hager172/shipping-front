@@ -1,0 +1,126 @@
+<div class="container">
+  <div class="row shadow rounded overflow-hidden justify-content-center">
+    <div class="col-md-10 bg-common">
+      <h2 class="text-center">Edit Courier</h2>
+
+      <form [formGroup]="courierForm" (ngSubmit)="onSubmit()" class="mt-4">
+        <div class="row">
+          <!-- User Name -->
+          <div class="col-md-6 mb-3">
+            <label>User Name</label>
+            <input class="form-control" formControlName="userName" />
+          </div>
+
+          <!-- Email -->
+          <div class="col-md-6 mb-3">
+            <label>Email</label>
+            <input class="form-control" formControlName="email" type="email" />
+          </div>
+
+          <!-- Password (Hidden) -->
+          <div class="col-md-6 mb-3 d-none">
+            <label>Password</label>
+            <input
+              class="form-control"
+              formControlName="password"
+              type="password"
+              placeholder="Leave empty to keep current"
+            />
+          </div>
+
+          <!-- Full Name -->
+          <div class="col-md-6 mb-3">
+            <label>Full Name</label>
+            <input class="form-control" formControlName="fullName" />
+          </div>
+
+          <!-- Address -->
+          <div class="col-md-6 mb-3">
+            <label>Address</label>
+            <input class="form-control" formControlName="address" />
+          </div>
+
+          <!-- Phone Number -->
+          <div class="col-md-6 mb-3">
+            <label>Phone Number</label>
+            <input class="form-control" formControlName="phoneNumber" />
+          </div>
+
+          <!-- Discount Type -->
+          <div class="col-md-6 mb-3">
+            <label>Discount Type</label>
+            <select class="form-select" formControlName="discountType">
+              <option [value]="0">Percentage</option>
+              <option [value]="1">Fixed Amount</option>
+            </select>
+          </div>
+
+          <!-- Order Share -->
+          <div class="col-md-6 mb-3">
+            <label>Order Share</label>
+            <input
+              class="form-control"
+              formControlName="orderShare"
+              type="number"
+            />
+          </div>
+
+          <!-- Governorates -->
+          <div class="col-md-6 mb-3">
+            <label for="governorates">Governorates</label>
+            <select
+              class="form-control"
+              multiple
+              (change)="onGovernoratesChange($event)"
+            >
+              <option
+                *ngFor="let g of allGovernorates"
+                [value]="g.id"
+                [selected]="selectedGovernorateIds.includes(g.id)"
+              >
+                {{ g.name }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Branches -->
+          <div class="col-md-6 mb-3">
+            <label for="branches">Branches</label>
+            <select
+              class="form-control"
+              multiple
+              (change)="onBranchesChange($event)"
+            >
+              <option
+                *ngFor="let b of allBranches"
+                [value]="b.id"
+                [selected]="selectedBranchIds.includes(b.id)"
+              >
+                {{ b.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Messages -->
+        <div *ngIf="errormessage" class="alert alert-danger mt-2">
+          {{ errormessage }}
+        </div>
+        <div *ngIf="successmessage" class="alert alert-success mt-2">
+          {{ successmessage }}
+        </div>
+
+        <!-- Submit Button -->
+        <div class="d-flex justify-content-center">
+          <button
+            class="custom-btn m-4"
+            type="submit"
+            [disabled]="courierForm.invalid"
+          >
+            Save Changes
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

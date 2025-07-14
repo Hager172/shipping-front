@@ -1,21 +1,45 @@
-<form #addgovernform="ngForm" (ngSubmit)="onSubmit(addgovernform)">
-  <div class="mb-3">
-    <label for="name" class="form-label">Governrate Name</label>
-    <input
-      type="text"
-      ngModel
-      name="name"
-      id="name"
-      class="form-control"
-      required
-    />
+<div class="container">
+  <div class="row shadow rounded overflow-hidden justify-content-center">
+    <div class="col-md-8 bg-common">
+      <h2 class="text-center my-4">Add Governorate</h2>
+
+      <form #addgovernform="ngForm" (ngSubmit)="onSubmit(addgovernform)">
+        <div class="mb-3">
+          <label for="name" class="form-label">
+            <i class="fa-solid fa-flag" style="color: #083c3e"></i>
+            Governorate Name
+          </label>
+          <input
+            type="text"
+            ngModel
+            name="name"
+            id="name"
+            class="form-control"
+            required
+            placeholder="Enter governorate name"
+          />
+        </div>
+
+        <!-- Messages -->
+        <div *ngIf="errorMessage" class="alert alert-danger">
+          <i class="fa-solid fa-triangle-exclamation"></i> {{ errorMessage }}
+        </div>
+        <div *ngIf="successMessage" class="alert alert-success">
+          <i class="fa-solid fa-circle-check"></i> {{ successMessage }}
+        </div>
+
+        <!-- Buttons -->
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="custom-btn m-2">Add Governorate</button>
+        </div>
+        <button
+          [routerLink]="['/governrates']"
+          class="btn btn-secondary m-2"
+          type="button"
+        >
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+      </form>
+    </div>
   </div>
-  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
-  <div *ngIf="successMessage" class="alert alert-success">
-    {{ successMessage }}
-  </div>
-  <button type="submit" class="btn btn-primary">Add Governorate</button>
-  <button [routerLink]="['/governrates']" class="btn btn-secondary ms-2">
-    Back
-  </button>
-</form>
+</div>

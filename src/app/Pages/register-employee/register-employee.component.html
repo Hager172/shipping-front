@@ -1,0 +1,122 @@
+<div class="container">
+  <div class="row shadow rounded overflow-hidden justify-content-center">
+    <div class="col-md-10 bg-common">
+      <h2 class="mb-4 text-center">Register Employee</h2>
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <!-- Full Name -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">
+              <i class="fa-solid fa-id-card" style="color: #083c3e"></i>
+              Full Name
+            </label>
+            <input class="form-control" formControlName="fullName" />
+          </div>
+
+          <!-- Username -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">
+              <i class="fa-solid fa-user" style="color: #083c3e"></i>
+              Username
+            </label>
+            <input class="form-control" formControlName="userName" />
+          </div>
+
+          <!-- Email -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">
+              <i class="fa-solid fa-envelope" style="color: #083c3e"></i>
+              Email
+            </label>
+            <input class="form-control" formControlName="email" type="email" />
+          </div>
+
+          <!-- Password -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">
+              <i class="fa-solid fa-lock" style="color: #083c3e"></i>
+              Password
+            </label>
+            <input
+              class="form-control"
+              formControlName="password"
+              type="password"
+            />
+          </div>
+
+          <!-- Address -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">
+              <i class="fa-solid fa-location-dot" style="color: #083c3e"></i>
+              Address
+            </label>
+            <input class="form-control" formControlName="address" />
+          </div>
+
+          <!-- Branches -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">
+              <i class="fa-solid fa-code-branch" style="color: #083c3e"></i>
+              Branches
+            </label>
+            <select class="form-select" formControlName="branchIds" multiple>
+              <option *ngFor="let b of allBranches" [value]="b.id">
+                {{ b.name }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Safes -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">
+              <i class="fa-solid fa-vault" style="color: #083c3e"></i>
+              Safes
+            </label>
+            <select class="form-select" formControlName="safeIds" multiple>
+              <option *ngFor="let s of allSafes" [value]="s.id">
+                {{ s.name }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Permissions -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">
+              <i class="fa-solid fa-shield-halved" style="color: #083c3e"></i>
+              Permissions
+            </label>
+            <select
+              class="form-select"
+              formControlName="permissionActionIds"
+              multiple
+            >
+              <option *ngFor="let p of allPermissions" [value]="p.id">
+                {{ p.actionTypeName }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <!-- الرسائل -->
+        <p *ngIf="errorMessage" class="alert alert-danger mt-2">
+          <i class="fa-solid fa-triangle-exclamation"></i> {{ errorMessage }}
+        </p>
+
+        <p *ngIf="successMessage" class="alert alert-success mt-2">
+          <i class="fa-solid fa-circle-check"></i> {{ successMessage }}
+        </p>
+
+        <div class="d-flex justify-content-center">
+          <button
+            class="custom-btn m-4"
+            type="submit"
+            [disabled]="registerForm.invalid"
+          >
+            <i class="fa-solid fa-user-plus"></i> Register Employee
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

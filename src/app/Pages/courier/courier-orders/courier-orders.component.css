@@ -2,7 +2,7 @@
   background-color: #083c3e;
   color: white;
   border: none;
-  width: 120px;
+  width: 180px;
   height: 50px;
   padding: 10px 20px;
   border-radius: 25px;
@@ -14,6 +14,7 @@
   -ms-border-radius: 25px;
   -o-border-radius: 25px;
 }
+
 .btn-delete{
     background-color: #ff0101;
   color: white;
@@ -82,4 +83,9 @@ th {
 .btn-edit:hover {
 
   background-color: #3ac5ce;  /* لون وقت الـ hover */
+}
+.pagination .btn.active {
+  background-color: #083c3e;
+ border: none;
+  color: white;
 }
