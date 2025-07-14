@@ -15,8 +15,6 @@ import { EmployeeWithPermissions } from '../../models/employee/employeedto';
     CommonModule,
     FormsModule,
     FilterPipe,
-    CustomTableComponent,
-    ButtonStyleComponent
   ],
   templateUrl: './all-employees.component.html',
   styleUrls: ['./all-employees.component.css']
@@ -31,7 +29,7 @@ export class AllEmployeesComponent {
     { header: 'Username', accessor: 'userName' },
     { header: 'Address', accessor: 'address' },
     { header: 'Status', accessor: 'isActive', type: 'toggle' },
-    { header: 'Permissions', accessor: 'permissions', type: 'array' } // ✳️ الجديد
+    { header: 'Permissions', accessor: 'permissions', type: 'array' } 
   ];
 
   constructor(private employeeService: EmployeeService, private router: Router) {
@@ -43,21 +41,17 @@ export class AllEmployeesComponent {
       next: (data) => {
         this.employees = data.map(e => ({
           ...e,
-          id: e.userId // to match 'id' accessor if needed
+          id: e.userId 
         }));
       },
       error: (err) => console.error('Error loading employees', err)
     });
   }
 
-  navigateToAddEmployee() {
-    this.router.navigate(['/add-employee']);
-  }
 
-  openEditEmployee(emp: any) {
-    this.router.navigate(['/edit-employee', emp.userId]);
-  }
-
+openEditEmployee(emp: any) {
+  this.router.navigate(['/edit-employee', emp.userId]);
+}
   deleteEmployee(emp: any) {
     alert("Delete feature not implemented yet!");
   }
@@ -77,4 +71,7 @@ export class AllEmployeesComponent {
       }
     });
   }
+  navigateToAddEmployee() {
+  this.router.navigate(['/employeereg']);
+}
 }

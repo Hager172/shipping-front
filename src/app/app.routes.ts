@@ -30,6 +30,8 @@ import { CourierEditComponent } from './Pages/courier/courier-edit/courier-edit.
 import { RegisterEmployeeComponent } from './Pages/register-employee/register-employee.component';
 import { CourierOrdersComponent } from './Pages/courier/courier-orders/courier-orders.component';
 import { OrderReportPaymentComponent } from './components/order-report-payment/order-report-payment.component';
+import { UpdateEmployeeComponent } from './update-employee/update-employee.component';
+
 
 
 
@@ -81,7 +83,12 @@ export const routes: Routes = [
         path: 'edit-trader/:id',
         loadComponent: () =>
           import('./Pages/edit-trader/edit-trader.component').then(m => m.EditTraderComponent)
-      }
+      },
+      {
+        path:'edit-employee/:id' , component:UpdateEmployeeComponent,
+
+}
+
 
     ]
   }

@@ -33,6 +33,7 @@
     <span *ngIf="!isCollapsed">Users</span>
   </a>
   <div *ngIf="!isCollapsed && isMenuOpen('users')" class="submenu">
+     <a routerLink="/register">Admin</a>
     <a routerLink="/employees">Employees</a>
     <a routerLink="/traders">Merchants</a>
     <a routerLink="/couriers">Couriers</a>

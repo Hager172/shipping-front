@@ -16,4 +16,16 @@ export interface EmployeeWithPermissions {
   address: string;
   isActive: boolean;
   permissions: string[];
+    branchIds: number[]; 
+  safeIds: number[];  
+}
+export interface PermissionDTO {
+  id: number;
+  name: string;
+  description?: string;
+}
+export interface CheckPermissionDto {
+  userId: string;
+  permissionName: string;
+  actionTypeId: number;
 }

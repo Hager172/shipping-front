@@ -14,19 +14,15 @@ export class ReportServicesService {
 
   getAllReportServicesPayment(filters: any) {
     let params = new HttpParams();
-
-    // Ensure pagination defaults
     filters.PageNumber ??= 1;
     filters.PageSize ??= 10;
 
     Object.keys(filters).forEach((key) => {
       let value = filters[key];
-
-      // Format date fields to yyyy-MM-dd
       if (value && key.toLowerCase().includes('date')) {
         const parsedDate = new Date(value);
         if (!isNaN(parsedDate.getTime())) {
-          value = parsedDate.toISOString().split('T')[0]; // yyyy-MM-dd
+          value = parsedDate.toISOString().split('T')[0]; 
         }
       }
 

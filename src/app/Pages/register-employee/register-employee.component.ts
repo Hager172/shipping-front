@@ -4,9 +4,10 @@ import { BranchService } from '../../services/branch.service';
 import { SaveService } from '../../services/Financial-transferServices/Save/saveFinancial.service';
 import { HttpClient } from '@angular/common/http';
 import { EmployeeService } from '../../services/employee.service';
-import { RegisterEmployeeDTO } from '../../models/employee/employeedto';
+import { PermissionDTO, RegisterEmployeeDTO } from '../../models/employee/employeedto';
 import { Route, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { SaveServiceService } from '../../services/save services/save.service';
 
 @Component({
   selector: 'app-register-employee',
@@ -21,9 +22,9 @@ export class RegisterEmployeeComponent implements OnInit {
 
   allBranches: any[] = [];
   allSafes: any[] = [];
-  allPermissions: any[] = [];
+ allPermissions: PermissionDTO[] = [];
 
-  constructor(private fb:FormBuilder, private branchservice:BranchService,private safeservice:SaveService,private http:HttpClient,private employeeservice:EmployeeService,private router:Router){}
+  constructor(private fb:FormBuilder, private branchservice:BranchService,private safeservice:SaveServiceService,private http:HttpClient,private employeeservice:EmployeeService,private router:Router){}
 
 ngOnInit(): void {
   this.registerForm=this.fb.group({
@@ -42,8 +43,15 @@ ngOnInit(): void {
 
 loadinitialdata(){
  this.branchservice.getAllBranches().subscribe((res) => (this.allBranches = res));
- this.safeservice.getAllSafes().subscribe((res) => (this.allSafes = res));
- this.http.get<any>(`https://localhost:7206/api/PermissionAction`).subscribe((res) => (this.allPermissions = res));
+ this.safeservice. getAllSaves().subscribe((res) => (this.allSafes = res));
+  this.employeeservice.getAllPermissions().subscribe({
+  next: (res) => {
+    this.allPermissions = res;
+  },
+  error: (err) => {
+    console.error('Error fetching permissions', err);
+  }
+});
 
 }
  onSubmit() {
