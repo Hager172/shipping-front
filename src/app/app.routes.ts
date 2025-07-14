@@ -29,6 +29,7 @@ import { AddCustomPriceComponent } from './Pages/add-custom-price/add-custom-pri
 import { CourierEditComponent } from './Pages/courier/courier-edit/courier-edit.component';
 import { RegisterEmployeeComponent } from './Pages/register-employee/register-employee.component';
 import { CourierOrdersComponent } from './Pages/courier/courier-orders/courier-orders.component';
+import { OrderReportPaymentComponent } from './components/order-report-payment/order-report-payment.component';
 
 
 
@@ -72,7 +73,7 @@ export const routes: Routes = [
  {path:'editcourier',component:CourierEditComponent},
  {path:'employeereg',component:RegisterEmployeeComponent},
  {path:'courierorders',component:CourierOrdersComponent},
-
+ {path:'courier-orders-report',component:OrderReportPaymentComponent},
         {path:'extraVillagePrice' , component:ExtraVillagePriceComponent},
         {path:'weight' , component:WeightComponent},
         {path:'addCustomPrice' , component:AddCustomPriceComponent},
