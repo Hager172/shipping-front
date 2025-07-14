@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row shadow rounded overflow-hidden justify-content-center">
     <div class="col-md-10 bg-common">
-      <h2 class="mb-4 text-center">Register Employee</h2>
+      <h2 class="mb-4 text-center">Update Employee</h2>
 
-      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
         <div class="row">
           <!-- Full Name -->
           <div class="col-md-6 mb-3">
@@ -32,19 +32,6 @@
             <input class="form-control" formControlName="email" type="email" />
           </div>
 
-          <!-- Password -->
-          <div class="col-md-6 mb-3">
-            <label class="form-label">
-              <i class="fa-solid fa-lock" style="color: #083c3e"></i>
-              Password
-            </label>
-            <input
-              class="form-control"
-              formControlName="password"
-              type="password"
-            />
-          </div>
-
           <!-- Address -->
           <div class="col-md-6 mb-3">
             <label class="form-label">
@@ -52,6 +39,18 @@
               Address
             </label>
             <input class="form-control" formControlName="address" />
+          </div>
+
+          <!-- Status -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">
+              <i class="fa-solid fa-toggle-on" style="color: #083c3e"></i>
+              Active Status
+            </label>
+            <select class="form-select" formControlName="isActive">
+              <option [value]="true">Active</option>
+              <option [value]="false">Inactive</option>
+            </select>
           </div>
 
           <!-- Branches -->
@@ -111,9 +110,9 @@
           <button
             class="custom-btn m-4"
             type="submit"
-            [disabled]="registerForm.invalid"
+            [disabled]="updateForm.invalid"
           >
-            <i class="fa-solid fa-user-plus"></i> Register Employee
+            <i class="fa-solid fa-save"></i> Update Employee
           </button>
         </div>
       </form>

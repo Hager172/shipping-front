@@ -33,15 +33,15 @@ import { EditOrderComponent } from './Pages/edit-order/edit-order.component';
 import { CourierEditComponent } from './Pages/courier/courier-edit/courier-edit.component';
 import { RegisterEmployeeComponent } from './Pages/register-employee/register-employee.component';
 import { CourierOrdersComponent } from './Pages/courier/courier-orders/courier-orders.component';
+import { OrderReportPaymentComponent } from './components/order-report-payment/order-report-payment.component';
+import { UpdateEmployeeComponent } from './update-employee/update-employee.component';
+import { OrderStatusHistoryComponent } from './components/order-status-history/order-status-history.component';
 import { RejectedorderComponent } from './Pages/courier/rejectedorder/rejectedorder.component';
-
-
 import { AdminDashboardComponent} from './Pages/dashboard/admindashboard.component'
 import { TraderdashboardComponent } from './Pages/traderdashboard/traderdashboard.component';
 import { CourierdashboardComponent } from './Pages/courierdashboard/courierdashboard.component';
 import { PermissionsComponent } from './Pages/permissions/permissions.component';
 import { AddPermissionComponent } from './Pages/add-permission/add-permission.component';
-
 export const routes: Routes = [
 
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -58,6 +58,12 @@ export const routes: Routes = [
       { path: 'shippingTypes', component: ShippingTypesComponent },
       { path: 'rejectionReasons', component: RejectionReasonComponent },
       { path: 'traders', component: TradersComponent },
+    {
+  path: 'employees',
+  loadComponent: () =>
+    import('./components/all-employees/all-employees.component')
+      .then(m => m.AllEmployeesComponent)
+},
       { path: 'saves', component: SaveComponent },
       { path: 'bank-financialtransfer', component: BankFinancialtransferComponent },
       { path: 'safe-financialtransfer', component: SafeFinancialtransferComponent },
@@ -96,8 +102,7 @@ export const routes: Routes = [
       {path: 'CourierDashboard' , component : CourierdashboardComponent},
       {path: 'Permissions' , component : PermissionsComponent},
       { path: 'addpermission', component: AddPermissionComponent },
-
-
+ {path:'courier-orders-report',component:OrderReportPaymentComponent},
         {path:'extraVillagePrice' , component:ExtraVillagePriceComponent},
         {path:'weight' , component:WeightComponent},
         {path:'addCustomPrice' , component:AddCustomPriceComponent},
@@ -106,11 +111,14 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./Pages/edit-trader/edit-trader.component').then(m => m.EditTraderComponent)
       },
+
         {path:'orders' , component:OrdersComponent},
         {path:'adminAddOrder' , component:AdminAddOrderComponent},
         {path:'traderAddOrder' , component:TraderAddOrderComponent},
         {path:'editOrder/:id' , component:EditOrderComponent},
 
+      {path:'edit-employee/:id' , component:UpdateEmployeeComponent},
+      { path: 'orders/:id/history', component: OrderStatusHistoryComponent }
 
 
     ]

@@ -32,6 +32,10 @@ onSubmit(form: NgForm) {
     if (form.invalid) {
       this.errormessage = 'Please fill out all required fields correctly.';
       return;}
+          const formData = {
+      ...form.value,
+      role: 'Admin'
+    };
     this.authservice.regester(form.value).subscribe({
       next:(data)=>{
 
