@@ -15,16 +15,16 @@ export class RegisterComponent implements OnInit {
  errormessage: string = '';
   roles: string[] = [];
   ngOnInit(): void {
-   this.authservice.getroles().subscribe({
-      next: (data) => {
-        this.roles = data;
-        this.errormessage = '';
-      },
-      error: (err) => {
-        console.error('Error fetching roles:', err);
-         this.errormessage = err.error.message || 'An error occurred during registration. Please try again.';
-      }
-    });
+  //  this.authservice.getroles().subscribe({
+  //     next: (data) => {
+  //       this.roles = data;
+  //       this.errormessage = '';
+  //     },
+  //     error: (err) => {
+  //       console.error('Error fetching roles:', err);
+  //        this.errormessage = err.error.message || 'An error occurred during registration. Please try again.';
+  //     }
+  //   });
   }
 
   constructor(private http:HttpClient, private authservice :AuthService , private router:Router) { }

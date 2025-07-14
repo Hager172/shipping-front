@@ -27,9 +27,9 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  getroles(): Observable<string[]> {
-    return this.http.get<string[]>(`${this.apiURL}/rols`);
-  }
+  // getroles(): Observable<string[]> {
+  //   return this.http.get<string[]>(`${this.apiURL}/rols`);
+  // }
   isLoggedIn(): boolean {
     return !!this.gettoken();
   }
