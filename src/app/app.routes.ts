@@ -42,6 +42,7 @@ import { TraderdashboardComponent } from './Pages/traderdashboard/traderdashboar
 import { CourierdashboardComponent } from './Pages/courierdashboard/courierdashboard.component';
 import { PermissionsComponent } from './Pages/permissions/permissions.component';
 import { AddPermissionComponent } from './Pages/add-permission/add-permission.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 export const routes: Routes = [
 
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -118,7 +119,8 @@ export const routes: Routes = [
         {path:'editOrder/:id' , component:EditOrderComponent},
 
       {path:'edit-employee/:id' , component:UpdateEmployeeComponent},
-      { path: 'orders/:id/history', component: OrderStatusHistoryComponent }
+      { path: 'orders/:id/history', component: OrderStatusHistoryComponent },
+
 
 
     ]

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 @Component({
@@ -8,14 +8,14 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
   activeMenu: string | null = null;
   isCollapsed = false;
   userRole = '';
 
   @Output() collapsedChange = new EventEmitter<boolean>();
 
-  constructor(private authService : AuthService){ this.ngOnInit()}
+  constructor(private authService : AuthService){ }
   ngOnInit(): void {
     this.userRole = this.authService.getUserRole();
   }
