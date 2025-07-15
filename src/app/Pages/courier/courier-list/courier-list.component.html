@@ -25,13 +25,12 @@
       <th>Branches</th>
       <th>Discount Type</th>
       <th>Order Share</th>
-
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let courier of filtered; let i = index">
-      <td>{{ i + 1 }}</td>
+    <tr *ngFor="let courier of pagedCouriers; let i = index">
+      <td>{{ (currentPage - 1) * pageSize + i + 1 }}</td>
       <td>{{ courier.fullName }}</td>
       <td>{{ courier.email }}</td>
       <td>{{ courier.phoneNumber }}</td>
@@ -63,9 +62,23 @@
   </tbody>
 </table>
 
+<!-- ✅ Pagination Buttons -->
+<div class="pagination text-center" *ngIf="totalPages.length > 0">
+  <button
+    style="background-color: #083c3e"
+    class="btn btn-sm m-1 text-white"
+    *ngFor="let page of totalPages"
+    [class.active]="page === currentPage"
+    (click)="goToPage(page)"
+  >
+    {{ page }}
+  </button>
+</div>
+
 <div *ngIf="errormessage" class="alert alert-danger mt-3">
   {{ errormessage }}
 </div>
+
 <!-- Delete Confirmation Modal -->
 <div
   class="modal fade"

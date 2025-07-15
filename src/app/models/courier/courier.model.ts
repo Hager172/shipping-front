@@ -10,6 +10,11 @@ export interface CourierDTO {
   selectedGovernorateIds: number[];
   selectedBranchIds: number[];
 }
+export interface RejectionReason {
+  id: number;
+  reason: string;
+}
+
 export interface DisplayCourier {
   userId: string;
   userName: string;

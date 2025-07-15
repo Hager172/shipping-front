@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { ActionTypeDto } from '../../models/permission/action-type-dto';
 import { PermissionDto } from '../../models/permission/permission-dto';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PermissionService {
 
-  private baseUrl = 'https://localhost:7206/api/Permission';
+  private baseUrl = `${environment.baseUrl}Permission`;
   constructor(private http: HttpClient) { }
 
  deletePermission(id: number): Observable<any> {

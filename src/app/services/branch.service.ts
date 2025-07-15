@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Branch, BranchDTO } from '../models/branch/branch';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BranchService {
-private baseUrl = 'https://localhost:7206/api/Branch';
+private baseUrl = `${environment.baseUrl}Branch`;
   constructor(private http:HttpClient) { }
    getAllBranches(): Observable<BranchDTO[]> {
     return this.http.get<BranchDTO[]>(this.baseUrl);

@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { SafeTransactionReport } from '../../../models/Financial-transfer/SaveFinancialtransfer';
 import { Observable } from 'rxjs';
 import { SaveFinancialTransfer } from '../SaveFinancialtransfer';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SaveService {
- private baseUrl = 'https://localhost:7206/api/FinancialTransfer/safes';
+ private baseUrl = `${environment.baseUrl}FinancialTransfer/safes`;
 
   constructor(private http: HttpClient) { }
 
@@ -21,11 +22,11 @@ export class SaveService {
     return this.http.get<SafeTransactionReport[]>(this.baseUrl, { params });
   }
   getAllSafes(): Observable<{ id: number, name: string }[]> {
-    return this.http.get<{ id: number, name: string }[]>('https://localhost:7206/api/Saves');
+    return this.http.get<{ id: number, name: string }[]>(`${environment.baseUrl}Saves`);
   }
   // services/Financial-transferServices/Bank/bankFinancial.service.ts
   addTransfer(data: SaveFinancialTransfer): Observable<any> {
-    return this.http.post('https://localhost:7206/api/FinancialTransfer', data);
+    return this.http.post(`${environment.baseUrl}FinancialTransfer'`, data);
   }
 
 }

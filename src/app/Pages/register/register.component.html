@@ -31,7 +31,7 @@
     <div class="row shadow rounded overflow-hidden">
       <!-- Left Side: Form -->
       <div class="col-md-6 p-4 bg-common">
-        <h2 class="mb-4 text-center">ADD EMPLOYEE</h2>
+        <h2 class="mb-4 text-center">ADD ADMIN</h2>
 
         <form
           #registerForm="ngForm"
@@ -108,31 +108,11 @@
             <input type="text" name="address" ngModel class="form-control" />
           </div>
 
-          <div class="mb-3">
-            <label class="form-label">
-              <i class="fa-solid fa-user-tag" style="color: #083c3e"></i> Role
-            </label>
-            <select name="role" ngModel class="form-select">
-              <option value="">Select Role</option>
-              <option *ngFor="let role of roles" [value]="role">
-                {{ role }}
-              </option>
-            </select>
-          </div>
-
           <button type="submit" class="custom-btn">Register</button>
 
           <p *ngIf="errormessage" class="error-message">
             <i class="fa-solid fa-triangle-exclamation"></i>
             {{ errormessage }}
-          </p>
-          <p class="text-center mt-4">
-            Already Have An Account?
-            <a
-              [routerLink]="['/login']"
-              style="color: #083c3e; font-weight: bold"
-              >Login</a
-            >
           </p>
         </form>
       </div>

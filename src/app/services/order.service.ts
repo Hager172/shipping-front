@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 const baseUrl = environment.baseUrl;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -20,9 +21,9 @@ export class OrderService {
   addOrder(order: any): Observable<any> {
     return this.httpClient.post(baseUrl+`Order`, order);
   }
-  updateOrder(id: number, order: any) {
-    return this.httpClient.put(baseUrl+`Order/${id}`, order);
-  }
+ updateOrder(id: number, order: any) {
+  return this.httpClient.put(baseUrl + `Order/${id}`, order);
+}
   deleteOrder(id: number) {
     return this.httpClient.delete(baseUrl+`Order/${id}`);
   }
