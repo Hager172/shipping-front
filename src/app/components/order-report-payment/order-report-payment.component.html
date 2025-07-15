@@ -1,0 +1,144 @@
+<div class="order-report-container">
+  <!-- 🔎 Filters -->
+  <div class="filter-section">
+    <h3>🔍 Filter Orders</h3>
+
+    <div class="filters-grid">
+      <!-- Search -->
+      <input
+        type="text"
+        placeholder="Search by customer..."
+        [(ngModel)]="searchText"
+        (input)="onFilterChange()"
+        class="filter-input"
+      />
+
+      <!-- Date From -->
+      <input
+        type="date"
+        [(ngModel)]="fromDate"
+        (change)="onFilterChange()"
+        class="filter-input"
+        placeholder="From Date"
+      />
+
+      <!-- Date To -->
+      <input
+        type="date"
+        [(ngModel)]="toDate"
+        (change)="onFilterChange()"
+        class="filter-input"
+        placeholder="To Date"
+      />
+
+      <!-- Trader -->
+      <select [(ngModel)]="selectedTraderName" (change)="onFilterChange()" class="filter-select">
+        <option value="">All Traders</option>
+        <option *ngFor="let trader of traderNames" [value]="trader">{{ trader }}</option>
+      </select>
+
+      <!-- Courier -->
+      <select [(ngModel)]="selectedCourierName" (change)="onFilterChange()" class="filter-select">
+        <option value="">All Couriers</option>
+        <option *ngFor="let courier of courierNames" [value]="courier">{{ courier }}</option>
+      </select>
+
+      <!-- Branch -->
+      <select [(ngModel)]="selectedBranchName" (change)="onFilterChange()" class="filter-select">
+        <option value="">All Branches</option>
+        <option *ngFor="let branch of branchNames" [value]="branch">{{ branch }}</option>
+      </select>
+
+      <!-- City -->
+      <select [(ngModel)]="selectedCityName" (change)="onFilterChange()" class="filter-select">
+        <option value="">All Cities</option>
+        <option *ngFor="let city of cityNames" [value]="city">{{ city }}</option>
+      </select>
+
+      <!-- Governorate -->
+      <select [(ngModel)]="selectedGovernorateName" (change)="onFilterChange()" class="filter-select">
+        <option value="">All Governorates</option>
+        <option *ngFor="let gov of governorateNames" [value]="gov">{{ gov }}</option>
+      </select>
+
+      <!-- Payment Type -->
+      <select [(ngModel)]="selectedPaymentType" (change)="onFilterChange()" class="filter-select">
+        <option value="">All Payment Types</option>
+        <option *ngFor="let type of paymentTypes" [value]="type.value">{{ type.text }}</option>
+      </select>
+
+      <!-- Status -->
+      <select [(ngModel)]="selectedStatus" (change)="onFilterChange()" class="filter-select">
+        <option value="">All Statuses</option>
+        <option *ngFor="let status of orderStatuses" [value]="status.value">{{ status.text }}</option>
+      </select>
+
+      <!-- Clear Filters -->
+      <button class="clear-btn" (click)="clearFilters()">Clear Filters</button>
+    </div>
+  </div>
+
+  <!-- 📄 Orders Table -->
+  <div class="table-section">
+    <table class="orders-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Created</th>
+          <th>Customer</th>
+          <th>Phone</th>
+          <th>Trader</th>
+          <th>Courier</th>
+          <th>Branch</th>
+          <th>Governorate</th>
+          <th>City</th>
+          <th>Status</th>
+          <th>Order Cost</th>
+          <th>Total Cost</th>
+          <th>Weight</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders; let i = index">
+          <td>{{ (currentPage - 1) * pageSize + i + 1 }}</td>
+          <td>{{ order.createdDate | date: 'shortDate' }}</td>
+          <td>{{ order.customerName }}</td>
+          <td>{{ order.phone }}</td>
+          <td>{{ order.traderName }}</td>
+          <td>{{ order.courierName }}</td>
+          <td>{{ order.branchName }}</td>
+          <td>{{ order.governororrateName }}</td>
+          <td>{{ order.cityName }}</td>
+          <td>
+            <span [ngClass]="getStatusClass(order.statusName)">
+              {{ order.statusName }}
+            </span>
+          </td>
+          <td>{{ order.orderCost | currency: 'EGP' }}</td>
+          <td>{{ order.totalCost | currency: 'EGP' }}</td>
+          <td>{{ order.totalWeight }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- No Data -->
+    <div *ngIf="orders.length === 0" class="no-data">
+      <p>No orders found.</p>
+    </div>
+  </div>
+
+  <!-- 📄 Pagination -->
+  <div class="pagination" *ngIf="totalPages > 1">
+    <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+
+    <button
+      *ngFor="let page of pages"
+      [ngClass]="{ active: page === currentPage }"
+      (click)="onPageChange(page)"
+    >
+      {{ page }}
+    </button>
+
+    <button (click)="onPageChange(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+  </div>
+</div>

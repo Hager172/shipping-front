@@ -4,6 +4,7 @@ import { GovernrateService } from '../../../services/governrate.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 declare var bootstrap: any;
+
 @Component({
   selector: 'app-govern-list',
   imports: [CommonModule],
@@ -11,24 +12,24 @@ declare var bootstrap: any;
   styleUrl: './govern-list.component.css'
 })
 export class GovernListComponent implements OnInit {
-governorates: GovernorateDTO[] = [];
+  governorates: GovernorateDTO[] = [];
   filteredGovernorates: GovernorateDTO[] = [];
   selectedGovernorate?: GovernorateDTO;
   deleteModal: any;
-
   errorMessage: string = '';
+
+  pageSize: number = 5;
+  currentPage: number = 1;
+  totalPages: number[] = [];
 
   constructor(private govService: GovernrateService, private router: Router) {}
 
-  ngOnInit(): void {
+ ngOnInit(): void {
     this.loadGovernorates();
     const modalElement = document.getElementById('deleteModal');
-
-  if (modalElement) {
-    this.deleteModal = new bootstrap.Modal(modalElement);
-  } else {
-    console.error('Delete Modal element not found!');
-  }
+    if (modalElement) {
+      this.deleteModal = new bootstrap.Modal(modalElement);
+    }
   }
 
   loadGovernorates() {
@@ -36,6 +37,7 @@ governorates: GovernorateDTO[] = [];
       next: (data) => {
         this.governorates = data;
         this.filteredGovernorates = data;
+        this.generatePages();
       },
       error: (err) => {
         this.errorMessage = err.error.message || 'Failed to load governorates.';
@@ -48,6 +50,23 @@ governorates: GovernorateDTO[] = [];
     this.filteredGovernorates = this.governorates.filter((g) =>
       g.name.toLowerCase().includes(value)
     );
+    this.currentPage = 1;
+    this.generatePages();
+  }
+
+  get pagedGovernorates(): GovernorateDTO[] {
+    const start = (this.currentPage - 1) * this.pageSize;
+    const end = start + this.pageSize;
+    return this.filteredGovernorates.slice(start, end);
+  }
+
+  generatePages(): void {
+    const pageCount = Math.ceil(this.filteredGovernorates.length / this.pageSize);
+    this.totalPages = Array.from({ length: pageCount }, (_, i) => i + 1);
+  }
+
+  goToPage(page: number): void {
+    this.currentPage = page;
   }
 
   addGovernorate() {
@@ -55,13 +74,13 @@ governorates: GovernorateDTO[] = [];
   }
 
   editGovernorate(governorate: GovernorateDTO) {
-  this.govService.selectedGovernorate = governorate;
+    this.govService.selectedGovernorate = governorate;
     this.router.navigate(['/edit-governorate']);
   }
+
   deleteGovernorate(governorate: GovernorateDTO): void {
     this.selectedGovernorate = governorate;
     this.deleteModal.show();
-    console.log(this.selectedGovernorate);
   }
 
   confirmDeleteGovernorate(): void {
@@ -76,6 +95,8 @@ governorates: GovernorateDTO[] = [];
         this.governorates = this.governorates.filter(
           (g) => g.id !== this.selectedGovernorate?.id
         );
+        this.generatePages();
+        this.currentPage = 1;
         this.deleteModal.hide();
         this.errorMessage = 'Governorate deleted successfully';
 
@@ -88,7 +109,6 @@ governorates: GovernorateDTO[] = [];
         setTimeout(() => {
           this.errorMessage = '';
         }, 2000);
-        console.error('Error deleting governorate', err.error);
         this.deleteModal.hide();
       },
     });

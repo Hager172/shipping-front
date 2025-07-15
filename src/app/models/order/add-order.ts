@@ -24,4 +24,5 @@ export interface AddOrderDTO {
   branchId?: number;
   traderId?: string;
   courierId?: string;
+    changedByUserId?: string;
 }

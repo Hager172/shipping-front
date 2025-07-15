@@ -1,13 +1,15 @@
 <body>
   <div class="overlay"></div>
-  <div class="container-wrapper">
-    <div class="row shadow rounded overflow-hidden">
+  <div
+    class="container-wrapper d-flex justify-content-center align-items-center"
+  >
+    <div class="row shadow rounded overflow-hidden hit">
       <!-- Left Side: Form -->
-      <div class="col-md-6 p-4 bg-common">
-        <h2 class="mb-4 text-center">Login</h2>
+      <div class="col-md-6 p-5 bg-common">
+        <h2 class="mb-5 text-center">Login</h2>
 
         <form [formGroup]="loginform" (ngSubmit)="onsubmit()" class="bg-common">
-          <div class="form-group">
+          <div class="form-group my-4">
             <label class="form-label">
               <i class="fa-solid fa-user" style="color: #083c3e"></i> Username
             </label>
@@ -33,8 +35,9 @@
             />
           </div>
 
-          <button type="submit" class="custom-btn mt-2">Login</button>
-
+          <div class="d-flex justify-content-center">
+            <button type="submit" class="custom-btn mt-5">Login</button>
+          </div>
           <p *ngIf="errormessage" class="error-message">
             <i class="fa-solid fa-triangle-exclamation"></i>
             {{ errormessage }}

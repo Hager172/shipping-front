@@ -1,0 +1,38 @@
+<div class="status-history-container">
+
+  <div class="search-bar">
+    <label for="orderIdInput">🔍 Enter Order ID:</label>
+    <input
+      type="number"
+      id="orderIdInput"
+      [(ngModel)]="orderIdInput"
+      placeholder="Type order ID..."
+    />
+    <button (click)="fetchLogs()">Search</button>
+  </div>
+
+  <table class="custom-table" *ngIf="statusLogs.length > 0; else noData">
+    <thead>
+      <tr>
+        <th *ngFor="let col of columns">{{ col.header }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of statusLogs">
+        <td *ngFor="let col of columns">
+          <ng-container *ngIf="col.accessor === 'changedAt'; else normalCell">
+            {{ row[col.accessor] | date:'short' }}
+          </ng-container>
+          <ng-template #normalCell>
+          {{ getCellValue(row, col.accessor) }}
+          </ng-template>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noData>
+    <p class="no-data-text">No status history found.</p>
+  </ng-template>
+
+</div>

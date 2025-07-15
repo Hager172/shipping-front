@@ -1,0 +1,60 @@
+<div class="table-container">
+  <div class="search-container mb-3">
+    <input
+      type="text"
+      class="form-control search-input"
+      placeholder="Search employee..."
+      [(ngModel)]="searchTerm"
+    />
+    <button class="btn add-btn" (click)="navigateToAddEmployee()">
+      <i class="fa fa-plus"></i> Add Employee
+    </button>
+  </div>
+
+  <table class="employee-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Username</th>
+        <th>Address</th>
+        <th>Status</th>
+        <th>Permissions</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emp of employees | filterPipe:searchTerm">
+        <td>{{ emp.fullName }}</td>
+        <td>{{ emp.email }}</td>
+        <td>{{ emp.userName }}</td>
+        <td>{{ emp.address }}</td>
+        <td>
+          <label class="status-switch">
+            <input
+              type="checkbox"
+              [checked]="emp.isActive"
+              (change)="onToggleStatus(emp)"
+            />
+            <span class="slider round"></span>
+          </label>
+        </td>
+        <td>
+          <span
+            class="permission-badge"
+            *ngFor="let permission of emp.permissions"
+            >{{ permission }}</span
+          >
+        </td>
+        <td>
+          <button class="btn btn-edit" (click)="openEditEmployee(emp)">
+            <i class="fa fa-edit"></i>
+          </button>
+          <button class="btn btn-delete" (click)="deleteEmployee(emp)">
+            <i class="fa fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

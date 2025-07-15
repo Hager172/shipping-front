@@ -6,4 +6,5 @@ export interface UserProfileDTO {
   role: string;
   token: string;
   tokenExpiration: Date;
+  Role?:string;
 }

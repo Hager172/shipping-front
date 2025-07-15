@@ -62,6 +62,11 @@ th {
   -ms-border-radius: 25px;
   -o-border-radius: 25px;
 }
+.pagination .btn.active {
+  background-color: #083c3e;
+ border: none;
+  color: white;
+}
 .btn-delete{
     background-color: #ff0101;
   color: white;
