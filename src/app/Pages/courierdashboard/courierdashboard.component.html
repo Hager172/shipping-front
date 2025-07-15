@@ -1,117 +1,119 @@
-<div class="dashboard-header">
-  <i class="fas fa-chart-line dashboard-icon"></i>
-  <h2 class="dashboard-title">Admin Dashboard</h2>
-</div>
-<div *ngIf="stats" class="flex flex-wrap justify-center gap-6 p-6">
-  <div class="dashboard-pricing-card">
-    <div class="card-top">New Orders</div>
-    <div class="card-center">{{ stats.newOrders }}</div>
-    <ul class="card-details">
-      <li><i class="fas fa-cart-plus"></i> New orders placed</li>
-    </ul>   
+<div style="text-align: center;">
+  <div class="dashboard-header">
+    <i class="fas fa-chart-line dashboard-icon"></i>
+    <h2 class="dashboard-title">Courier Dashboard</h2>
   </div>
-
-  <div class="dashboard-pricing-card">
-    <div class="card-top">Pending Orders</div>
-    <div class="card-center">{{ stats.pendingOrders }}</div>
-    <ul class="card-details">
-      <li><i class="fas fa-hourglass-half"></i> Awaiting action</li>
-    </ul>
-  </div>
-
-  <div class="dashboard-pricing-card">
-    <div class="card-top">Delivered Orders</div>
-    <div class="card-center">{{ stats.deliveredOrders }}</div>
-    <ul class="card-details">
-      <li><i class="fas fa-truck"></i> Successfully delivered</li>
-    </ul>
-  </div>
-
-  <div class="dashboard-pricing-card">
-    <div class="card-top">Delivered to Rep</div>
-    <div class="card-center">{{ stats.deliveredToRepresentativeOrders }}</div>
-    <ul class="card-details">
-      <li><i class="fas fa-user-check"></i> Handed to rep</li>
-    </ul>
-  </div>
-
-  <div class="dashboard-pricing-card">
-    <div class="card-top">Unreachable Orders</div>
-    <div class="card-center">{{ stats.unreachableOrders }}</div>
-    <ul class="card-details">
-      <li><i class="fas fa-phone-slash"></i> Customer unreachable</li>
-    </ul>
-     
-  </div>
-
-  <div class="dashboard-pricing-card">
-    <div class="card-top">Postponed Orders</div>
-    <div class="card-center">{{ stats.postponedOrders }}</div>
-    <ul class="card-details">
-      <li><i class="fas fa-clock"></i> Rescheduled orders</li>
-    </ul>
-     
-  </div>
-
-  <div class="dashboard-pricing-card">
-    <div class="card-top">Partially Delivered</div>
-    <div class="card-center">{{ stats.partiallyDeliveredOrders }}</div>
-    <ul class="card-details">
-      <li><i class="fas fa-box-open"></i> Partially shipped</li>
-    </ul>
-  </div>
-
-  <div class="dashboard-pricing-card">
-    <div class="card-top">Cancelled by User</div>
-    <div class="card-center">{{ stats.cancelledByUserOrders }}</div>
-    <ul class="card-details">
-      <li><i class="fas fa-user-times"></i> Cancelled manually</li>
-    </ul>
-     
-  </div>
-
-  <div class="dashboard-pricing-card">
-    <div class="card-top">Rejected w/ Payment</div>
-    <div class="card-center">{{ stats.rejectedWithPaymentOrders }}</div>
-    <ul class="card-details">
-      <li><i class="fas fa-money-check-alt"></i> Refused w/ full pay</li>
-    </ul>
-     
-  </div>
-
-  <div class="dashboard-pricing-card">
-    <div class="card-top">Rejected Partial Payment</div>
-    <div class="card-center">{{ stats.rejectedWithPartialPaymentOrders }}</div>
-    <ul class="card-details">
-      <li><i class="fas fa-money-bill-wave"></i> Refused w/ partial pay</li>
-    </ul>
-  </div>
-
-  <div class="dashboard-pricing-card">
-    <div class="card-top">Rejected w/o Payment</div>
-    <div class="card-center">{{ stats.rejectedWithoutPaymentOrders }}</div>
-    <ul class="card-details">
-      <li><i class="fas fa-ban"></i> Refused - no payment</li>
-    </ul>
-  </div>
-
-  <div class="dashboard-pricing-card">
-    <div class="card-top">Total Revenue</div>
-    <div class="card-center text-green-600">
-      {{ stats.totalRevenue | currency }}
+  <div *ngIf="stats" class="flex flex-wrap justify-center gap-6 p-6">
+    <div class="dashboard-pricing-card">
+      <div class="card-top">New Orders</div>
+      <div class="card-center">{{ stats.newOrders }}</div>
+      <ul class="card-details">
+        <li><i class="fas fa-cart-plus"></i> New orders placed</li>
+      </ul>
     </div>
-    <ul class="card-details">
-      <li><i class="fas fa-dollar-sign"></i> Earnings</li>
-    </ul>
-  </div>
 
-  <div class="dashboard-pricing-card">
-    <div class="card-top">Total Cost</div>
-    <div class="card-center text-red-600">
-      {{ stats.totalCost | currency }}
+    <div class="dashboard-pricing-card">
+      <div class="card-top">Pending Orders</div>
+      <div class="card-center">{{ stats.pendingOrders }}</div>
+      <ul class="card-details">
+        <li><i class="fas fa-hourglass-half"></i> Awaiting action</li>
+      </ul>
     </div>
-    <ul class="card-details">
-      <li><i class="fas fa-money-bill-trend-up"></i> Expenses</li>
-    </ul>
+
+    <div class="dashboard-pricing-card">
+      <div class="card-top">Delivered Orders</div>
+      <div class="card-center">{{ stats.deliveredOrders }}</div>
+      <ul class="card-details">
+        <li><i class="fas fa-truck"></i> Successfully delivered</li>
+      </ul>
+    </div>
+
+    <div class="dashboard-pricing-card">
+      <div class="card-top">Delivered to Rep</div>
+      <div class="card-center">{{ stats.deliveredToRepresentativeOrders }}</div>
+      <ul class="card-details">
+        <li><i class="fas fa-user-check"></i> Handed to rep</li>
+      </ul>
+    </div>
+
+    <div class="dashboard-pricing-card">
+      <div class="card-top">Unreachable Orders</div>
+      <div class="card-center">{{ stats.unreachableOrders }}</div>
+      <ul class="card-details">
+        <li><i class="fas fa-phone-slash"></i> Customer unreachable</li>
+      </ul>
+
+    </div>
+
+    <div class="dashboard-pricing-card">
+      <div class="card-top">Postponed Orders</div>
+      <div class="card-center">{{ stats.postponedOrders }}</div>
+      <ul class="card-details">
+        <li><i class="fas fa-clock"></i> Rescheduled orders</li>
+      </ul>
+
+    </div>
+
+    <div class="dashboard-pricing-card">
+      <div class="card-top">Partially Delivered</div>
+      <div class="card-center">{{ stats.partiallyDeliveredOrders }}</div>
+      <ul class="card-details">
+        <li><i class="fas fa-box-open"></i> Partially shipped</li>
+      </ul>
+    </div>
+
+    <div class="dashboard-pricing-card">
+      <div class="card-top">Cancelled by User</div>
+      <div class="card-center">{{ stats.cancelledByUserOrders }}</div>
+      <ul class="card-details">
+        <li><i class="fas fa-user-times"></i> Cancelled manually</li>
+      </ul>
+
+    </div>
+
+    <div class="dashboard-pricing-card">
+      <div class="card-top">Rejected w/ Payment</div>
+      <div class="card-center">{{ stats.rejectedWithPaymentOrders }}</div>
+      <ul class="card-details">
+        <li><i class="fas fa-money-check-alt"></i> Refused w/ full pay</li>
+      </ul>
+
+    </div>
+
+    <div class="dashboard-pricing-card">
+      <div class="card-top">Rejected Partial Payment</div>
+      <div class="card-center">{{ stats.rejectedWithPartialPaymentOrders }}</div>
+      <ul class="card-details">
+        <li><i class="fas fa-money-bill-wave"></i> Refused w/ partial pay</li>
+      </ul>
+    </div>
+
+    <div class="dashboard-pricing-card">
+      <div class="card-top">Rejected w/o Payment</div>
+      <div class="card-center">{{ stats.rejectedWithoutPaymentOrders }}</div>
+      <ul class="card-details">
+        <li><i class="fas fa-ban"></i> Refused - no payment</li>
+      </ul>
+    </div>
+
+    <div class="dashboard-pricing-card">
+      <div class="card-top">Total Revenue</div>
+      <div class="card-center text-green-600">
+        {{ stats.totalRevenue | currency }}
+      </div>
+      <ul class="card-details">
+        <li><i class="fas fa-dollar-sign"></i> Earnings</li>
+      </ul>
+    </div>
+
+    <div class="dashboard-pricing-card">
+      <div class="card-top">Total Cost</div>
+      <div class="card-center text-red-600">
+        {{ stats.totalCost | currency }}
+      </div>
+      <ul class="card-details">
+        <li><i class="fas fa-money-bill-trend-up"></i> Expenses</li>
+      </ul>
+    </div>
   </div>
 </div>

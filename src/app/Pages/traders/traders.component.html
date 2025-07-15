@@ -1,28 +1,13 @@
- <div class="page-container">
-  <div class="container mt-4">
-    <!-- Search + Add Trader -->
-    <div class="d-flex justify-content-between align-items-center mb-3">
-      <input
-        type="text"
-        class="form-control w-25"
-        placeholder="Search trader..."
-        [(ngModel)]="searchTerm"
-      />
+<div class="page-container">
+  <!-- Search + Add Trader -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <input type="text" class="form-control w-25" placeholder="Search trader..." [(ngModel)]="searchTerm" />
 
-      <app-button-style
-        [label]="'Add Trader'"
-        [className]="'btn custom-btn'"
-        [onClick]="navigateToAddTrader.bind(this)"
-      ></app-button-style>
-    </div>
-
-    <!-- Custom Table -->
-    <app-custom-table
-      [columns]="columns"
-      [data]="traders | filterPipe:searchTerm"
-      (onEdit)="openEditTrader($event)"
-      (onDelete)="deleteTrader($event)"
-      (onToggleStatus)="onToggleStatus($event)"
-    ></app-custom-table>
+    <app-button-style [label]="'Add Trader'" [className]="'btn custom-btn'"
+      [onClick]="navigateToAddTrader.bind(this)"></app-button-style>
   </div>
+
+  <!-- Custom Table -->
+  <app-custom-table [columns]="columns" [data]="traders | filterPipe:searchTerm" (onEdit)="openEditTrader($event)"
+    (onDelete)="deleteTrader($event)" (onToggleStatus)="onToggleStatus($event)"></app-custom-table>
 </div>

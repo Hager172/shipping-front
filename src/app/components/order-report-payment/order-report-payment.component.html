@@ -5,31 +5,15 @@
 
     <div class="filters-grid">
       <!-- Search -->
-      <input
-        type="text"
-        placeholder="Search by customer..."
-        [(ngModel)]="searchText"
-        (input)="onFilterChange()"
-        class="filter-input"
-      />
+      <input type="text" placeholder="Search by customer..." [(ngModel)]="searchText" (input)="onFilterChange()"
+        class="filter-input" />
 
       <!-- Date From -->
-      <input
-        type="date"
-        [(ngModel)]="fromDate"
-        (change)="onFilterChange()"
-        class="filter-input"
-        placeholder="From Date"
-      />
+      <input type="date" [(ngModel)]="fromDate" (change)="onFilterChange()" class="filter-input"
+        placeholder="From Date" />
 
       <!-- Date To -->
-      <input
-        type="date"
-        [(ngModel)]="toDate"
-        (change)="onFilterChange()"
-        class="filter-input"
-        placeholder="To Date"
-      />
+      <input type="date" [(ngModel)]="toDate" (change)="onFilterChange()" class="filter-input" placeholder="To Date" />
 
       <!-- Trader -->
       <select [(ngModel)]="selectedTraderName" (change)="onFilterChange()" class="filter-select">
@@ -99,7 +83,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let order of orders; let i = index">
+        <tr *ngFor="let order of pagedOrders; let i = index">
           <td>{{ (currentPage - 1) * pageSize + i + 1 }}</td>
           <td>{{ order.createdDate | date: 'shortDate' }}</td>
           <td>{{ order.customerName }}</td>
@@ -131,11 +115,7 @@
   <div class="pagination" *ngIf="totalPages > 1">
     <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
 
-    <button
-      *ngFor="let page of pages"
-      [ngClass]="{ active: page === currentPage }"
-      (click)="onPageChange(page)"
-    >
+    <button *ngFor="let page of pages" [ngClass]="{ active: page === currentPage }" (click)="onPageChange(page)">
       {{ page }}
     </button>
 

@@ -45,12 +45,9 @@ import { RegisterEmployeeComponent } from './Pages/register-employee/register-em
 import { UpdateEmployeeComponent } from './update-employee/update-employee.component';
 
 import { OrderReportPaymentComponent } from './components/order-report-payment/order-report-payment.component';
-
 import { OrderStatusHistoryComponent } from './components/order-status-history/order-status-history.component';
 
-
 import { AdminDashboardComponent } from './Pages/dashboard/admindashboard.component';
-
 import { TraderdashboardComponent } from './Pages/traderdashboard/traderdashboard.component';
 import { CourierdashboardComponent } from './Pages/courierdashboard/courierdashboard.component';
 
@@ -58,7 +55,6 @@ import { PermissionsComponent } from './Pages/permissions/permissions.component'
 import { AddPermissionComponent } from './Pages/add-permission/add-permission.component';
 
 import { ChatBotComponent } from './Chatbot/chat-bot/chat-bot.component';
-
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -74,7 +70,6 @@ export const routes: Routes = [
       { path: 'add-city', component: AddCityComponent },
       { path: 'edit-city', component: EditCityComponent },
 
-
       { path: 'branches', component: BranchListComponent },
       { path: 'add-branch', component: AddBranchComponent },
       { path: 'edit-branch', component: EditBranchComponent },
@@ -82,8 +77,6 @@ export const routes: Routes = [
       { path: 'governrates', component: GovernListComponent },
       { path: 'add-governorate', component: AddGovernorateComponent },
       { path: 'edit-governorate', component: EditGovernorateComponent },
-
-      
 
       { path: 'couriers', component: CourierListComponent },
       { path: 'addcourier', component: CourierAddComponent },

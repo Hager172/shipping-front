@@ -103,7 +103,7 @@
       </div>
     </div>
 
-    <hr class="my-4" />
+    <!-- <hr class="my-4" />
     <h5 class="text-secondary">Order Items</h5>
 
     <div class="row g-3 mt-2">
@@ -123,15 +123,15 @@
           [onClick]="addItem.bind(this)">
         </app-button-style>
       </div>
-    </div>
+    </div> -->
 
-    <ul *ngIf="order.items?.length" class="list-group mt-3">
+    <!-- <ul *ngIf="order.items?.length" class="list-group mt-3">
       <li *ngFor="let item of order.items; index as i"
           class="list-group-item d-flex justify-content-between align-items-center">
         {{ item.productName }} – Qty: {{ item.quantity }}, Weight: {{ item.weight }}kg
         <button type="button" class="btn btn-sm btn-outline-danger" (click)="removeItem(i)">Remove</button>
       </li>
-    </ul>
+    </ul> -->
 
     <div class="mt-4">
       <app-button-style
