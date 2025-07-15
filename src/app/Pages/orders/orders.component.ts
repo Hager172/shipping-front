@@ -282,6 +282,7 @@ onStatusChange(event: any, order: any): void {
 
   this.orderService.updateOrder(order.id, dto).subscribe({
     next: () => {
+      order.rejectionReasonId=null
       order.statusLabel = this.getStatusLabel(newStatus);
       alert('Status updated successfully');
     },
