@@ -21,7 +21,6 @@ import { TradersComponent } from './Pages/traders/traders.component';
 import { SaveComponent } from './Pages/saves/save.component';
 import { BankFinancialtransferComponent } from './Pages/bank-financialtransfer/bank-financialtransfer.component';
 import { SafeFinancialtransferComponent } from './Pages/safe-financialtransfer/safe-financialtransfer.component';
-
 import { WeightComponent } from './Pages/weight/weight.component';
 import { ExtraVillagePriceComponent } from './Pages/extra-village-price/extra-village-price.component';
 import { AddCustomPriceComponent } from './Pages/add-custom-price/add-custom-price.component';
@@ -29,7 +28,6 @@ import { OrdersComponent } from './Pages/orders/orders.component';
 import { AdminAddOrderComponent } from './Pages/admin-add-order/admin-add-order.component';
 import { TraderAddOrderComponent } from './Pages/trader-add-order/trader-add-order.component';
 import { EditOrderComponent } from './Pages/edit-order/edit-order.component';
-
 import { CourierEditComponent } from './Pages/courier/courier-edit/courier-edit.component';
 import { RegisterEmployeeComponent } from './Pages/register-employee/register-employee.component';
 import { CourierOrdersComponent } from './Pages/courier/courier-orders/courier-orders.component';
@@ -37,14 +35,14 @@ import { OrderReportPaymentComponent } from './components/order-report-payment/o
 import { UpdateEmployeeComponent } from './update-employee/update-employee.component';
 import { OrderStatusHistoryComponent } from './components/order-status-history/order-status-history.component';
 import { RejectedorderComponent } from './Pages/courier/rejectedorder/rejectedorder.component';
-import { AdminDashboardComponent} from './Pages/dashboard/admindashboard.component'
+import { AdminDashboardComponent } from './Pages/dashboard/admindashboard.component';
 import { TraderdashboardComponent } from './Pages/traderdashboard/traderdashboard.component';
 import { CourierdashboardComponent } from './Pages/courierdashboard/courierdashboard.component';
 import { PermissionsComponent } from './Pages/permissions/permissions.component';
 import { AddPermissionComponent } from './Pages/add-permission/add-permission.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
-export const routes: Routes = [
+import { authGuard } from './guards/auth.guard';
 
+export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
@@ -53,77 +51,68 @@ export const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-      { path: 'banks', component: BanksComponent },
-      { path: 'cities', component: CityListComponent },
-      { path: 'addTrader', component: AddTraderComponent },
-      { path: 'shippingTypes', component: ShippingTypesComponent },
-      { path: 'rejectionReasons', component: RejectionReasonComponent },
-      { path: 'traders', component: TradersComponent },
-    {
-  path: 'employees',
-  loadComponent: () =>
-    import('./components/all-employees/all-employees.component')
-      .then(m => m.AllEmployeesComponent)
-},
+
+      //  Admin Routes
+      { path: 'banks', component: BanksComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'cities', component: CityListComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'add-city', component: AddCityComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'edit-city', component: EditCityComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'addTrader', component: AddTraderComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'shippingTypes', component: ShippingTypesComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'rejectionReasons', component: RejectionReasonComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'traders', component: TradersComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'branches', component: BranchListComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'edit-branch', component: EditBranchComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'add-branch', component: AddBranchComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'governrates', component: GovernListComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'edit-governorate', component: EditGovernorateComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'add-governorate', component: AddGovernorateComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'couriers', component: CourierListComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'addcourier', component: CourierAddComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'editcourier', component: CourierEditComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'employeereg', component: RegisterEmployeeComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'AdminDashboard', component: AdminDashboardComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'Permissions', component: PermissionsComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'addpermission', component: AddPermissionComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'courier-orders-report', component: OrderReportPaymentComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'extraVillagePrice', component: ExtraVillagePriceComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'weight', component: WeightComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'addCustomPrice', component: AddCustomPriceComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'edit-employee/:id', component: UpdateEmployeeComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      {
+        path: 'edit-trader/:id',
+        loadComponent: () => import('./Pages/edit-trader/edit-trader.component').then(m => m.EditTraderComponent),
+        canActivate: [authGuard],
+        data: { roles: ['Admin'] }
+      },
+
+      //  Orders (Admin + Trader)
+      { path: 'orders', component: OrdersComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'editOrder/:id', component: EditOrderComponent, canActivate: [authGuard], data: { roles: ['Admin', 'Trader'] } },
+      { path: 'orders/:id/history', component: OrderStatusHistoryComponent, canActivate: [authGuard], data: { roles: ['Admin', 'Trader'] } },
+
+      //  Trader Routes
+      { path: 'traderAddOrder', component: TraderAddOrderComponent, canActivate: [authGuard], data: { roles: ['Trader'] } },
+      { path: 'TraderDashboard', component: TraderdashboardComponent, canActivate: [authGuard], data: { roles: ['Trader'] } },
+
+      //  Courier Routes
+      { path: 'courierorders', component: CourierOrdersComponent, canActivate: [authGuard], data: { roles: ['Courier'] } },
+      { path: 'rejectedorder', component: RejectedorderComponent, canActivate: [authGuard], data: { roles: ['Courier'] } },
+      { path: 'CourierDashboard', component: CourierdashboardComponent, canActivate: [authGuard], data: { roles: ['Courier'] } },
+
+      //  Other (Shared or No Guard Needed)
       { path: 'saves', component: SaveComponent },
       { path: 'bank-financialtransfer', component: BankFinancialtransferComponent },
       { path: 'safe-financialtransfer', component: SafeFinancialtransferComponent },
-      {path:'edit-city',component:EditCityComponent},
+      { path: 'adminAddOrder', component: AdminAddOrderComponent, canActivate: [authGuard], data: { roles: ['Admin'] }},
 
-
-     {path:'add-city',component:AddCityComponent},
-    {path:'branches',component:BranchListComponent},
-    {path:'edit-branch',component:EditBranchComponent},
-    {path:'add-branch',component:AddBranchComponent},
-    {path:'governrates', component: GovernListComponent},
-    {path:'edit-governorate', component: EditGovernorateComponent},
-    {path:'add-governorate', component: AddGovernorateComponent},
-    {path:'couriers',component:CourierListComponent},
-    {path:'addcourier',component:CourierAddComponent},
-    {path:'cities',component:CityListComponent},
-    {path:'editcourier',component:CourierEditComponent},
-    {path:'employeereg',component:RegisterEmployeeComponent},
-    {path:'courierorders',component:CourierOrdersComponent},
-      {path:'add-city',component:AddCityComponent},
-      {path:'branches',component:BranchListComponent},
-      {path:'edit-branch',component:EditBranchComponent},
-      {path:'add-branch',component:AddBranchComponent},
-      {path:'governrates', component: GovernListComponent},
-      {path:'edit-governorate', component: EditGovernorateComponent},
-      {path:'add-governorate', component: AddGovernorateComponent},
-      {path:'couriers',component:CourierListComponent},
-      {path:'addcourier',component:CourierAddComponent},
-      {path:'cities',component:CityListComponent},
-       {path:'editcourier',component:CourierEditComponent},
- {path:'employeereg',component:RegisterEmployeeComponent},
- {path:'courierorders',component:CourierOrdersComponent},
- {path:'rejectedorder',component:RejectedorderComponent},
-      {path: 'AdminDashboard' , component : AdminDashboardComponent},
-      {path: 'TraderDashboard' , component : TraderdashboardComponent},
-      {path: 'CourierDashboard' , component : CourierdashboardComponent},
-      {path: 'Permissions' , component : PermissionsComponent},
-      { path: 'addpermission', component: AddPermissionComponent },
- {path:'courier-orders-report',component:OrderReportPaymentComponent},
-        {path:'extraVillagePrice' , component:ExtraVillagePriceComponent},
-        {path:'weight' , component:WeightComponent},
-        {path:'addCustomPrice' , component:AddCustomPriceComponent},
-        {
-        path: 'edit-trader/:id',
-        loadComponent: () =>
-          import('./Pages/edit-trader/edit-trader.component').then(m => m.EditTraderComponent)
-      },
-
-        {path:'orders' , component:OrdersComponent},
-        {path:'adminAddOrder' , component:AdminAddOrderComponent},
-        {path:'traderAddOrder' , component:TraderAddOrderComponent},
-        {path:'editOrder/:id' , component:EditOrderComponent},
-
-      {path:'edit-employee/:id' , component:UpdateEmployeeComponent},
-      { path: 'orders/:id/history', component: OrderStatusHistoryComponent },
-
-
+      {
+        path: 'employees',
+        loadComponent: () => import('./components/all-employees/all-employees.component').then(m => m.AllEmployeesComponent),
+        canActivate: [authGuard],
+        data: { roles: ['Admin'] }
+      }
 
     ]
   }
-
 ];
