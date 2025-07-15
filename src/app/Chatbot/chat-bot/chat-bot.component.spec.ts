@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PredictFormComponent } from './predict-form.component';
+import { ChatBotComponent } from './chat-bot.component';
 
-describe('PredictFormComponent', () => {
-  let component: PredictFormComponent;
-  let fixture: ComponentFixture<PredictFormComponent>;
+describe('ChatBotComponent', () => {
+  let component: ChatBotComponent;
+  let fixture: ComponentFixture<ChatBotComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PredictFormComponent]
+      imports: [ChatBotComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PredictFormComponent);
+    fixture = TestBed.createComponent(ChatBotComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

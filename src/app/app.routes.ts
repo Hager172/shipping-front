@@ -36,11 +36,12 @@ import { CourierOrdersComponent } from './Pages/courier/courier-orders/courier-o
 import { RejectedorderComponent } from './Pages/courier/rejectedorder/rejectedorder.component';
 
 
-import { AdminDashboardComponent} from './Pages/dashboard/admindashboard.component'
+import { AdminDashboardComponent } from './Pages/dashboard/admindashboard.component'
 import { TraderdashboardComponent } from './Pages/traderdashboard/traderdashboard.component';
 import { CourierdashboardComponent } from './Pages/courierdashboard/courierdashboard.component';
 import { PermissionsComponent } from './Pages/permissions/permissions.component';
 import { AddPermissionComponent } from './Pages/add-permission/add-permission.component';
+import { ChatBotComponent } from './Chatbot/chat-bot/chat-bot.component';
 
 export const routes: Routes = [
 
@@ -61,55 +62,55 @@ export const routes: Routes = [
       { path: 'saves', component: SaveComponent },
       { path: 'bank-financialtransfer', component: BankFinancialtransferComponent },
       { path: 'safe-financialtransfer', component: SafeFinancialtransferComponent },
-      {path:'edit-city',component:EditCityComponent},
+      { path: 'edit-city', component: EditCityComponent },
 
 
-     {path:'add-city',component:AddCityComponent},
-    {path:'branches',component:BranchListComponent},
-    {path:'edit-branch',component:EditBranchComponent},
-    {path:'add-branch',component:AddBranchComponent},
-    {path:'governrates', component: GovernListComponent},
-    {path:'edit-governorate', component: EditGovernorateComponent},
-    {path:'add-governorate', component: AddGovernorateComponent},
-    {path:'couriers',component:CourierListComponent},
-    {path:'addcourier',component:CourierAddComponent},
-    {path:'cities',component:CityListComponent},
-    {path:'editcourier',component:CourierEditComponent},
-    {path:'employeereg',component:RegisterEmployeeComponent},
-    {path:'courierorders',component:CourierOrdersComponent},
-      {path:'add-city',component:AddCityComponent},
-      {path:'branches',component:BranchListComponent},
-      {path:'edit-branch',component:EditBranchComponent},
-      {path:'add-branch',component:AddBranchComponent},
-      {path:'governrates', component: GovernListComponent},
-      {path:'edit-governorate', component: EditGovernorateComponent},
-      {path:'add-governorate', component: AddGovernorateComponent},
-      {path:'couriers',component:CourierListComponent},
-      {path:'addcourier',component:CourierAddComponent},
-      {path:'cities',component:CityListComponent},
-       {path:'editcourier',component:CourierEditComponent},
- {path:'employeereg',component:RegisterEmployeeComponent},
- {path:'courierorders',component:CourierOrdersComponent},
- {path:'rejectedorder',component:RejectedorderComponent},
-      {path: 'AdminDashboard' , component : AdminDashboardComponent},
-      {path: 'TraderDashboard' , component : TraderdashboardComponent},
-      {path: 'CourierDashboard' , component : CourierdashboardComponent},
-      {path: 'Permissions' , component : PermissionsComponent},
+      { path: 'add-city', component: AddCityComponent },
+      { path: 'branches', component: BranchListComponent },
+      { path: 'edit-branch', component: EditBranchComponent },
+      { path: 'add-branch', component: AddBranchComponent },
+      { path: 'governrates', component: GovernListComponent },
+      { path: 'edit-governorate', component: EditGovernorateComponent },
+      { path: 'add-governorate', component: AddGovernorateComponent },
+      { path: 'couriers', component: CourierListComponent },
+      { path: 'addcourier', component: CourierAddComponent },
+      { path: 'cities', component: CityListComponent },
+      { path: 'editcourier', component: CourierEditComponent },
+      { path: 'employeereg', component: RegisterEmployeeComponent },
+      { path: 'courierorders', component: CourierOrdersComponent },
+      { path: 'add-city', component: AddCityComponent },
+      { path: 'branches', component: BranchListComponent },
+      { path: 'edit-branch', component: EditBranchComponent },
+      { path: 'add-branch', component: AddBranchComponent },
+      { path: 'governrates', component: GovernListComponent },
+      { path: 'edit-governorate', component: EditGovernorateComponent },
+      { path: 'add-governorate', component: AddGovernorateComponent },
+      { path: 'couriers', component: CourierListComponent },
+      { path: 'addcourier', component: CourierAddComponent },
+      { path: 'cities', component: CityListComponent },
+      { path: 'editcourier', component: CourierEditComponent },
+      { path: 'employeereg', component: RegisterEmployeeComponent },
+      { path: 'courierorders', component: CourierOrdersComponent },
+      { path: 'rejectedorder', component: RejectedorderComponent },
+      { path: 'AdminDashboard', component: AdminDashboardComponent },
+      { path: 'TraderDashboard', component: TraderdashboardComponent },
+      { path: 'CourierDashboard', component: CourierdashboardComponent },
+      { path: 'Permissions', component: PermissionsComponent },
       { path: 'addpermission', component: AddPermissionComponent },
-
-
-        {path:'extraVillagePrice' , component:ExtraVillagePriceComponent},
-        {path:'weight' , component:WeightComponent},
-        {path:'addCustomPrice' , component:AddCustomPriceComponent},
-        {
+      { path: 'chatbot' , component: ChatBotComponent},
+      
+      { path: 'extraVillagePrice', component: ExtraVillagePriceComponent },
+      { path: 'weight', component: WeightComponent },
+      { path: 'addCustomPrice', component: AddCustomPriceComponent },
+      {
         path: 'edit-trader/:id',
         loadComponent: () =>
           import('./Pages/edit-trader/edit-trader.component').then(m => m.EditTraderComponent)
       },
-        {path:'orders' , component:OrdersComponent},
-        {path:'adminAddOrder' , component:AdminAddOrderComponent},
-        {path:'traderAddOrder' , component:TraderAddOrderComponent},
-        {path:'editOrder/:id' , component:EditOrderComponent},
+      { path: 'orders', component: OrdersComponent },
+      { path: 'adminAddOrder', component: AdminAddOrderComponent },
+      { path: 'traderAddOrder', component: TraderAddOrderComponent },
+      { path: 'editOrder/:id', component: EditOrderComponent },
 
 
 

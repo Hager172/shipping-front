@@ -1,0 +1,69 @@
+/* ✅ الزر العائم */
+.chat-float-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #083c3e;
+  color: #ebfdff;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+/* ✅ صندوق الشات */
+.chat-popup {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 300px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ✅ ترويسة الشات */
+.chat-header {
+  background-color: #083c3e;
+  color: #ebfdff;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ✅ جسم الشات */
+.chat-body {
+  padding: 10px;
+}
+
+.chat-body textarea {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.chat-body button {
+  width: 100%;
+  background-color: #083c3e;
+  color: #fff;
+  border: none;
+  padding: 6px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.chat-answer {
+  background: #f1f1f1;
+  padding: 8px;
+  border-radius: 6px;
+  white-space: pre-wrap;
+}
