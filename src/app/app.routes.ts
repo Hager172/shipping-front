@@ -31,7 +31,6 @@ import { RejectionReasonComponent } from './Pages/rejection-reason/rejection-rea
 
 import { BankFinancialtransferComponent } from './Pages/bank-financialtransfer/bank-financialtransfer.component';
 import { SafeFinancialtransferComponent } from './Pages/safe-financialtransfer/safe-financialtransfer.component';
-
 import { WeightComponent } from './Pages/weight/weight.component';
 import { ExtraVillagePriceComponent } from './Pages/extra-village-price/extra-village-price.component';
 import { AddCustomPriceComponent } from './Pages/add-custom-price/add-custom-price.component';
@@ -41,12 +40,15 @@ import { AdminAddOrderComponent } from './Pages/admin-add-order/admin-add-order.
 import { TraderAddOrderComponent } from './Pages/trader-add-order/trader-add-order.component';
 import { EditOrderComponent } from './Pages/edit-order/edit-order.component';
 
+
+import { CourierEditComponent } from './Pages/courier/courier-edit/courier-edit.component';
 import { RegisterEmployeeComponent } from './Pages/register-employee/register-employee.component';
 import { UpdateEmployeeComponent } from './update-employee/update-employee.component';
 
 import { OrderReportPaymentComponent } from './components/order-report-payment/order-report-payment.component';
 import { OrderStatusHistoryComponent } from './components/order-status-history/order-status-history.component';
 
+import { RejectedorderComponent } from './Pages/courier/rejectedorder/rejectedorder.component';
 import { AdminDashboardComponent } from './Pages/dashboard/admindashboard.component';
 import { TraderdashboardComponent } from './Pages/traderdashboard/traderdashboard.component';
 import { CourierdashboardComponent } from './Pages/courierdashboard/courierdashboard.component';
@@ -55,6 +57,10 @@ import { PermissionsComponent } from './Pages/permissions/permissions.component'
 import { AddPermissionComponent } from './Pages/add-permission/add-permission.component';
 
 import { ChatBotComponent } from './Chatbot/chat-bot/chat-bot.component';
+import { authGuard } from './guards/auth.guard';
+
+
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -108,12 +114,14 @@ export const routes: Routes = [
       { path: 'addCustomPrice', component: AddCustomPriceComponent },
 
       { path: 'orders', component: OrdersComponent },
+
       { path: 'adminAddOrder', component: AdminAddOrderComponent },
       { path: 'traderAddOrder', component: TraderAddOrderComponent },
       { path: 'editOrder/:id', component: EditOrderComponent },
       { path: 'orders/:id/history', component: OrderStatusHistoryComponent },
 
       { path: 'courier-orders-report', component: OrderReportPaymentComponent },
+
 
       {
         path: 'edit-trader/:id',
@@ -127,6 +135,68 @@ export const routes: Routes = [
 
       { path: 'Permissions', component: PermissionsComponent },
       { path: 'addpermission', component: AddPermissionComponent },
+      //  Admin Routes
+      { path: 'banks', component: BanksComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'cities', component: CityListComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'add-city', component: AddCityComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'edit-city', component: EditCityComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'addTrader', component: AddTraderComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'shippingTypes', component: ShippingTypesComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'rejectionReasons', component: RejectionReasonComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'traders', component: TradersComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'branches', component: BranchListComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'edit-branch', component: EditBranchComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'add-branch', component: AddBranchComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'governrates', component: GovernListComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'edit-governorate', component: EditGovernorateComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'add-governorate', component: AddGovernorateComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'couriers', component: CourierListComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'addcourier', component: CourierAddComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'editcourier', component: CourierEditComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'employeereg', component: RegisterEmployeeComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'AdminDashboard', component: AdminDashboardComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'Permissions', component: PermissionsComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'addpermission', component: AddPermissionComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'courier-orders-report', component: OrderReportPaymentComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'extraVillagePrice', component: ExtraVillagePriceComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'weight', component: WeightComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'addCustomPrice', component: AddCustomPriceComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'edit-employee/:id', component: UpdateEmployeeComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      {
+        path: 'edit-trader/:id',
+        loadComponent: () => import('./Pages/edit-trader/edit-trader.component').then(m => m.EditTraderComponent),
+        canActivate: [authGuard],
+        data: { roles: ['Admin'] }
+      },
+
+
+      //  Orders (Admin + Trader)
+      { path: 'orders', component: OrdersComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+      { path: 'editOrder/:id', component: EditOrderComponent, canActivate: [authGuard], data: { roles: ['Admin', 'Trader'] } },
+      { path: 'orders/:id/history', component: OrderStatusHistoryComponent, canActivate: [authGuard], data: { roles: ['Admin', 'Trader'] } },
+
+      //  Trader Routes
+      { path: 'traderAddOrder', component: TraderAddOrderComponent, canActivate: [authGuard], data: { roles: ['Trader'] } },
+      { path: 'TraderDashboard', component: TraderdashboardComponent, canActivate: [authGuard], data: { roles: ['Trader'] } },
+
+      //  Courier Routes
+      { path: 'courierorders', component: CourierOrdersComponent, canActivate: [authGuard], data: { roles: ['Courier'] } },
+      { path: 'rejectedorder', component: RejectedorderComponent, canActivate: [authGuard], data: { roles: ['Courier'] } },
+      { path: 'CourierDashboard', component: CourierdashboardComponent, canActivate: [authGuard], data: { roles: ['Courier'] } },
+
+      //  Other (Shared or No Guard Needed)
+      { path: 'saves', component: SaveComponent },
+      { path: 'bank-financialtransfer', component: BankFinancialtransferComponent },
+      { path: 'safe-financialtransfer', component: SafeFinancialtransferComponent },
+      { path: 'adminAddOrder', component: AdminAddOrderComponent, canActivate: [authGuard], data: { roles: ['Admin'] }},
+      
+
+      {
+        path: 'employees',
+        loadComponent: () => import('./components/all-employees/all-employees.component').then(m => m.AllEmployeesComponent),
+        canActivate: [authGuard],
+        data: { roles: ['Admin'] }
+      }
 
       { path: 'chatbot', component: ChatBotComponent },
     ]

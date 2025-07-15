@@ -8,6 +8,8 @@ import { CustomTableComponent } from '../../components/custom-table/custom-table
 import { ButtonStyleComponent } from '../../components/button-style/button-style.component';
 import { EmployeeWithPermissions } from '../../models/employee/employeedto';
 
+
+
 @Component({
   selector: 'app-all-employees',
   standalone: true,
@@ -74,4 +76,5 @@ openEditEmployee(emp: any) {
   navigateToAddEmployee() {
   this.router.navigate(['/employeereg']);
 }
+
 }

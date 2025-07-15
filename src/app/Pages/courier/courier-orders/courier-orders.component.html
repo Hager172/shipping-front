@@ -6,7 +6,7 @@
         routerLinkActive="router-link-active"
         class="custom-btn"
       >
-        rejected order
+        Rejected Orders
       </button>
     </div>
     <div class="col-md-6 text-end">
@@ -57,7 +57,6 @@
       </td>
       <td>{{ order.orderCost }} EGP</td>
       <td>
-        <!-- زرار الرفض -->
         <button class="btn btn-sm btn-danger" (click)="rejectOrder(order)">
           <i class="fa fa-times" style="color: white"></i>
         </button>
@@ -80,13 +79,13 @@
     {{ page }}
   </button>
 </div>
-<!-- مودال سبب الرفض -->
-<!-- مودال سبب الرفض وحالة الرفض -->
+
+<!-- Rejection Modal -->
 <div class="modal fade show d-block" tabindex="-1" *ngIf="showRejectionModal">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">رفض الأوردر</h5>
+        <h5 class="modal-title">Reject Order</h5>
         <button
           type="button"
           class="btn-close"
@@ -94,10 +93,10 @@
         ></button>
       </div>
       <div class="modal-body">
-        <!-- اختيار الحالة -->
-        <label class="form-label">اختر نوع الرفض</label>
+        <!-- Rejection Status -->
+        <label class="form-label">Select Rejection Status</label>
         <select class="form-select mb-3" [(ngModel)]="selectedRejectionStatus">
-          <option [ngValue]="null" disabled>-- اختر الحالة --</option>
+          <option [ngValue]="null" disabled>-- Select Status --</option>
           <option
             *ngFor="let status of rejectedStatusOptions"
             [ngValue]="status.value"
@@ -106,10 +105,10 @@
           </option>
         </select>
 
-        <!-- اختيار السبب -->
-        <label class="form-label">اختر سبب الرفض</label>
+        <!-- Rejection Reason -->
+        <label class="form-label">Select Rejection Reason</label>
         <select class="form-select" [(ngModel)]="selectedRejectionReasonId">
-          <option [ngValue]="null" disabled>-- اختر سبب --</option>
+          <option [ngValue]="null" disabled>-- Select Reason --</option>
           <option *ngFor="let reason of rejectionReasons" [ngValue]="reason.id">
             {{ reason.reason }}
           </option>
@@ -117,14 +116,14 @@
       </div>
       <div class="modal-footer">
         <button class="btn btn-secondary" (click)="showRejectionModal = false">
-          إلغاء
+          Cancel
         </button>
         <button
           class="btn btn-primary"
           [disabled]="!selectedRejectionStatus || !selectedRejectionReasonId"
           (click)="submitRejection()"
         >
-          تأكيد الرفض
+          Confirm Rejection
         </button>
       </div>
     </div>

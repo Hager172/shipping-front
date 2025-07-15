@@ -27,7 +27,7 @@ export class OrderItemService {
     return this.http.get(`${baseUrl}/OrderItem`);
   }
   bulkInsertItems(items: any[]) {
-  return this.http.post(`${baseUrl}/OrderItem/bulkItems`, items);
+  return this.http.post(`${baseUrl}OrderItem/bulkItems`, items);
 }
 
 }

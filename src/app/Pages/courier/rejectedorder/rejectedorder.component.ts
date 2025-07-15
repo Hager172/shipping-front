@@ -18,16 +18,16 @@ export class RejectedorderComponent implements OnInit {
   itemsPerPage = 5;
   totalPages: number[] = [];
   courierId: string = '';
-statusMap: { [key: number]: string } = {
-  9: 'مرفوض مع الدفع',
-  10: 'مرفوض مع دفع جزئي',
-  11: 'مرفوض بدون دفع'
-};
+  statusMap: { [key: number]: string } = {
+    9: 'Rejected with Full Payment',
+    10: 'Rejected with Partial Payment',
+    11: 'Rejected without Payment'
+  };
 
 
   constructor(private courierService: CourierService) {}
 
-  ngOnInit(): void {
+ ngOnInit(): void {
     this.courierId = this.getCourierIdFromToken();
     if (this.courierId) {
       this.courierService.getRejectedOrders(this.courierId).subscribe({
@@ -36,7 +36,7 @@ statusMap: { [key: number]: string } = {
           this.setupPagination();
         },
         error: (err) => {
-          console.error('فشل تحميل الأوردرات المرفوضة:', err);
+          console.error('Failed to load rejected orders:', err);
         }
       });
     }
@@ -65,7 +65,7 @@ statusMap: { [key: number]: string } = {
   }
 
   viewDetails(order: any) {
-    console.log('تفاصيل الطلب:', order);
+    console.log('Order details:', order);
   }
 
 }

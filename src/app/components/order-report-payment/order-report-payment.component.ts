@@ -3,6 +3,10 @@ import { OrderReportDto } from '../../models/Reports/order-report-dto';
 import { ReportServicesService } from '../../services/Report-services/report-services.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 @Component({
   selector: 'app-order-report-payment',
@@ -177,4 +181,71 @@ export class OrderReportPaymentComponent implements OnInit {
   onCreateOrder(): void {
     console.log('Create Order clicked');
   }
+  exportToExcel(): void {
+  if (this.orders.length === 0) {
+    alert('No data to export.');
+    return;
+  }
+
+  const exportData = this.orders.map((order, index) => ({
+    '#': index + 1,
+    CreatedDate: order.createdDate,
+    Customer: order.customerName,
+    Phone: order.phone,
+    Trader: order.traderName,
+    Courier: order.courierName,
+    Branch: order.branchName,
+    Governorate: order.governororrateName,
+    City: order.cityName,
+    Status: order.statusName,
+    OrderCost: order.orderCost,
+    TotalCost: order.totalCost,
+    Weight: order.totalWeight
+  }));
+
+  const worksheet = XLSX.utils.json_to_sheet(exportData);
+  const workbook = { Sheets: { 'Orders': worksheet }, SheetNames: ['Orders'] };
+  const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+  const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+  saveAs(blob, 'Order_Report.xlsx');
+}
+exportToPDF(): void {
+    if (this.orders.length === 0) {
+    alert('No data to export.');
+    return;
+  }
+
+  const doc = new jsPDF();
+
+  const headers = [
+    ['#', 'Created', 'Customer', 'Phone', 'Trader', 'Courier', 'Branch', 'Governorate', 'City', 'Status', 'Order Cost', 'Total Cost', 'Weight']
+  ];
+
+  const rows = this.orders.map((order, index) => [
+    index + 1,
+    new Date(order.createdDate).toLocaleDateString(),
+    order.customerName,
+    order.phone,
+    order.traderName,
+    order.courierName,
+    order.branchName,
+    order.governororrateName,
+    order.cityName,
+    order.statusName,
+    `${order.orderCost} EGP`,
+    `${order.totalCost} EGP`,
+    order.totalWeight
+  ]);
+
+  autoTable(doc, {
+    head: headers,
+    body: rows,
+    styles: { fontSize: 8 },
+    headStyles: { fillColor: [3, 62, 62] }, // نفس لون الهيدر في الجدول
+    margin: { top: 20 }
+  });
+
+  doc.save('Order_Report.pdf');
+}
+
 }
