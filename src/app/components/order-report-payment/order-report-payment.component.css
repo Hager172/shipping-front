@@ -104,3 +104,34 @@
   margin-top: 20px;
   color: gray;
 }
+.export-btn {
+  background-color: #1d6f42;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background-color 0.3s ease;
+}
+
+/* زر الإكسل */
+.export-btn:hover {
+  background-color: #155d33;
+}
+
+/* زر PDF بلون مختلف */
+.pdf-btn {
+  background-color: #c0392b; /* أحمر غامق */
+}
+
+.pdf-btn:hover {
+  background-color: #96281b;
+}
+
+.pdf-btn i {
+  color: #ffe5e5;
+}
