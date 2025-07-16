@@ -116,7 +116,9 @@ export class TraderAddOrderComponent implements OnInit {
   }
 
   submitOrder(): void {
-    const traderId = this.order.traderId;
+    // const traderId = this.order.traderId;
+    const traderId =localStorage.getItem('traderId') ;
+    
     if (!traderId) {
       alert('Trader ID is missing. Please log in again.');
       return;

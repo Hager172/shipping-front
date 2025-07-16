@@ -106,4 +106,12 @@
     <a routerLink="/courierorders">My Orders</a>
     <a routerLink="/rejectedorder">Rejected Orders</a>
   </div>
+   <!--Trader Order  -->
+  <a *ngIf="userRole === 'Trader'" class="nav-link" (click)="toggleMenu('Trader Orders')">
+    <i class="fas fa-chart-bar"></i>
+    <span *ngIf="!isCollapsed">Orders</span>
+  </a>
+  <div *ngIf="!isCollapsed && isMenuOpen('Trader Orders')" class="submenu">
+    <a routerLink="/traderAddOrder">Add Order</a>
+  </div>
 </div>

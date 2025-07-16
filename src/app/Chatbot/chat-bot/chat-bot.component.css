@@ -1,3 +1,6 @@
+* {
+  font-size: 1.5rem;
+}
 /* ✅ الزر العائم */
 .chat-float-button {
   position: fixed;
@@ -20,7 +23,7 @@
   position: fixed;
   bottom: 90px;
   right: 20px;
-  width: 300px;
+  width: 500px;
   background: white;
   border: 1px solid #ccc;
   border-radius: 10px;

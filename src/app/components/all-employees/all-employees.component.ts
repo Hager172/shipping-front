@@ -41,6 +41,7 @@ export class AllEmployeesComponent {
   loadEmployees() {
     this.employeeService.getAllEmployees().subscribe({
       next: (data) => {
+        console.log(data);
         this.employees = data.map(e => ({
           ...e,
           id: e.userId 

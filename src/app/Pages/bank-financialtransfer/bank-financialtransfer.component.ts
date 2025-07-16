@@ -126,6 +126,10 @@ export class BankFinancialtransferComponent implements OnInit {
       alert('Please enter an amount for either Withdraw or Deposit.');
       return;
     }
+    if (isWithdraw && isDeposit) {
+      alert('Please enter an amount for either Withdraw or Deposit.');
+      return;
+    }
 
     const amount = isWithdraw ? this.withdrawAmount! : this.depositAmount!;
     if (amount <= 0) {
