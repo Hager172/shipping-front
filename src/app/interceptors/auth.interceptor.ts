@@ -1,6 +1,6 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { AuthService } from '../services/auth.service'; // تأكد من المسار
+import { AuthService } from '../services/auth.service'; 
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
     const excludedUrls = ['/Auth/login', '/Auth/register'];

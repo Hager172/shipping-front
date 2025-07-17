@@ -47,14 +47,16 @@
             >{{ permission }}</span
           >
         </td>
-        <td>
-          <button class="btn btn-edit" (click)="openEditEmployee(emp)">
-            <i class="fa fa-edit"></i>
-          </button>
-          <button class="btn btn-delete" (click)="deleteEmployee(emp)">
-            <i class="fa fa-trash"></i>
-          </button>
-        </td>
+       <td>
+  <div class="action-buttons">
+    <button class="action-btn edit" (click)="openEditEmployee(emp)">
+      <i class="fa-solid fa-pen-to-square"></i>
+    </button>
+    <button class="action-btn delete" (click)="deleteEmployee(emp)">
+      <i class="fa-solid fa-trash"></i>
+    </button>
+  </div>
+</td>
       </tr>
     </tbody>
   </table>

@@ -37,19 +37,13 @@ export class BankFinancialtransferComponent implements OnInit {
   ];
 
   selectedBankBalance: number = 0;
-
-  // Modal state
   showDepositWithdrawModal = false;
   showBankToBankModal = false;
   showBankToSafeModal = false;
-
-  // Deposit/Withdraw form
   selectedBankId: number = 0;
   withdrawAmount: number | null = null;
   depositAmount: number | null = null;
   note: string = '';
-
-  // Transfer DTOs
   bankToBank: SaveFinancialTransfer = {
     sourceBankId: undefined,
     destinationBankId: undefined,

@@ -3,7 +3,6 @@
 
   <form (ngSubmit)="addTrader()" #form="ngForm">
     <div class="row">
-      <!-- Column 1 -->
       <div class="col-md-4 mb-3">
         <div class="p-3 rounded border bg-white shadow-sm h-100">
           <label>Full Name</label>
@@ -22,8 +21,6 @@
           <input type="text" class="form-control" [(ngModel)]="trader.phone" name="phone" />
         </div>
       </div>
-
-      <!-- Column 2 -->
       <div class="col-md-4 mb-3">
         <div class="p-3 rounded border bg-white shadow-sm h-100">
           <label>Store Name</label>
@@ -45,8 +42,6 @@
           </select>
         </div>
       </div>
-
-      <!-- Column 3 -->
       <div class="col-md-4 mb-3">
         <div class="p-3 rounded border bg-white shadow-sm h-100">
           <label>Branch</label>
@@ -54,7 +49,6 @@
             <option [ngValue]="0" disabled selected>Select Branch</option>
             <option *ngFor="let b of branches" [value]="b.id">{{ b.name }}</option>
           </select>
-
           <label>Custom Pickup Cost</label>
           <input type="number" class="form-control mb-2" [(ngModel)]="trader.customPickupCost" name="customPickupCost" />
 

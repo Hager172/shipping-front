@@ -6,13 +6,13 @@ export const authGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  const allowedRoles = route.data['roles'] as string[]; // ex: ['Admin', 'Courier']
-  const userRole = authService.getUserRole(); // من localStorage
+  const allowedRoles = route.data['roles'] as string[]; 
+  const userRole = authService.getUserRole();
 
   if (allowedRoles.includes(userRole)) {
-    return true; // مسموح يدخل
+    return true; 
   }
 
-  router.navigate(['/login']); // أو أي صفحة تانية
+  router.navigate(['/login']); 
   return false;
 };

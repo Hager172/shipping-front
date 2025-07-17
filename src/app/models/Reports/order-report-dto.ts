@@ -1,5 +1,5 @@
 export interface OrderReportDto {
-  id: number;
+  orderId: number;
   customerName: string;
   phone: string;
   traderName: string;

@@ -51,12 +51,12 @@ export class AddPermissionComponent {
   loadActionTypes() {
     this.permissionService.getActionTypes().subscribe({
       next: data => this.actionTypes = data,
-      error: err => console.error("❌ Failed to load action types:", err)
+      error: err => console.error(" Failed to load action types:", err)
     });
   }
   addPermission() {
     if (!this.newPermissionName.trim()) {
-      alert("❌ Please enter a permission name first.");
+      alert(" Please enter a permission name first.");
       return;
     }
 
@@ -70,11 +70,11 @@ export class AddPermissionComponent {
       next: () => {
         this.newPermissionName = '';
         this.loadPermissions();
-        alert("✔ Permission successfully added.");
+        alert("Permission successfully added.");
       },
       error: err => {
         console.error(err);
-        alert("❌ An error occurred while adding the permission.");
+        alert("An error occurred while adding the permission.");
       }
     });
   }
@@ -97,7 +97,7 @@ export class AddPermissionComponent {
           });
         });
       },
-      error: err => console.error("❌ Failed to load permissions:", err)
+      error: err => console.error(" Failed to load permissions:", err)
     });
   }
 
@@ -110,7 +110,6 @@ export class AddPermissionComponent {
     }
 
     if (isChecked) {
-      // ✅ Add action
       if (permission.selectedActions[actionId]) {
         alert("⚠ This action is already assigned.");
         return;
@@ -122,25 +121,24 @@ export class AddPermissionComponent {
         permissionId: permission.id,
         actionTypeIds: [actionId]
       }).subscribe({
-        next: () => console.log("✔ Action assigned."),
+        next: () => console.log("Action assigned."),
         error: err => {
-          console.error("❌ Error while assigning:", err);
+          console.error(" Error while assigning:", err);
           delete permission.selectedActions[actionId];
         }
       });
 
     } else {
-      // 🗑️ Remove action
       this.permissionService.removePermissionAction({
         permissionId: permission.id,
         actionTypeIds: [actionId]
       }).subscribe({
         next: () => {
           delete permission.selectedActions[actionId];
-          console.log("🗑 Action removed.");
+          console.log(" Action removed.");
         },
         error: err => {
-          console.error("❌ Failed to remove action:", err);
+          console.error(" Failed to remove action:", err);
           permission.selectedActions[actionId] = true;
         }
       });
@@ -169,8 +167,8 @@ export class AddPermissionComponent {
 
     for (const assignment of assignments) {
       this.permissionService.assignPermissions(assignment).subscribe({
-        next: () => console.log('✔ Assignment saved.'),
-        error: (err) => console.error('❌ Failed to save assignment:', err)
+        next: () => console.log(' Assignment saved.'),
+        error: (err) => console.error(' Failed to save assignment:', err)
       });
     }
   }

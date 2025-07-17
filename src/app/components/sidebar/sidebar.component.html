@@ -1,19 +1,14 @@
 <div class="sidebar" [class.collapsed]="isCollapsed">
-  <!-- Toggle button -->
   <div class="toggle-btn" (click)="toggleCollapse()">
     <i
       class="fas"
       [ngClass]="isCollapsed ? 'fa-chevron-right' : 'fa-chevron-left'"
     ></i>
   </div>
-  <!-- Home -->
-  <!-- لو الدور admin -->
   <a *ngIf="userRole === 'Admin'" class="nav-link" routerLink="/AdminDashboard">
     <i class="fas fa-home"></i>
     <span *ngIf="!isCollapsed">Admin Dashboard</span>
   </a>
-
-  <!-- لو الدور courier -->
   <a
     *ngIf="userRole === 'Courier'"
     class="nav-link"
@@ -22,8 +17,6 @@
     <i class="fas fa-home"></i>
     <span *ngIf="!isCollapsed">Courier Dashboard</span>
   </a>
-
-  <!-- لو الدور trader -->
   <a
     *ngIf="userRole === 'Trader'"
     class="nav-link"
@@ -32,8 +25,6 @@
     <i class="fas fa-home"></i>
     <span *ngIf="!isCollapsed">Trader Dashboard</span>
   </a>
-
-  <!-- Settings -->
   <a *ngIf="userRole === 'Admin'" class="nav-link" (click)="toggleMenu('settings')">
     <i class="fas fa-cog"></i>
     <span *ngIf="!isCollapsed">Settings</span>
@@ -47,8 +38,6 @@
     <a routerLink="/banks">Banks</a>
     <a routerLink="/saves">Saves</a>
   </div>
-
-  <!-- Users -->
   <a *ngIf="userRole === 'Admin'" class="nav-link" (click)="toggleMenu('users')">
     <i class="fas fa-users"></i>
     <span *ngIf="!isCollapsed">Users</span>
@@ -59,8 +48,6 @@
     <a routerLink="/traders">Merchants</a>
     <a routerLink="/couriers">Couriers</a>
   </div>
-
-  <!-- Regions -->
   <a *ngIf="userRole === 'Admin'" class="nav-link" (click)="toggleMenu('regions')">
     <i class="fas fa-map-marker-alt"></i>
     <span *ngIf="!isCollapsed">Regions</span>
@@ -69,15 +56,11 @@
     <a routerLink="/governrates">Governorates</a>
     <a routerLink="/cities">Cities</a>
   </div>
-
-  <!-- Orders -->
   <a  *ngIf="userRole === 'Admin'" class="nav-link" routerLink="/orders">
     <i class="fas fa-shopping-bag"></i>
     <span *ngIf="!isCollapsed">Orders</span>
   </a>
   
-
-  <!-- Accounts -->
   <a *ngIf="userRole === 'Admin'" class="nav-link" (click)="toggleMenu('accounts')">
     <i class="fas fa-wallet"></i>
     <span *ngIf="!isCollapsed">Accounts</span>
@@ -86,8 +69,6 @@
     <a routerLink="/bank-financialtransfer">Banks</a>
     <a routerLink="/safe-financialtransfer">Safes</a>
   </div>
-
-  <!-- Order Reports -->
   <a *ngIf="userRole === 'Admin'" class="nav-link" (click)="toggleMenu('orderReports')">
     <i class="fas fa-chart-bar"></i>
     <span *ngIf="!isCollapsed">Order Reports</span>
@@ -96,8 +77,6 @@
     <a routerLink="/courier-orders-report">Courier Orders</a>
     <a routerLink="/orders/:id/history">By Status</a>
   </div>
-
-   <!--courier Order  -->
   <a *ngIf="userRole === 'Courier'"class="nav-link" (click)="toggleMenu('Courier Orders')">
     <i class="fas fa-chart-bar"></i>
     <span *ngIf="!isCollapsed">Orders</span>
@@ -106,7 +85,6 @@
     <a routerLink="/courierorders">My Orders</a>
     <a routerLink="/rejectedorder">Rejected Orders</a>
   </div>
-   <!--Trader Order  -->
   <a *ngIf="userRole === 'Trader'" class="nav-link" (click)="toggleMenu('Trader Orders')">
     <i class="fas fa-chart-bar"></i>
     <span *ngIf="!isCollapsed">Orders</span>

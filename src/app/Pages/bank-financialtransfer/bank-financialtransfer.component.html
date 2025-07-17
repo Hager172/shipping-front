@@ -13,11 +13,7 @@
 </div>
 
 <div style="margin-top: 50px;">
-
-    <!-- Filters -->
     <div class="row align-items-end mb-3">
-
-        <!-- Bank Dropdown -->
         <div class="col-md-3">
             <label class="form-label label">Bank</label>
             <select class="form-control" [(ngModel)]="selectedBankName" name="bankName" (change)="onSearch()">
@@ -25,20 +21,14 @@
                 <option *ngFor="let bank of banks" [value]="bank.name">{{ bank.name }}</option>
             </select>
         </div>
-
-        <!-- Start Date -->
         <div class="col-md-3">
             <label class="form-label label">Start Date</label>
             <input type="date" class="form-control" [(ngModel)]="startDate" name="startDate">
         </div>
-
-        <!-- End Date -->
         <div class="col-md-3">
             <label class="form-label label">End Date</label>
             <input type="date" class="form-control" [(ngModel)]="endDate" name="endDate">
         </div>
-
-        <!-- Search Button -->
         <div class="col-md-2">
             <app-button-style [label]="'Search'" [className]="'btn custom-btn w-100 h-100'"
                 [onClick]="onSearch.bind(this)">
@@ -46,8 +36,6 @@
         </div>
 
     </div>
-
-    <!-- Table -->
     <app-custom-table-without-action [columns]="columns" [data]="reports"></app-custom-table-without-action>
 
 </div>
@@ -55,32 +43,23 @@
     (close)="showDepositWithdrawModal = false">
     <div modal-body>
         <form>
-            <!-- اختيار البنك -->
             <select class="form-control" [(ngModel)]="selectedBankId" name="selectedBankId" (change)="onBankChange()">
                 <option *ngFor="let bank of banks" [value]="bank.id">{{ bank.name }}</option>
             </select>
-
-
-            <!-- من (خصم) -->
             <div class="mb-3">
                 <label>Withdraw (From)</label>
                 <input type="number" class="form-control" [(ngModel)]="withdrawAmount" name="withdrawAmount">
             </div>
-
-            <!-- الي (إيداع) -->
             <div class="mb-3">
                 <label>Deposit (To)</label>
                 <input type="number" class="form-control" [(ngModel)]="depositAmount" name="depositAmount">
             </div>
-
-            <!-- ملاحظات -->
             <div class="mb-3">
                 <label>Note</label>
                 <textarea class="form-control" [(ngModel)]="note" name="note"></textarea>
             </div>
         </form>
     </div>
-
     <div modal-footer>
         <button class="btn btn-primary" (click)="submitDepositWithdraw()">Save</button>
     </div>

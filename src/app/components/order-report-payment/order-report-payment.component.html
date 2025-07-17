@@ -68,13 +68,11 @@
     </div>
     
   </div>
-
-  <!-- 📄 Orders Table -->
   <div class="table-section">
     <table class="orders-table">
       <thead>
         <tr>
-          <th>#</th>
+          <th>orderId</th>
           <th>Created</th>
           <th>Customer</th>
           <th>Phone</th>
@@ -91,7 +89,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let order of pagedOrders; let i = index">
-          <td>{{ (currentPage - 1) * pageSize + i + 1 }}</td>
+          <td>{{ order.orderId }}</td>
           <td>{{ order.createdDate | date: 'shortDate' }}</td>
           <td>{{ order.customerName }}</td>
           <td>{{ order.phone }}</td>
@@ -111,14 +109,10 @@
         </tr>
       </tbody>
     </table>
-
-    <!-- No Data -->
     <div *ngIf="orders.length === 0" class="no-data">
       <p>No orders found.</p>
     </div>
   </div>
-
-  <!-- 📄 Pagination -->
   <div class="pagination" *ngIf="totalPages > 1">
     <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
 

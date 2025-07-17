@@ -1,6 +1,5 @@
 <div class="page-container">
   <div class="container mt-4">
-    <!-- زرار الإضافة والبحث -->
     <div class="d-flex justify-content-between align-items-center mb-3">
       <app-button-style
         label="Add Custom Price"
@@ -15,8 +14,6 @@
         class="form-control w-25"
       />
     </div>
-
-    <!-- جدول عرض البيانات -->
     <app-custom-table
       [data]="customPrices | filterPipe: searchTerm"
       [columns]="columns"
@@ -26,8 +23,6 @@
       (onToggleStatus)="toggleStatus($event)"
     ></app-custom-table>
   </div>
-
-  <!-- المودال -->
   <app-shared-modal
     [show]="showModal"
     [title]="selectedCustomPrice ? 'Edit Custom Price' : 'Add Custom Price'"

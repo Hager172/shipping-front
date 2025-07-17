@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RegisterEmployeeDTO,EmployeeWithPermissions, PermissionDTO, CheckPermissionDto  } from '../models/employee/employeedto';
 import { environment } from '../../environments/environment';
+import { AuthService } from './auth.service';
 const baseUrl = environment.baseUrl;
 
 @Injectable({
@@ -10,9 +11,15 @@ const baseUrl = environment.baseUrl;
 })
 export class EmployeeService {
 
-  constructor(private http:HttpClient) { }
-  regesteremployee (employeedto:RegisterEmployeeDTO):Observable<any>{
-    return this.http.post(`${baseUrl}Auth/register-employee`,employeedto)
+  constructor(private http:HttpClient,private authService:AuthService) { }
+  regesteremployee(employeedto: RegisterEmployeeDTO): Observable<any> {
+    const token = this.authService.gettoken();
+
+    const headers = {
+      Authorization: `Bearer ${token}`
+    };
+
+    return this.http.post(`${baseUrl}Auth/register-employee`, employeedto, { headers });
   }
    getAllEmployees(): Observable<EmployeeWithPermissions[]> {
     return this.http.get<EmployeeWithPermissions[]>(`${baseUrl}Auth`);
@@ -41,5 +48,7 @@ export class EmployeeService {
   checkPermission(dto: CheckPermissionDto): Observable<{ hasPermission: boolean }> {
   return this.http.post<{ hasPermission: boolean }>(`${baseUrl}Permission/check`, dto);
 }
-
+updateEmployeePermissions(dto: { userId: string, permissionIds: number[] }): Observable<any> {
+  return this.http.put(`${baseUrl}Auth/update-employee-permissions`, dto);
+}
 }

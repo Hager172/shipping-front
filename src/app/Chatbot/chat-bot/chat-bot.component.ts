@@ -14,7 +14,7 @@ export class ChatBotComponent {
   question = '';
   answer = '';
   loading = false;
-  showChat = false; // ✅ ده اللي هنستخدمه لفتح/غلق الصندوق
+  showChat = false; 
 
   constructor(private http: HttpClient) {}
 

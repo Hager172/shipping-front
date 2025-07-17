@@ -28,7 +28,10 @@ selectedRejectionStatus: number | null = null;
     { value: 5, label: 'Not Reachable' },
     { value: 6, label: 'Postponed' },
     { value: 7, label: 'Partially Delivered' },
-    { value: 8, label: 'Cancelled by Receiver' }
+    { value: 8, label: 'Cancelled by Receiver' },
+    { value: 9, label: 'Rejected With Payment' },
+     { value: 10, label: 'Rejected With Partial Payment' },
+      { value: 11, label: 'Rejected Without Payment' }
   ];
 
   rejectedStatusOptions = [

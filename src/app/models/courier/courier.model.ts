@@ -23,9 +23,9 @@ export interface DisplayCourier {
   fullName: string;
   address: string;
   phoneNumber: string;
-  discountType: number; // أو string لو هتستخدمي enum كـ نص
+  discountType: number; 
   orderShare: number;
 
-  selectedGovernorates: string[]; // أسماء المحافظات
-  selectedBranchs: string[];      // أسماء الفروع
+  selectedGovernorates: string[]; 
+  selectedBranchs: string[];      
 }

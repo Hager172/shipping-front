@@ -120,7 +120,8 @@ export class OrderReportPaymentComponent implements OnInit {
         if (Array.isArray(data)) {
           this.orders = data;
           this.totalRecords = data.length;
-
+          console.log(this.orders);
+          
           const start = (this.currentPage - 1) * this.pageSize;
           const end = start + this.pageSize;
           this.pagedOrders = this.orders.slice(start, end);
@@ -188,7 +189,7 @@ export class OrderReportPaymentComponent implements OnInit {
   }
 
   const exportData = this.orders.map((order, index) => ({
-    '#': index + 1,
+    orderId: order.orderId,
     CreatedDate: order.createdDate,
     Customer: order.customerName,
     Phone: order.phone,
@@ -241,7 +242,7 @@ exportToPDF(): void {
     head: headers,
     body: rows,
     styles: { fontSize: 8 },
-    headStyles: { fillColor: [3, 62, 62] }, // نفس لون الهيدر في الجدول
+    headStyles: { fillColor: [3, 62, 62] }, 
     margin: { top: 20 }
   });
 
