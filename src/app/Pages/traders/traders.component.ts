@@ -30,7 +30,7 @@ export class TradersComponent {
     { header: 'Email', accessor: 'email' },
     { header: 'Phone', accessor: 'phone' },
     { header: 'Branch', accessor: 'branchName' },
-    { header: 'Store Name', accessor: 'storeName' },
+    { header: 'store Name', accessor: 'storeName' },
     { header: 'Status', accessor: 'isActive', type: 'toggle' }
   ];
 

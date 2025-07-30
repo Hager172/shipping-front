@@ -277,7 +277,7 @@ onStatusChange(event: any, order: any): void {
     traderId: order.traderId,
     courierId: order.courierId,
     createdAt: order.createdAt,
-    rejectionReasonId: order.rejectionReasonId || null
+    rejectionReasonId:  null
   };
 
   this.orderService.updateOrder(order.id, dto).subscribe({
@@ -287,6 +287,8 @@ onStatusChange(event: any, order: any): void {
       alert('Status updated successfully');
     },
     error: err => {
+      console.log(order);
+      
       console.error('Update status failed', err);
       alert('Failed to update status');
     }

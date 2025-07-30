@@ -3,7 +3,7 @@
   padding: 16px;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  overflow-x: auto; /* مهم للتجاوب */
+  overflow-x: auto; 
 }
 
 .custom-table {
@@ -20,10 +20,10 @@
 .custom-table th,
 .custom-table td {
   padding: 12px;
-  text-align: center; /* توسيط المحتوى */
+  text-align: center; 
   vertical-align: middle;
   border-bottom: 1px solid #ccc;
-  white-space: nowrap; /* تمنع التكسر */
+  white-space: nowrap; 
 }
 
 .custom-table tbody tr:hover {

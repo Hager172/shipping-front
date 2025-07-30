@@ -3,7 +3,7 @@ export interface Bank {
   name: string;
   branchName: string;
   balance: number;
-  createdDate: string; // string أو Date لو هتعملي فورمات
+  createdDate: string; 
   isActive: boolean;
   branchId: number;
 }

@@ -16,8 +16,11 @@ export class AuthService {
   login(model: LoginDTO): Observable<UserProfileDTO> {
     return this.http.post<UserProfileDTO>(`${this.apiURL}/login`, model);
   }
-  regester(model: RegisterDTO): Observable<UserProfileDTO> {
-    return this.http.post<UserProfileDTO>(`${this.apiURL}/register`, model);
+  regester(model: RegisterDTO): Observable<UserProfileDTO> {  const token = this.gettoken();
+  const headers = {
+    Authorization: `Bearer ${token}`
+  };
+  return this.http.post<UserProfileDTO>(`${this.apiURL}/register`, model, { headers });
   }
   savetoken(token: string): void {
     localStorage.setItem('token', token);
@@ -27,9 +30,6 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  // getroles(): Observable<string[]> {
-  //   return this.http.get<string[]>(`${this.apiURL}/rols`);
-  // }
   isLoggedIn(): boolean {
     return !!this.gettoken();
   }

@@ -73,7 +73,7 @@ loadUserPermissions(userId: string) {
     const dto: CheckPermissionDto = {
       userId: userId,
       permissionName: perm.name,
-      actionTypeId: perm.id, // لو دي هي ActionTypeId
+      actionTypeId: perm.id, 
     };
 
     this.employeeService.checkPermission(dto).subscribe({
@@ -83,7 +83,6 @@ loadUserPermissions(userId: string) {
         }
       },
       complete: () => {
-        // لما نخلص كل ال permissions نعمل patch
         this.updateForm.patchValue({
           permissionActionIds: selectedPermissions
         });
@@ -113,20 +112,37 @@ loadEmployeeData() {
   });
 }
 
-  onSubmit() {
-    if (this.updateForm.invalid) return;
+onSubmit() {
+  if (this.updateForm.invalid) return;
 
-    const updatedData: RegisterEmployeeDTO = this.updateForm.value;
+  const updatedData: RegisterEmployeeDTO = this.updateForm.value;
 
-    this.employeeService.updateEmployee(updatedData).subscribe({
-      next: () => {
-        this.successMessage = 'Employee updated successfully.';
-        setTimeout(() => this.router.navigate(['/employees']), 2000);
-      },
-      error: (err) => {
-        this.errorMessage = err.error?.message || 'Update failed.';
-        console.error(err);
-      }
-    });
-  }
+  this.employeeService.updateEmployee(updatedData).subscribe({
+    next: () => {
+      const permissionIds = this.updateForm.value.permissionActionIds;
+
+      const dto = {
+        userId: this.userId,
+        permissionIds: permissionIds
+      };
+
+      this.employeeService.updateEmployeePermissions(dto).subscribe({
+        next: () => {
+          this.successMessage = 'Employee and permissions updated successfully.';
+          setTimeout(() => this.router.navigate(['/employees']), 2000);
+        },
+        error: (err) => {
+          this.errorMessage = 'Employee updated but permissions update failed.';
+          console.error('Permissions error:', err);
+        }
+      });
+    },
+    error: (err) => {
+      this.errorMessage = err.error?.message || 'Employee update failed.';
+      console.error('Employee error:', err);
+    }
+  });
+}
+
+
 }

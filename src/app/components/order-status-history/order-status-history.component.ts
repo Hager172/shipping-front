@@ -57,7 +57,7 @@ export class OrderStatusHistoryComponent {
       },
       error: (err) => {
         console.error('Error fetching logs:', err);
-        this.statusLogs = []; // Clear table if error
+        this.statusLogs = [];
       }
     });
   }

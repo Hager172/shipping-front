@@ -1,0 +1,17 @@
+<button class="chat-float-button" (click)="toggleChat()">
+  💬
+</button>
+
+<div class="chat-popup" *ngIf="showChat">
+  <div class="chat-header">
+    <span>Shipping ChatBot</span>
+    <button (click)="toggleChat()">×</button>
+  </div>
+
+  <div class="chat-body">
+    <textarea [(ngModel)]="question" rows="3" placeholder="Ask a question..."></textarea>
+    <button (click)="ask()">Ask</button>
+    <div *ngIf="loading">Thinking...</div>
+    <div *ngIf="answer" class="chat-answer">{{ answer }}</div>
+  </div>
+</div>

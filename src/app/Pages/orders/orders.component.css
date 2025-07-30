@@ -1,5 +1,6 @@
-.new-table{
-  background-color: #ebfdff !important;
+.new-table thead tr {
+  background-color: #083c3f !important;
+  color: white; /* لو اللون غامق خليه أبيض */
 }
 
 .new-table thead{

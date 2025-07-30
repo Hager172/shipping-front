@@ -8,9 +8,6 @@
     </thead>
     <tbody>
       <tr *ngFor="let row of paginatedData">
-        <!-- <td *ngFor="let col of columns">
-          {{ row[col.accessor] }}
-        </td> -->
         <td *ngFor="let col of columns">
           <ng-container *ngIf="col.type !== 'toggle'; else toggleTpl">
             {{ row[col.accessor] }}

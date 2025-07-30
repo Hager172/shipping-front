@@ -15,16 +15,16 @@ export class RegisterComponent implements OnInit {
  errormessage: string = '';
   roles: string[] = [];
   ngOnInit(): void {
-  //  this.authservice.getroles().subscribe({
-  //     next: (data) => {
-  //       this.roles = data;
-  //       this.errormessage = '';
-  //     },
-  //     error: (err) => {
-  //       console.error('Error fetching roles:', err);
-  //        this.errormessage = err.error.message || 'An error occurred during registration. Please try again.';
-  //     }
-  //   });
+  const userId = this.authservice.getUserIdFromToken();
+
+  if (userId) {
+    console.log('Logged in user ID:', userId);
+
+    // لو حابب تسجله مع التسجيل أو تربطه بحاجة
+    // ممكن تبعته مع الطلب أو تخزنه
+  } else {
+    console.log('User not logged in or invalid token');
+  }
   }
 
   constructor(private http:HttpClient, private authservice :AuthService , private router:Router) { }

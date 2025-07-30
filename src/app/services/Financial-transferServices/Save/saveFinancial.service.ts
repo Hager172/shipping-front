@@ -26,7 +26,7 @@ export class SaveService {
   }
   // services/Financial-transferServices/Bank/bankFinancial.service.ts
   addTransfer(data: SaveFinancialTransfer): Observable<any> {
-    return this.http.post(`${environment.baseUrl}FinancialTransfer'`, data);
+    return this.http.post(`${environment.baseUrl}FinancialTransfer`, data);
   }
 
 }

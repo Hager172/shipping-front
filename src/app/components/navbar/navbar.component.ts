@@ -18,7 +18,7 @@ export class NavbarComponent {
   logout() {
     this.authService.logout().subscribe({
       next: () => {
-        this.authService.logout(); // حذف التوكن من localStorage
+        this.authService.logout(); 
         this.router.navigate(['/login']);
       },
       error: (err) => {

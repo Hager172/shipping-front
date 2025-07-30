@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CustomTableWithouActionComponent } from './custom-table-without-action.component';
+import { CustomTableWithoutActionComponent } from './custom-table-without-action.component';
 
 describe('CustomTableWithouActionComponent', () => {
-  let component: CustomTableWithouActionComponent;
-  let fixture: ComponentFixture<CustomTableWithouActionComponent>;
+  let component: CustomTableWithoutActionComponent;
+  let fixture: ComponentFixture<CustomTableWithoutActionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CustomTableWithouActionComponent]
+      imports: [CustomTableWithoutActionComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CustomTableWithouActionComponent);
+    fixture = TestBed.createComponent(CustomTableWithoutActionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -118,14 +118,11 @@
   transition: background-color 0.3s ease;
 }
 
-/* زر الإكسل */
 .export-btn:hover {
   background-color: #155d33;
 }
-
-/* زر PDF بلون مختلف */
 .pdf-btn {
-  background-color: #c0392b; /* أحمر غامق */
+  background-color: #c0392b; 
 }
 
 .pdf-btn:hover {
